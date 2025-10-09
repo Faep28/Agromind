@@ -16,7 +16,7 @@ import java.util.Set;
 @Entity
 @Table(name = "authorities")
 public class Authority {
-
+//Prueba
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
