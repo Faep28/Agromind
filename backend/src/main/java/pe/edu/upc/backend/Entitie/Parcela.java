@@ -14,7 +14,7 @@ import lombok.NoArgsConstructor;
 public class Parcela {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;  // Identificador único de la parcela
+    private Long id;  //
 
     private String nombre;
     private Double longitud;
