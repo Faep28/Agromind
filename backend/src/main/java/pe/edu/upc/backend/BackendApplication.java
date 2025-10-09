@@ -25,7 +25,7 @@ public class BackendApplication {
                                                 ServicioRepository servicioRepository,
                                                 SolicitudServicioRepository solicitudServicioRepository) {
         return args -> {
-            // 1. Crear autoridades (Roles)
+            // 1. Crear autoridades (Roles) Hola
             Authority adminRole = new Authority(null, "ADMIN", null);
             Authority userRole = new Authority(null, "USER", null);
             authorityRepository.save(adminRole);
