@@ -13,7 +13,7 @@ import java.util.List;
 
 @CrossOrigin("*")
 @RestController
-@RequestMapping("/api/authorities")
+@RequestMapping("/api/authorities") //http://localhost:8080/api/authorities
 public class AuthorityController {
     @Autowired
     private AuthorityService authorityService;

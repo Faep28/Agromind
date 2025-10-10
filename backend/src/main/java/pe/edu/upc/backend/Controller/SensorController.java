@@ -15,30 +15,30 @@ import java.util.List;
 
 @CrossOrigin("*")
 @RestController
-@RequestMapping("/api/sensores")
+@RequestMapping("/api/sensores")  //http://localhost:8080/api/sensores
 public class SensorController {
 
     @Autowired
     private SensorService sensorService;
 
-    @PostMapping("/insert")
+    @PostMapping("/insert")  //http://localhost:8080/api/sensores/insert
     public ResponseEntity<Sensor> add(@RequestBody Sensor sensor) {
         Sensor createdSensor = sensorService.add(sensor);
         return new ResponseEntity<>(createdSensor, HttpStatus.CREATED);
     }
 
-    @GetMapping("/list")
+    @GetMapping("/list")  //http://localhost:8080/api/sensores/list
     public List<Sensor> getAll() {
         return  sensorService.findAll();
     }
 
-    @PutMapping("/update/{id}")
+    @PutMapping("/update/{id}")  //http://localhost:8080/api/sensores/update/{id}
     public ResponseEntity<Sensor> update(@PathVariable Long id, @RequestBody Sensor sensor) {
         Sensor updatedSensor = sensorService.edit(id, sensor);
         return new ResponseEntity<>(updatedSensor, HttpStatus.OK);
     }
 
-    @DeleteMapping("/delete/{id}")
+    @DeleteMapping("/delete/{id}")  //http://localhost:8080/api/sensores/delete/{id}
     public ResponseEntity<Void> delete(@PathVariable Long id) {
         sensorService.deleteById(id);
         return new ResponseEntity<>(HttpStatus.NO_CONTENT); // 204 No Content indica que la eliminación se realizó correctamente

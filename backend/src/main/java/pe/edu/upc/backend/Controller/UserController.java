@@ -11,24 +11,24 @@ import java.util.List;
 
 @CrossOrigin("*")
 @RestController
-@RequestMapping("/api/users")
+@RequestMapping("/api/users")  //http://localhost:8080/api/users
 public class UserController {
     @Autowired
     private UserService userService;
     // --------------------------CRUD----------------------------
     //---------------------------------------------------------------------------------------------------------------
     // Crear un nuevo usuario
-    @PostMapping("/insert")
+    @PostMapping("/insert")  //http://localhost:8080/api/users/insert
     public ResponseEntity<User> add(@RequestBody User user) {
         User createdUser = userService.add(user);
         return new ResponseEntity<>(createdUser, HttpStatus.CREATED);
     }
     // Obtener todos los usuarios
-    @GetMapping("/list")
+    @GetMapping("/list")  //http://localhost:8080/api/users/list
     public List<User> getAllUsers() {
         return userService.findAll();
     }
-    @PutMapping("/update/{id}")
+    @PutMapping("/update/{id}")   //http://localhost:8080/api/users/update/{id}
     public ResponseEntity<User> updateUser(@PathVariable Long id, @RequestBody User userDetails) {
         // Asegurarse de que el ID de la URL coincida con el ID del objeto del cuerpo
         userDetails.setId(id);  // Establecemos el ID del usuario desde la URL
@@ -40,7 +40,7 @@ public class UserController {
         }
     }
     // Eliminar un usuario
-    @DeleteMapping("/delete/{id}")
+    @DeleteMapping("/delete/{id}")  //http://localhost:8080/api/users/delete/{id}
     public ResponseEntity<Void> deleteUser(@PathVariable Long id) {
         userService.deleteById(id);
         return new ResponseEntity<>(HttpStatus.NO_CONTENT);
