@@ -19,7 +19,7 @@ public class Servicio {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id; //Identificador
 
-    private String nombre;
+    private String nombre; //nombre
     private String descripcion;
     private String categoria;
     private Double precio;  // Cambio aquí: usando `double` para el precio
