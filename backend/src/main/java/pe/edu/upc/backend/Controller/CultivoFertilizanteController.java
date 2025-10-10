@@ -17,7 +17,21 @@ public class CultivoFertilizanteController {
     @Autowired
     private CultivoFertilizanteService cultivoFertilizanteService;
 
+
+// === CultivoFertilizanteController ===
+// POST: http://localhost:8080/api/cultivo-fertilizante/insert/{cultivoId}/{fertilizanteId}
+//     → Crea una relación entre un cultivo y un fertilizante.
+// GET:  http://localhost:8080/api/cultivo-fertilizante/list
+//     → Lista todas las relaciones cultivo-fertilizante.
+// PUT:  http://localhost:8080/api/cultivo-fertilizante/update/{id}
+//     → Actualiza una relación existente.
+// DELETE: http://localhost:8080/api/cultivo-fertilizante/delete/{id}
+//     → Elimina una relación por ID.
+
+
+
     // Crear una nueva relación cultivo-fertilizante
+    //http://localhost:8080/api/cultivo-fertilizante/insert/{cultivoId}/{fertilizanteId}
     @PostMapping("/insert/{cultivoId}/{fertilizanteId}")
     public ResponseEntity<CultivoFertilizante> add(
             @PathVariable Long cultivoId,
@@ -29,7 +43,7 @@ public class CultivoFertilizanteController {
     }
 
     // Obtener todas las relaciones
-    @GetMapping("/list")
+    @GetMapping("/list")//http://localhost:8080/api/cultivo-fertilizante/list
     public List<CultivoFertilizante> getAll() {
         return cultivoFertilizanteService.findAll();
     }
