@@ -20,7 +20,7 @@ public class Servicio {
     private Long id; //Identificador
 
     private String nombre; //nombre
-    private String descripcion;
+    private String descripcion; //descripcion
     private String categoria;
     private Double precio;  // Cambio aquí: usando `double` para el precio
     private String estado;
