@@ -19,7 +19,7 @@ public class Noticia {
     @GeneratedValue(strategy = GenerationType.IDENTITY) // Estrategia de generación automática del identificador
     private Long id;
 
-    private String titulo; // Título de la notificación
+    private String titulo; // Título
     private String mensaje; // Texto del mensaje
     private LocalDate fechapublicacion; // Fecha en que se publico
 

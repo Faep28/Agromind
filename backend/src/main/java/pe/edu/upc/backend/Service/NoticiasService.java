@@ -6,9 +6,9 @@ import java.util.List;
 
 public interface NoticiasService {
 
-    Noticia registrar(Noticia noticia);  // Registrar una nueva noticia
-    List<Noticia> listarTodas();  // Listar todas las noticias existentes
+    Noticia add(Noticia noticia);  // Registrar una nueva noticia
+    List<Noticia> findall();  // Listar todas las noticias existentes
     Noticia actualizar(Noticia noticia);  // Modificar una noticia
-    void eliminarPorId(Long id);  // Borrar una noticia
+    void deleteById(Long id);  // Borrar una noticia
 }
 
