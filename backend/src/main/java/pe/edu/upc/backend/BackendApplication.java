@@ -23,7 +23,10 @@ public class BackendApplication {
                                                 ParcelaRepository parcelaRepository,
                                                 CultivoRepository cultivoRepository,
                                                 ServicioRepository servicioRepository,
-                                                SolicitudServicioRepository solicitudServicioRepository) {
+                                                SolicitudServicioRepository solicitudServicioRepository,
+                                                FertilizanteRepository fertilizanteRepository,
+                                                CultivoFertilizanteRepository cultivoFertilizanteRepository
+    ) {
         return args -> {
             // 1. Crear autoridades (Roles) Hola
             Authority adminRole = new Authority(null, "ADMIN", null);
@@ -96,6 +99,26 @@ public class BackendApplication {
             solicitudServicioRepository.save(solicitud2);
             solicitudServicioRepository.save(solicitud3);
             solicitudServicioRepository.save(solicitud4);
+
+
+// 6. Crear fertilizantes
+            Fertilizante fert1 = new Fertilizante(null, "Nitrofoska", "NPK", 50.00, null);
+            Fertilizante fert2 = new Fertilizante(null, "Urea", "Nitrogenado", 30.00, null);
+            Fertilizante fert3 = new Fertilizante(null, "Fosfato Diamónico", "Fosforado", 40.00, null);
+            fertilizanteRepository.save(fert1);
+            fertilizanteRepository.save(fert2);
+            fertilizanteRepository.save(fert3);
+
+// 7. Asignar fertilizantes a cultivos con fechas fijas
+            CultivoFertilizante cf1 = new CultivoFertilizante(null, cultivo1, fert1, LocalDate.of(2025, 5, 15), 25.00);
+            CultivoFertilizante cf2 = new CultivoFertilizante(null, cultivo2, fert2, LocalDate.of(2025, 6, 10), 15.00);
+            CultivoFertilizante cf3 = new CultivoFertilizante(null, cultivo3, fert3, LocalDate.of(2025, 7, 5), 20.00);
+            cultivoFertilizanteRepository.save(cf1);
+            cultivoFertilizanteRepository.save(cf2);
+            cultivoFertilizanteRepository.save(cf3);
+
+
+
 
 
         };
