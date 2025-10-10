@@ -11,13 +11,13 @@ import java.util.List;
 
 @CrossOrigin("*")
 @RestController
-@RequestMapping("/api/solicitudes-servicios")
+@RequestMapping("/api/solicitudes-servicios")  //http://localhost:8080/api/solicitudes-servicios
 public class SolicitudServicioController {
     @Autowired
     private SolicitudServicioService solicitudServicioService;
 
     // Crear una nueva solicitud de servicio
-    @PostMapping("/insert/{servicioId}/{cultivoId}")
+    @PostMapping("/insert/{servicioId}/{cultivoId}")  //http://localhost:8080/api/solicitudes-servicios/insert/{servicioId}/{cultivoId}
     public ResponseEntity<SolicitudServicio> add(
             @PathVariable Long servicioId,
             @PathVariable Long cultivoId,
@@ -29,12 +29,12 @@ public class SolicitudServicioController {
     }
 
     // Obtener todas las solicitudes de servicio
-    @GetMapping("/list")
+    @GetMapping("/list")  //http://localhost:8080/api/solicitudes-servicios/list
     public List<SolicitudServicio> getAll() {
         return solicitudServicioService.findAll();
     }
     // Editar una solicitud de servicio
-    @PutMapping("/update/{id}")
+    @PutMapping("/update/{id}")  //http://localhost:8080/api/solicitudes-servicios/update/{id}
     public ResponseEntity<SolicitudServicio> update(
             @PathVariable Long id,
             @RequestBody SolicitudServicio solicitudServicio) {
@@ -43,7 +43,7 @@ public class SolicitudServicioController {
         return new ResponseEntity<>(updatedSolicitud, HttpStatus.OK);
     }
     // Eliminar una solicitud de servicio
-    @DeleteMapping("/delete/{id}")
+    @DeleteMapping("/delete/{id}")  //http://localhost:8080/api/solicitudes-servicios/delete/{id}
     public ResponseEntity<Void> delete(@PathVariable Long id) {
         solicitudServicioService.deleteById(id);
         return new ResponseEntity<>(HttpStatus.NO_CONTENT);  // 204 No Content indica que la eliminación fue exitosa

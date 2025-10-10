@@ -13,7 +13,7 @@ import java.util.List;
 
 @CrossOrigin("*")
 @RestController
-@RequestMapping("/api/cultivos")
+@RequestMapping("/api/cultivos")   //http://localhost:8080/api/cultivos
 public class CultivoController {
     @Autowired
     private CultivoService cultivoService;
@@ -23,7 +23,7 @@ public class CultivoController {
     // --------------------------CRUD----------------------------------------------
     //---------------------------------------------------------------------------------------------------------------
     // Crear un nuevo cultivo asociado a una parcela
-    @PostMapping("/insert/{parcelaId}")
+    @PostMapping("/insert/{parcelaId}")   //http://localhost:8080/api/cultivos/insert/{parcelaId}
     public ResponseEntity<Cultivo> add(@PathVariable Long parcelaId, @RequestBody Cultivo cultivo) {
         // Verificar que la parcela asociada existe en la base de datos
         Parcela parcela = parcelaRepository.findById(parcelaId).orElse(null);
@@ -42,12 +42,12 @@ public class CultivoController {
     }
 
     // Obtener todos los cultivos
-    @GetMapping("/list")
+    @GetMapping("/list")   //http://localhost:8080/api/cultivos/list
     public List<Cultivo> getAllCultivos() {
         return cultivoService.findAll();
     }
     // Actualizar un cultivo
-    @PutMapping("/update/{id}")
+    @PutMapping("/update/{id}")   //http://localhost:8080/api/cultivos/update/{id}
     public ResponseEntity<Cultivo> updateCultivo(@PathVariable Long id, @RequestBody Cultivo cultivoDetails) {
         cultivoDetails.setId(id);
         Cultivo updatedCultivo = cultivoService.edit(cultivoDetails);
@@ -58,7 +58,7 @@ public class CultivoController {
         }
     }
     // Eliminar un cultivo
-    @DeleteMapping("/delete/{id}")
+    @DeleteMapping("/delete/{id}")   //http://localhost:8080/api/cultivos/delete/{id}
     public ResponseEntity<Void> deleteCultivo(@PathVariable Long id) {
         cultivoService.deleteById(id);
         return new ResponseEntity<>(HttpStatus.NO_CONTENT);  // 204 No Content indica que la eliminación fue exitosa

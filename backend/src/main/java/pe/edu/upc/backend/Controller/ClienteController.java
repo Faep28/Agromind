@@ -13,7 +13,7 @@ import java.util.List;
 
 @CrossOrigin("*")
 @RestController
-@RequestMapping("/api/clientes")
+@RequestMapping("/api/clientes") //http://localhost:8080/api/clientes
 public class ClienteController {
 
     @Autowired
@@ -25,7 +25,7 @@ public class ClienteController {
     //---------------------------------------------------------------------------------------------------------------
     // PARA CREAR UN CLIENTE DEBE CREARSE PRIMERO UN USER... Y LUEGO VINCULAS LAS ID
 
-    @PostMapping("/insert/{userId}")
+    @PostMapping("/insert/{userId}") //http://localhost:8080/api/clientes/insert/{userId}
     public ResponseEntity<Cliente> add(@PathVariable Long userId, @RequestBody Cliente cliente) {
 
         User user = userRepository.findById(userId).orElse(null);
