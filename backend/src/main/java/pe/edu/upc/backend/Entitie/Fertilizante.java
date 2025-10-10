@@ -26,10 +26,11 @@ public class Fertilizante {
     @Column(length = 50)
     private String tipo;
 
-    @Column(name = "dosis_recomendada", precision = 10, scale = 2)
-    private BigDecimal dosisRecomendada;
+    @Column(name = "dosis_recomendada")
+    private Double dosisRecomendada;
+
 
     @JsonIgnore
-    @OneToMany(mappedBy = "fertilizante", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    @OneToMany(mappedBy = "fertilizante", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
     private List<CultivoFertilizante> cultivoFertilizantes;
 }

@@ -30,6 +30,6 @@ public class CultivoFertilizante {
     @Column(name = "fecha_aplicacion")
     private LocalDate fechaAplicacion;
 
-    @Column(precision = 10, scale = 2)
-    private BigDecimal cantidad;
+    @Column(name = "cantidad")
+    private Double cantidad;
 }
