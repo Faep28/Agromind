@@ -7,6 +7,7 @@ import org.springframework.context.annotation.Bean;
 import pe.edu.upc.backend.Entitie.*;
 import pe.edu.upc.backend.Repository.*;
 
+import java.time.LocalDateTime;
 import java.time.LocalDate;
 import java.util.List;
 
@@ -25,7 +26,8 @@ public class BackendApplication {
                                                 ServicioRepository servicioRepository,
                                                 SolicitudServicioRepository solicitudServicioRepository,
                                                 FertilizanteRepository fertilizanteRepository,
-                                                CultivoFertilizanteRepository cultivoFertilizanteRepository
+                                                CultivoFertilizanteRepository cultivoFertilizanteRepository,
+                                                NotificacionRepository notificacionRepository
     ) {
         return args -> {
             // 1. Crear autoridades (Roles) Hola
@@ -118,7 +120,10 @@ public class BackendApplication {
             cultivoFertilizanteRepository.save(cf3);
 
 
-
+// 8. Llamada de notificaciones a sus respectivos usuarios
+            Notificacion not1 = new Notificacion(null,"Riego completado","Tu cultivo fue regado correctamente.",LocalDateTime.of(2025, 5, 15, 10, 30),true,"INFO",juanPerezUser);
+            Notificacion not2 = new Notificacion(null,"Solicitud aprobada","Tu solicitud de servicio fue aprobada.",LocalDateTime.now(),false,"ALERT",mariaLopezUser);
+            Notificacion not3 = new Notificacion(null,"Mensaje nuevo","Nuevo mensaje del soporte técnico.",LocalDateTime.now(),false,"INFO",carlosGarciaUser);
 
 
         };
