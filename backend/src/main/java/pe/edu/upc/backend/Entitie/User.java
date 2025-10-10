@@ -6,9 +6,7 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-import java.util.HashSet;
 import java.util.List;
-import java.util.Set;
 
 @Data
 @AllArgsConstructor
@@ -54,11 +52,11 @@ public class User {
 
     // Asociación de uno a muchos con la entidad notificación
     @OneToMany(
-            mappedBy = "notification",
+            mappedBy = "notificacion",
             fetch = FetchType.EAGER,
             cascade = CascadeType.ALL
     )
-    private List<Notification>notifications;
+    private List<Notificacion>notificaciones;
 
 }
 
