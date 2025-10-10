@@ -56,7 +56,7 @@ public class User {
             fetch = FetchType.EAGER,
             cascade = CascadeType.ALL
     )
-    private List<Notificacion>notificaciones;
+    private List<Noticia>notificaciones;
 
 }
 
