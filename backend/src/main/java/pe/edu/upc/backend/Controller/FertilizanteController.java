@@ -17,6 +17,19 @@ public class FertilizanteController {
     @Autowired
     private FertilizanteService fertilizanteService;
 
+
+// === FertilizanteController ===
+// POST: http://localhost:8080/api/fertilizantes/insert
+//     → Crea un nuevo fertilizante.
+// GET:  http://localhost:8080/api/fertilizantes/list
+//     → Lista todos los fertilizantes registrados.
+// PUT:  http://localhost:8080/api/fertilizantes/update/{id}
+//     → Actualiza un fertilizante existente.
+// DELETE: http://localhost:8080/api/fertilizantes/delete/{id}
+//     → Elimina un fertilizante por ID.
+
+
+
     // Crear un nuevo fertilizante
     @PostMapping("/insert")
     public ResponseEntity<Fertilizante> add(@RequestBody Fertilizante fertilizante) {
