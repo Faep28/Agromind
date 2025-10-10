@@ -50,7 +50,7 @@ public class User {
     // Relación OneToMany con Cliente
 
     @OneToMany(mappedBy = "user", fetch = FetchType.EAGER, cascade = CascadeType.ALL)
-    private List<Cliente> clientes;  // Un User puede tener varios Clientes
+    private List<Cliente> clientes;
 
 
 
