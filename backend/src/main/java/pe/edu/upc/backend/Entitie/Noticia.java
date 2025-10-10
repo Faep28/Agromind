@@ -20,7 +20,7 @@ public class Noticia {
     private Long id;
 
     private String titulo; // Título
-    private String mensaje; // Texto del mensaje
+    private String contenido; // Texto del contenido
     private LocalDate fechapublicacion; // Fecha en que se publico
 
     @JsonIgnore

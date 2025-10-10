@@ -56,7 +56,15 @@ public class User {
             fetch = FetchType.EAGER,
             cascade = CascadeType.ALL
     )
-    private List<Noticia>notificaciones;
+    private List<notificaciones>notificaciones;
+
+    @OneToMany(
+            mappedBy = "noticia",
+            fetch = FetchType.EAGER,
+            cascade = CascadeType.ALL
+
+    )
+    private List<Noticia> noticias;
 
 }
 

@@ -36,10 +36,10 @@ public class BackendApplication {
 
             // 2. Crear usuarios
             // Renombramos las variables para hacer más claro el rol y cliente
-            User juanPerezUser = new User(null, "juanperez", "admin123", "juan.perez@example.com", true, List.of(adminRole),null);  // Juan Perez (admin)
-            User mariaLopezUser = new User(null, "mariaLopez", "user123", "maria.lopez@example.com", true, List.of(userRole),null  );  // Maria Lopez (normal)
-            User carlosGarciaUser = new User(null, "carlosgarcia", "carlo1234", "carlos.garcia@example.com", true, List.of(userRole),null);  // Carlos Garcia (cliente)
-            User luisMartinezUser = new User(null, "luismartinez", "luis1234", "luis.martinez@example.com", true, List.of(userRole),null);  // Luis Martinez (cliente)
+            User juanPerezUser = new User(null, "juanperez", "admin123", "juan.perez@example.com", true, List.of(adminRole),null,null);  // Juan Perez (admin)
+            User mariaLopezUser = new User(null, "mariaLopez", "user123", "maria.lopez@example.com", true, List.of(userRole),null,null  );  // Maria Lopez (normal)
+            User carlosGarciaUser = new User(null, "carlosgarcia", "carlo1234", "carlos.garcia@example.com", true, List.of(userRole),null,null);  // Carlos Garcia (cliente)
+            User luisMartinezUser = new User(null, "luismartinez", "luis1234", "luis.martinez@example.com", true, List.of(userRole),null,null);  // Luis Martinez (cliente)
 
             userRepository.save(juanPerezUser);
             userRepository.save(mariaLopezUser);
