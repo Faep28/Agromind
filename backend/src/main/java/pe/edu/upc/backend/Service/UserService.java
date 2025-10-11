@@ -10,4 +10,7 @@ public interface UserService {
     public List<User> findAll();
     public User edit(User user);
     void deleteById(Long id);
+
+    List<User> findUsersWithUnreadNotifications();
+    List<User> findUsersWithMoreThanNotifications(int minCount);
 }
