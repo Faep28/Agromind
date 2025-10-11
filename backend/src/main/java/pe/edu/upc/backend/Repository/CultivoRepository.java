@@ -14,4 +14,7 @@ public interface CultivoRepository extends JpaRepository<Cultivo, Long> {
     //Query method de buscar cultivos por nombre y estado
     List<Cultivo> findByNombreContainingIgnoreCaseAndEstadoIgnoreCase(String nombre, String estado);
 
+    //Query method de listar todos los cultivos registrados en una temporada específica
+    List<Cultivo> findByTemporadaIgnoreCase(String temporada);
+
 }
