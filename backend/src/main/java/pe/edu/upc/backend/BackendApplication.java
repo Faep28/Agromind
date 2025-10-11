@@ -41,7 +41,7 @@ public class BackendApplication {
             User mariaLopezUser = new User(null, "mariaLopez", "user123", "maria.lopez@example.com", true, List.of(userRole), null, null, null);
             User carlosGarciaUser = new User(null, "carlosgarcia", "carlo1234", "carlos.garcia@example.com", true, List.of(userRole), null, null, null);
             User luisMartinezUser = new User(null, "luismartinez", "luis1234", "luis.martinez@example.com", true, List.of(userRole), null, null, null);
-            User pedroLopezUser = new User(null, "pedrolopez", "pedro1234", "pedro.lopez@example.com", true, List.of(userRole), null, null, null);
+            User pedroLopezUser = new User(null, "pedrolopez", "pedro1234", "pedro.lopez@example.com", true, List.of(adminRole), null, null, null);
 
             userRepository.save(juanPerezUser);
             userRepository.save(mariaLopezUser);
