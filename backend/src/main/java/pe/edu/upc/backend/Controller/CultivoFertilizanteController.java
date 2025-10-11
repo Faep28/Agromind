@@ -64,4 +64,11 @@ public class CultivoFertilizanteController {
         cultivoFertilizanteService.deleteById(id);
         return new ResponseEntity<>(HttpStatus.NO_CONTENT);
     }
+
+    @GetMapping("/fertilizantes/cultivo/{cultivoId}")
+    public ResponseEntity<List<String>> getFertilizantesByCultivo(@PathVariable Long cultivoId) {
+        List<String> fertilizantes = cultivoFertilizanteService.findFertilizantesByCultivoId(cultivoId);
+        return new ResponseEntity<>(fertilizantes, HttpStatus.OK);
+    }
+
 }

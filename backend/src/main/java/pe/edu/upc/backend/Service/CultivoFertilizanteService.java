@@ -9,4 +9,6 @@ public interface CultivoFertilizanteService {
     List<CultivoFertilizante> findAll();
     CultivoFertilizante edit(Long id, CultivoFertilizante cultivoFertilizante);
     void deleteById(Long id);
+    List<String> findFertilizantesByCultivoId(Long cultivoId);
+
 }

@@ -59,4 +59,10 @@ public class CultivoFertilizanteServiceImpl implements CultivoFertilizanteServic
             System.out.println("Relación Cultivo-Fertilizante no encontrada");
         }
     }
+
+    @Override
+    public List<String> findFertilizantesByCultivoId(Long cultivoId) {
+        return cultivoFertilizanteRepository.findFertilizantesByCultivoId(cultivoId);
+    }
+
 }
