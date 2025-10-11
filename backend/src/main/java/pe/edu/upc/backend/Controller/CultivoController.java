@@ -71,4 +71,16 @@ public class CultivoController {
         List<Object[]> data = cultivoService.countCultivosPorParcela();
         return new ResponseEntity<>(data, HttpStatus.OK);
     }
+
+    // 🔎 Buscar cultivos por nombre y estado
+    @GetMapping("/buscar")   //http://localhost:8080/api/cultivos/buscar
+    public ResponseEntity<List<Cultivo>> buscarCultivos(
+            @RequestParam String nombre,
+            @RequestParam String estado) {
+        List<Cultivo> cultivos = cultivoService.findByNombreContainingIgnoreCaseAndEstado(nombre, estado);
+        if (cultivos.isEmpty()) {
+            return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+        }
+        return new ResponseEntity<>(cultivos, HttpStatus.OK);
+    }
 }

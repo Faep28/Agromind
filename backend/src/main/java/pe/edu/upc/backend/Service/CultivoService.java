@@ -12,4 +12,5 @@ public interface CultivoService {
 
     List<Object[]> countCultivosPorParcela();
 
+    List<Cultivo> findByNombreContainingIgnoreCaseAndEstado(String nombre, String estado);
 }
