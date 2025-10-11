@@ -6,6 +6,7 @@ import pe.edu.upc.backend.Entitie.Noticia;
 import pe.edu.upc.backend.Repository.NoticiasRepository;
 import pe.edu.upc.backend.Service.NoticiasService;
 
+import java.time.LocalDate;
 import java.util.List;
 
 @Service
@@ -41,6 +42,13 @@ public class NoticiasServiceImpl implements NoticiasService {
         } else {
             throw new RuntimeException("Noticia no encontrada");
         }
+    }
+
+
+    // Implementación del nuevo método para obtener noticias después de una fecha
+    @Override
+    public List<Noticia> findNoticiasAfterFecha(LocalDate fecha) {
+        return noticiasRepository.findNoticiasAfterFecha(fecha);
     }
 
 }

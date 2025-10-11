@@ -1,6 +1,8 @@
 package pe.edu.upc.backend.Service;
 
 import pe.edu.upc.backend.Entitie.Noticia;
+
+import java.time.LocalDate;
 import java.util.List;
 
 public interface NoticiasService {
@@ -9,6 +11,10 @@ public interface NoticiasService {
     List<Noticia> findAll();       // Listar todas las noticias
     Noticia edit(Long id, Noticia noticia);  // Modificar una noticia
     void deleteById(Long id);      // Borrar una noticia
+
+    //PRIMER QUERY NATIVE
+    // Nuevo método para obtener noticias después de una fecha específica
+    List<Noticia> findNoticiasAfterFecha(LocalDate fecha);
 }
 
 
