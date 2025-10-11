@@ -70,5 +70,11 @@ public class CultivoFertilizanteController {
         List<String> fertilizantes = cultivoFertilizanteService.findFertilizantesByCultivoId(cultivoId);
         return new ResponseEntity<>(fertilizantes, HttpStatus.OK);
     }
-
+    //TOP 5 FERTILIZANTES
+    //http://localhost:8080/api/cultivo-fertilizante/top-fertilizantes
+    @GetMapping("/top-fertilizantes")
+    public ResponseEntity<List<Object[]>> getTopFertilizantes() {
+        List<Object[]> data = cultivoFertilizanteService.findTop5FertilizantesMasUsados();
+        return new ResponseEntity<>(data, HttpStatus.OK);
+    }
 }

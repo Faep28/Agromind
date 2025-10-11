@@ -40,4 +40,10 @@ public class SensorServiceImpl implements SensorService {
             System.out.println("Sensor no encontrado");
         }
     }
+    @Override
+    public List<Object[]> countSensoresActivosPorTipo() {
+        return sensorRepository.countSensoresActivosPorTipo();
+    }
+
+
 }

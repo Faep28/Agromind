@@ -10,6 +10,7 @@ import pe.edu.upc.backend.Repository.ParcelaRepository;
 import pe.edu.upc.backend.Service.CultivoService;
 
 import java.util.List;
+import java.util.Map;
 
 @CrossOrigin("*")
 @RestController
@@ -71,4 +72,40 @@ public class CultivoController {
         List<Object[]> data = cultivoService.countCultivosPorParcela();
         return new ResponseEntity<>(data, HttpStatus.OK);
     }
+
+    //Buscar cultivos por nombre y estado
+    @GetMapping("/buscar")   //http://localhost:8080/api/cultivos/buscar?nombre=Cultivo de Papa&estado=activo
+    public ResponseEntity<List<Cultivo>> buscarCultivosPorNombreYEstado(
+            @RequestParam String nombre,
+            @RequestParam String estado) {
+        List<Cultivo> cultivos = cultivoService.findByNombreContainingIgnoreCaseAndEstadoIgnoreCase(nombre, estado);
+        if (cultivos.isEmpty()) {
+            return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+        }
+        return new ResponseEntity<>(cultivos, HttpStatus.OK);
+    }
+
+
+    //Buscar cultivos por temporada
+    @GetMapping("/temporada/{temporada}")   //http://localhost:8080/api/cultivos/temporada/Verano
+    public ResponseEntity<List<Cultivo>> buscarPorTemporada(@PathVariable String temporada) {
+        List<Cultivo> cultivos = cultivoService.findByTemporadaIgnoreCase(temporada);
+        if (cultivos.isEmpty()) {
+            return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+        }
+        return new ResponseEntity<>(cultivos, HttpStatus.OK);
+    }
+
+
+    @GetMapping("/estadisticas/estado")  //http://localhost:8080/api/cultivos/estadisticas/estado
+    public ResponseEntity<?> contarCultivosPorEstado() {
+        long activos = cultivoService.countByEstadoIgnoreCase("Activo");
+        long inactivos = cultivoService.countByEstadoIgnoreCase("Inactivo");
+
+        return new ResponseEntity<>(Map.of(
+                "activos", activos,
+                "inactivos", inactivos
+        ), HttpStatus.OK);
+    }
+
 }

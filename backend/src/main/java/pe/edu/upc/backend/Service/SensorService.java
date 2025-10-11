@@ -9,4 +9,5 @@ public interface SensorService {
     List<Sensor> findAll();
     Sensor edit(Long id, Sensor sensor);
     void deleteById(Long id);
+    List<Object[]> countSensoresActivosPorTipo();
 }

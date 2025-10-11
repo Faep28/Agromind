@@ -10,4 +10,14 @@ public interface CultivoRepository extends JpaRepository<Cultivo, Long> {
 
     @Query("SELECT p.nombre, COUNT(c.id) FROM Cultivo c JOIN c.parcela p GROUP BY p.nombre")
     List<Object[]> countCultivosPorParcela();
+
+    //Query method de buscar cultivos por nombre y estado
+    List<Cultivo> findByNombreContainingIgnoreCaseAndEstadoIgnoreCase(String nombre, String estado);
+
+    //Query method de listar todos los cultivos registrados en una temporada específica
+    List<Cultivo> findByTemporadaIgnoreCase(String temporada);
+
+    //Query method para contar cuántos cultivos están activos vs inactivos
+    Long countByEstadoIgnoreCase(String estado);
+
 }

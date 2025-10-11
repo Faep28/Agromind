@@ -47,5 +47,20 @@ public class CultivoServiceImpl implements CultivoService {
         return cultivoRepository.countCultivosPorParcela();
     }
 
-
+    @Override
+    public List<Cultivo> findByNombreContainingIgnoreCaseAndEstadoIgnoreCase(String nombre, String estado) {
+        return cultivoRepository.findByNombreContainingIgnoreCaseAndEstadoIgnoreCase(nombre, estado);
     }
+
+    @Override
+    public List<Cultivo> findByTemporadaIgnoreCase(String temporada) {
+        return cultivoRepository.findByTemporadaIgnoreCase(temporada);
+    }
+
+    @Override
+    public Long countByEstadoIgnoreCase(String estado) {
+        return cultivoRepository.countByEstadoIgnoreCase(estado);
+    }
+
+
+}

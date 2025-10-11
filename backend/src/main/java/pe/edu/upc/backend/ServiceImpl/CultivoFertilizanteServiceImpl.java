@@ -65,4 +65,9 @@ public class CultivoFertilizanteServiceImpl implements CultivoFertilizanteServic
         return cultivoFertilizanteRepository.findFertilizantesByCultivoId(cultivoId);
     }
 
+    @Override
+    public List<Object[]> findTop5FertilizantesMasUsados() {
+        return cultivoFertilizanteRepository.findTop5FertilizantesMasUsados();
+
+    }
 }
