@@ -77,7 +77,7 @@ public class CultivoController {
     public ResponseEntity<List<Cultivo>> buscarCultivos(
             @RequestParam String nombre,
             @RequestParam String estado) {
-        List<Cultivo> cultivos = cultivoService.findByNombreContainingIgnoreCaseAndEstado(nombre, estado);
+        List<Cultivo> cultivos = cultivoService.findByNombreContainingIgnoreCaseAndEstadoIgnoreCase(nombre, estado);
         if (cultivos.isEmpty()) {
             return new ResponseEntity<>(HttpStatus.NO_CONTENT);
         }

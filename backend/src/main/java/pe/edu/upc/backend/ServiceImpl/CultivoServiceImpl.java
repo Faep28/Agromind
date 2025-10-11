@@ -48,8 +48,8 @@ public class CultivoServiceImpl implements CultivoService {
     }
 
     @Override
-    public List<Cultivo> findByNombreContainingIgnoreCaseAndEstado(String nombre, String estado) {
-        return cultivoRepository.findByNombreContainingIgnoreCaseAndEstado(nombre, estado);
+    public List<Cultivo> findByNombreContainingIgnoreCaseAndEstadoIgnoreCase(String nombre, String estado) {
+        return cultivoRepository.findByNombreContainingIgnoreCaseAndEstadoIgnoreCase(nombre, estado);
     }
 
 
