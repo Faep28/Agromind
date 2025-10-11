@@ -65,14 +65,17 @@ public class UserController {
         return new ResponseEntity<>(users, HttpStatus.OK);
     }
 
-    // Obtener los usuarios con más de 'X' notificaciones
-    @GetMapping("/many-notifications")  // GET → http://localhost:8080/api/users/many-notifications?minCount=2
-    public ResponseEntity<List<User>> getUsersWithManyNotifications(
+    // Obtener usuarios con más de 'X' notificaciones
+    @GetMapping("/many-notifications-native")  // GET → http://localhost:8080/api/users/many-notifications-native?minCount=2
+    public ResponseEntity<List<Object[]>> getUsersWithManyNotificationsNative(
             @RequestParam(defaultValue = "2") int minCount) {
-        List<User> users = userService.findUsersWithMoreThanNotifications(minCount);
-        if (users.isEmpty()) {
+        List<Object[]> results = userService.findUsersWithMoreThanNotificationsNative(minCount);
+
+        if (results.isEmpty()) {
             return new ResponseEntity<>(HttpStatus.NO_CONTENT);
         }
-        return new ResponseEntity<>(users, HttpStatus.OK);
+
+        return new ResponseEntity<>(results, HttpStatus.OK);
     }
+
 }
