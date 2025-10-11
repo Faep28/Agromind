@@ -61,5 +61,26 @@ public class NoticiaController {
         return new ResponseEntity<>(HttpStatus.NO_CONTENT);
     }
     // -------------------------- CRUD --------------------------
+
+    // Nuevo endpoint para obtener noticias después de una fecha específica
+    @GetMapping("/after/{fecha}")
+    public ResponseEntity<List<Noticia>> getNoticiasAfterFecha(@PathVariable String fecha) {
+        try {
+            // Convertir la fecha del string a LocalDate
+            LocalDate localDate = LocalDate.parse(fecha);
+
+            // Buscar las noticias
+            List<Noticia> noticias = noticiasService.findNoticiasAfterFecha(localDate);
+
+            if (noticias.isEmpty()) {
+                return new ResponseEntity<>(HttpStatus.NO_CONTENT);  // Si no hay noticias, retornar 204
+            }
+
+            return new ResponseEntity<>(noticias, HttpStatus.OK);  // Si hay noticias, retornar 200 OK
+        } catch (Exception e) {
+            // Manejo de errores, si el formato de fecha es incorrecto
+            return new ResponseEntity<>(HttpStatus.BAD_REQUEST);  // Retorna 400 si la fecha no es válida
+        }
+    }
 }
 
