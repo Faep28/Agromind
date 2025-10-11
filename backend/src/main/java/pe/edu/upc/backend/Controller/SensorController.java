@@ -43,4 +43,10 @@ public class SensorController {
         sensorService.deleteById(id);
         return new ResponseEntity<>(HttpStatus.NO_CONTENT); // 204 No Content indica que la eliminación se realizó correctamente
     }
+    @GetMapping("/activos/por-tipo")
+    public ResponseEntity<List<Object[]>> getSensoresActivosPorTipo() {
+        List<Object[]> data = sensorService.countSensoresActivosPorTipo();
+        return new ResponseEntity<>(data, HttpStatus.OK);
+    }
+
 }
