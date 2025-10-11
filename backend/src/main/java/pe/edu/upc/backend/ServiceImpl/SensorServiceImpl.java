@@ -45,5 +45,10 @@ public class SensorServiceImpl implements SensorService {
         return sensorRepository.countSensoresActivosPorTipo();
     }
 
+    @Override
+    public List<Sensor> findByEstadoIgnoreCase(String estado) {
+        return sensorRepository.findByEstadoIgnoreCase(estado);
+    }
+
 
 }

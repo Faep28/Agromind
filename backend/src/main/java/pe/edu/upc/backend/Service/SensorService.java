@@ -10,4 +10,6 @@ public interface SensorService {
     Sensor edit(Long id, Sensor sensor);
     void deleteById(Long id);
     List<Object[]> countSensoresActivosPorTipo();
+    List<Sensor> findByEstadoIgnoreCase(String estado);
+
 }

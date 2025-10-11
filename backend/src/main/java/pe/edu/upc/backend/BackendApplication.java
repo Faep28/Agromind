@@ -143,7 +143,7 @@ public class BackendApplication {
             // Crear sensores
             Sensor sensor1 = new Sensor(null, "Sensor de Temperatura", "Temperatura", "activo", "Modelo T150", null);
             Sensor sensor2 = new Sensor(null, "Sensor de Humedad", "Humedad", "activo", "Modelo H250", null);
-            Sensor sensor3 = new Sensor(null, "Sensor de PH", "PH", "activo", "Modelo P350", null);
+            Sensor sensor3 = new Sensor(null, "Sensor de PH", "PH", "inactivo", "Modelo P350", null);
 
             sensorRepository.save(sensor1);
             sensorRepository.save(sensor2);

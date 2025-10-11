@@ -13,4 +13,9 @@ public interface SensorRepository extends JpaRepository<Sensor, Long> {
             "WHERE LOWER(estado) = 'activo' " +
             "GROUP BY tipo", nativeQuery = true)
     List<Object[]> countSensoresActivosPorTipo();
+
+
+    //Query method para listar todos los sensores activos
+    List<Sensor> findByEstadoIgnoreCase(String estado);
+
 }

@@ -49,4 +49,9 @@ public class SensorController {
         return new ResponseEntity<>(data, HttpStatus.OK);
     }
 
+    // Listar sensores según su estado (activo / inactivo)
+    @GetMapping("/estado/{estado}")     //http://localhost:8080/api/sensores/estado/inactivo
+    public List<Sensor> findByEstado(@PathVariable String estado) {
+        return sensorService.findByEstadoIgnoreCase(estado);
+    }
 }
