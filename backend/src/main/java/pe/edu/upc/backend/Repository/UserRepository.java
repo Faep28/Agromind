@@ -15,12 +15,13 @@ public interface UserRepository extends JpaRepository<User,Long> {
 
     // SQL Nativo
     @Query(value = """
-        SELECT u.*
-        FROM users u
-        JOIN notificaciones n ON n.usuario_id = u.id
-        GROUP BY u.id
-        HAVING COUNT(n.id) > ?1
-        """, nativeQuery = true)
-    List<User> findUsersWithMoreThanNotifications(int minCount);
+    SELECT u.id, u.username, u.email, COUNT(n.id) AS total_notificaciones
+    FROM users u
+    JOIN notificaciones n ON n.user_id = u.id
+    GROUP BY u.id, u.username, u.email
+    HAVING COUNT(n.id) > ?1
+    """, nativeQuery = true)
+    List<Object[]> findUsersWithMoreThanNotificationsNative(int minCount);
+
 
 }
