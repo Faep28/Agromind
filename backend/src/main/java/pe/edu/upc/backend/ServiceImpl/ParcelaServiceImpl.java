@@ -4,7 +4,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import pe.edu.upc.backend.Entitie.Cliente;
 import pe.edu.upc.backend.Entitie.Parcela;
-import pe.edu.upc.backend.Entitie.User;
 import pe.edu.upc.backend.Repository.ClienteRepository;
 import pe.edu.upc.backend.Repository.ParcelaRepository;
 import pe.edu.upc.backend.Service.ParcelaService;
@@ -28,11 +27,11 @@ public class ParcelaServiceImpl implements ParcelaService {
         return parcelaRepository.save(parcela);
     }
 
-
     @Override
     public List<Parcela> findAll() {
         return parcelaRepository.findAll();  // Obtener todas las parcelas
     }
+
     @Override
     public Parcela edit(Parcela parcela) {
         // Verifica si la parcela existe antes de actualizar
@@ -41,6 +40,7 @@ public class ParcelaServiceImpl implements ParcelaService {
         }
         return null;  // Si no existe, retorna null
     }
+
     @Override
     public void deleteById(Long id) {
         if (parcelaRepository.existsById(id)) {
@@ -50,4 +50,15 @@ public class ParcelaServiceImpl implements ParcelaService {
     //----------------------------------CRUD----------------------------------------------------
     //----------------------------------------------------------------------------------------------------------------------
 
+    //----------------------------------JPQL QUERY 3----------------------------------------------------
+    //----------------------------------------------------------------------------------------------------------------------
+    @Override
+    public List<Object[]> obtenerTotalParcelasYCultivosPorCliente(Long clienteId) {
+        return parcelaRepository.obtenerTotalParcelasYCultivosPorCliente(clienteId);
+    }
+    //----------------------------------------------------------------------------------------------------------------------
+    @Override
+    public List<Parcela> findByClienteId(Long clienteId) {
+        return parcelaRepository.findParcelasByClienteId(clienteId);
+    }
 }

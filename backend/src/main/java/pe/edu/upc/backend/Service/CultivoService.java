@@ -9,4 +9,7 @@ public interface CultivoService {
     List<Cultivo> findAll();
     Cultivo edit(Cultivo cultivo);
     void deleteById(Long id);
+
+    List<Object[]> countCultivosPorParcela();
+
 }

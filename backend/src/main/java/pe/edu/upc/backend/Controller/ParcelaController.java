@@ -18,12 +18,14 @@ public class ParcelaController {
 
     @Autowired
     private ParcelaService parcelaService;
+
     @Autowired
     private ClienteRepository clienteRepository;
+
     // --------------------------CRUD----------------------------------------------
     //---------------------------------------------------------------------------------------------------------------
     // Crear una nueva parcela asociada a un cliente
-        @PostMapping("/insert/{clienteId}")  //http://localhost:8080/api/parcelas/insert/{clienteId}
+    @PostMapping("/insert/{clienteId}")  //http://localhost:8080/api/parcelas/insert/{clienteId}
     public ResponseEntity<Parcela> add(@PathVariable Long clienteId, @RequestBody Parcela parcela) {
 
         Cliente cliente = clienteRepository.findById(clienteId).orElse(null);
@@ -37,11 +39,13 @@ public class ParcelaController {
 
         return new ResponseEntity<>(createdParcela, HttpStatus.CREATED);
     }
+
     // Obtener todas las parcelas
     @GetMapping("/list") //http://localhost:8080/api/parcelas/list
     public List<Parcela> getAllParcelas() {
         return parcelaService.findAll();  // Llamamos al servicio para obtener todas las parcelas
     }
+
     // Actualizar una parcela
     @PutMapping("/update/{id}")  //http://localhost:8080/api/parcelas/update/{id}
     public ResponseEntity<Parcela> updateParcela(@PathVariable Long id, @RequestBody Parcela parcelaDetails) {
@@ -53,6 +57,7 @@ public class ParcelaController {
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);  // Si la parcela no fue encontrada
         }
     }
+
     // Eliminar una parcela
     @DeleteMapping("/delete/{id}") //http://localhost:8080/api/parcelas/delete/{id}
     public ResponseEntity<Void> deleteParcela(@PathVariable Long id) {
@@ -61,5 +66,19 @@ public class ParcelaController {
     }
     // --------------------------CRUD----------------------------------------------
     //---------------------------------------------------------------------------------------------------------------
+
+    //----------------------------------JPQL QUERY 3----------------------------------------------------
+    // GET: http://localhost:8080/api/parcelas/estadisticas/cliente/{clienteId}
+    @GetMapping("/estadisticas/cliente/{clienteId}")
+    public ResponseEntity<List<Object[]>> getEstadisticasPorCliente(@PathVariable Long clienteId) {
+        List<Object[]> estadisticas = parcelaService.obtenerTotalParcelasYCultivosPorCliente(clienteId);
+        return new ResponseEntity<>(estadisticas, HttpStatus.OK);
+    }
+    //----------------------------------------------------------------------------------------------------------------------
+    @GetMapping("/cliente/{clienteId}")
+    public ResponseEntity<List<Parcela>> getParcelasByCliente(@PathVariable Long clienteId) {
+        List<Parcela> parcelas = parcelaService.findByClienteId(clienteId);
+        return new ResponseEntity<>(parcelas, HttpStatus.OK);
+    }
 
 }

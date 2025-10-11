@@ -42,5 +42,10 @@ public class CultivoServiceImpl implements CultivoService {
     }
     //----------------------------------CRUD----------------------------------------------------
     //----------------------------------------------------------------------------------------------------------------------
+    @Override
+    public List<Object[]> countCultivosPorParcela() {
+        return cultivoRepository.countCultivosPorParcela();
+    }
 
-}
+
+    }

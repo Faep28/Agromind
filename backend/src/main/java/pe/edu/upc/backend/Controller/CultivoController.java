@@ -66,5 +66,9 @@ public class CultivoController {
     // --------------------------CRUD----------------------------------------------
     //---------------------------------------------------------------------------------------------------------------
 
-
+    @GetMapping("/estadisticas/por-parcela")
+    public ResponseEntity<List<Object[]>> getCultivosPorParcela() {
+        List<Object[]> data = cultivoService.countCultivosPorParcela();
+        return new ResponseEntity<>(data, HttpStatus.OK);
+    }
 }

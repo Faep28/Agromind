@@ -10,4 +10,8 @@ public interface ParcelaService {
     List<Parcela> findAll();  // Obtener todas las parcelas
     Parcela edit(Parcela parcela);  // Actualizar parcela
     void deleteById(Long id);  // Eliminar parcela
+
+    // JPQL Query 3
+    List<Object[]> obtenerTotalParcelasYCultivosPorCliente(Long clienteId);
+    List<Parcela> findByClienteId(Long clienteId);
 }
