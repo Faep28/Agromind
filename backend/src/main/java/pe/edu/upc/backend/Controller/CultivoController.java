@@ -10,6 +10,7 @@ import pe.edu.upc.backend.Repository.ParcelaRepository;
 import pe.edu.upc.backend.Service.CultivoService;
 
 import java.util.List;
+import java.util.Map;
 
 @CrossOrigin("*")
 @RestController
@@ -93,6 +94,18 @@ public class CultivoController {
             return new ResponseEntity<>(HttpStatus.NO_CONTENT);
         }
         return new ResponseEntity<>(cultivos, HttpStatus.OK);
+    }
+
+
+    @GetMapping("/estadisticas/estado")  //http://localhost:8080/api/cultivos/estadisticas/estado
+    public ResponseEntity<?> contarCultivosPorEstado() {
+        long activos = cultivoService.countByEstadoIgnoreCase("Activo");
+        long inactivos = cultivoService.countByEstadoIgnoreCase("Inactivo");
+
+        return new ResponseEntity<>(Map.of(
+                "activos", activos,
+                "inactivos", inactivos
+        ), HttpStatus.OK);
     }
 
 }

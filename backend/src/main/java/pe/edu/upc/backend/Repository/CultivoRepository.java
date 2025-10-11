@@ -17,4 +17,7 @@ public interface CultivoRepository extends JpaRepository<Cultivo, Long> {
     //Query method de listar todos los cultivos registrados en una temporada específica
     List<Cultivo> findByTemporadaIgnoreCase(String temporada);
 
+    //Query method para contar cuántos cultivos están activos vs inactivos
+    Long countByEstadoIgnoreCase(String estado);
+
 }

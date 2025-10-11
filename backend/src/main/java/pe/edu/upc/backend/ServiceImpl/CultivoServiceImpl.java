@@ -57,5 +57,10 @@ public class CultivoServiceImpl implements CultivoService {
         return cultivoRepository.findByTemporadaIgnoreCase(temporada);
     }
 
+    @Override
+    public Long countByEstadoIgnoreCase(String estado) {
+        return cultivoRepository.countByEstadoIgnoreCase(estado);
+    }
+
 
 }

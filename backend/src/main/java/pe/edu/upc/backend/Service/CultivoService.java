@@ -16,4 +16,7 @@ public interface CultivoService {
 
     //Listar cultivos por temporada
     List<Cultivo> findByTemporadaIgnoreCase(String temporada);
+
+
+    Long countByEstadoIgnoreCase(String estado);
 }
