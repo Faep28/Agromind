@@ -41,6 +41,6 @@ public class NotificacionServiceImpl implements NotificacionService {
 
     @Override
     public List<Notificacion> findByUserId(Long userId) {
-        return notificacionRepository.findByUserId(userId);
+        return notificacionRepository.findByUsuarioId(userId);
     }
 }

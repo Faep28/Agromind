@@ -52,19 +52,15 @@ public class User {
 
     // Asociación de uno a muchos con la entidad notificación
     @OneToMany(
-            mappedBy = "notificacion",
+            mappedBy = "usuario",
             fetch = FetchType.EAGER,
             cascade = CascadeType.ALL
     )
     private List<Notificacion>notificaciones;
 
-    @OneToMany(
-            mappedBy = "noticia",
-            fetch = FetchType.EAGER,
-            cascade = CascadeType.ALL
-
-    )
+    @OneToMany(mappedBy = "usuarioRelacionado", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
     private List<Noticia> noticias;
+
 
 }
 

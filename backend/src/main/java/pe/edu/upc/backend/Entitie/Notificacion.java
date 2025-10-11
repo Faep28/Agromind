@@ -28,5 +28,5 @@ public class Notificacion {
     @JsonIgnore
     @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "user_id")
-    private User user;
+    private User usuario;
 }

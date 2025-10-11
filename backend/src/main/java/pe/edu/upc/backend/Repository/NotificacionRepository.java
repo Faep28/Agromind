@@ -1,10 +1,12 @@
 package pe.edu.upc.backend.Repository;
 
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.stereotype.Repository;
 import pe.edu.upc.backend.Entitie.Notificacion;
 
 import java.util.List;
 
+@Repository
 public interface NotificacionRepository extends JpaRepository<Notificacion, Long> {
-    List<Notificacion> findByUserId(Long userId);
+    List<Notificacion> findByUsuarioId(Long usuarioId);
 }
