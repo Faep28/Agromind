@@ -13,7 +13,7 @@ public interface UserRepository extends JpaRepository<User,Long> {
     List<User> findUsersWithUnreadNotifications();
 
 
-    // SQL Nativo usando parámetro posicional (?1) en lugar de @Param
+    // SQL Nativo
     @Query(value = """
         SELECT u.*
         FROM users u
