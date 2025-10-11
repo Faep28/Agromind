@@ -44,9 +44,12 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public List<User> findUsersWithMoreThanNotifications(int minCount) {
-        return userRepository.findUsersWithMoreThanNotifications(minCount);
+    public List<Object[]> findUsersWithMoreThanNotificationsNative(int minCount) {
+        return userRepository.findUsersWithMoreThanNotificationsNative(minCount);
     }
+
+
+
     //----------------------------------CRUD----------------------------------------------------
     //----------------------------------------------------------------------------------------------------------------------
 
