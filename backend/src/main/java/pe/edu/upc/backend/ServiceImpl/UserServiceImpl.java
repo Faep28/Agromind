@@ -37,6 +37,16 @@ public class UserServiceImpl implements UserService {
     public void deleteById(Long id) {
         userRepository.deleteById(id);  // Eliminar un usuario por ID
     }
+
+    @Override
+    public List<User> findUsersWithUnreadNotifications() {
+        return userRepository.findUsersWithUnreadNotifications();
+    }
+
+    @Override
+    public List<User> findUsersWithMoreThanNotifications(int minCount) {
+        return userRepository.findUsersWithMoreThanNotifications(minCount);
+    }
     //----------------------------------CRUD----------------------------------------------------
     //----------------------------------------------------------------------------------------------------------------------
 
