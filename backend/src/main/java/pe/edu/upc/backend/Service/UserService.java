@@ -12,5 +12,5 @@ public interface UserService {
     void deleteById(Long id);
 
     List<User> findUsersWithUnreadNotifications();
-    List<User> findUsersWithMoreThanNotifications(int minCount);
+    List<Object[]> findUsersWithMoreThanNotificationsNative(int minCount);
 }
