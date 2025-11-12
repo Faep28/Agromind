@@ -1,6 +1,6 @@
 FROM eclipse-temurin:24-jdk AS build
 COPY . .
-RUN chmod +x nvmw
+RUN chmod +x mvnw
 RUN ./mvnw clean install -DskipTests
 
 FROM eclipse-temurin:24-jdk
