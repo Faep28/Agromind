@@ -96,6 +96,53 @@
 
     </dependencies>
 
+    <profiles>
+        <profile>
+            <id>prod</id>
+            <activation>
+                <activeByDefault>true</activeByDefault>
+            </activation>
+            <properties>
+                <profileActive>prod</profileActive>
+            </properties>
+        </profile>
+
+        <profile>
+            <id>joshua</id>
+            <properties>
+                <profileActive>joshua</profileActive>
+            </properties>
+        </profile>
+
+        <profile>
+            <id>angelo</id>
+            <properties>
+                <profileActive>angelo</profileActive>
+            </properties>
+        </profile>
+
+        <profile>
+            <id>rodrigo</id>
+            <properties>
+                <profileActive>rodrigo</profileActive>
+            </properties>
+        </profile>
+
+        <profile>
+            <id>frank</id>
+            <properties>
+                <profileActive>frank</profileActive>
+            </properties>
+        </profile>
+
+        <profile>
+            <id>maria</id>
+            <properties>
+                <profileActive>maria</profileActive>
+            </properties>
+        </profile>
+    </profiles>
+
     <build>
         <plugins>
             <plugin>
