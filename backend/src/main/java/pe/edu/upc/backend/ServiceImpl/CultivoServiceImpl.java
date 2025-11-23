@@ -2,11 +2,10 @@ package pe.edu.upc.backend.ServiceImpl;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import pe.edu.upc.backend.Entitie.Cultivo;
-import pe.edu.upc.backend.Entitie.Parcela;
-import pe.edu.upc.backend.Repository.CultivoRepository;
-import pe.edu.upc.backend.Repository.ParcelaRepository;
-import pe.edu.upc.backend.Service.CultivoService;
+import pe.edu.upc.backend.Entities.Cultivo;
+import pe.edu.upc.backend.Repositories.CultivoRepository;
+import pe.edu.upc.backend.Repositories.ParcelaRepository;
+import pe.edu.upc.backend.Services.CultivoService;
 
 import java.util.List;
 

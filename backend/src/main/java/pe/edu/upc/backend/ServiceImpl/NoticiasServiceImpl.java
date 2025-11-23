@@ -2,9 +2,9 @@ package pe.edu.upc.backend.ServiceImpl;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import pe.edu.upc.backend.Entitie.Noticia;
-import pe.edu.upc.backend.Repository.NoticiasRepository;
-import pe.edu.upc.backend.Service.NoticiasService;
+import pe.edu.upc.backend.Entities.Noticia;
+import pe.edu.upc.backend.Repositories.NoticiasRepository;
+import pe.edu.upc.backend.Services.NoticiasService;
 
 import java.time.LocalDate;
 import java.util.List;

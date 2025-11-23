@@ -1,11 +1,10 @@
 package pe.edu.upc.backend.ServiceImpl;
 
-import jakarta.persistence.EntityNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import pe.edu.upc.backend.Entitie.Authority;
-import pe.edu.upc.backend.Repository.AuthorityRepository;
-import pe.edu.upc.backend.Service.AuthorityService;
+import pe.edu.upc.backend.Entities.Authority;
+import pe.edu.upc.backend.Repositories.AuthorityRepository;
+import pe.edu.upc.backend.Services.AuthorityService;
 
 import java.util.List;
 

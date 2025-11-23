@@ -2,9 +2,9 @@ package pe.edu.upc.backend.ServiceImpl;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import pe.edu.upc.backend.Entitie.User;
-import pe.edu.upc.backend.Repository.UserRepository;
-import pe.edu.upc.backend.Service.UserService;
+import pe.edu.upc.backend.Entities.User;
+import pe.edu.upc.backend.Repositories.UserRepository;
+import pe.edu.upc.backend.Services.UserService;
 
 import java.util.List;
 

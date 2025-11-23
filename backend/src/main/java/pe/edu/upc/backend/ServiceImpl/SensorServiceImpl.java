@@ -2,9 +2,9 @@ package pe.edu.upc.backend.ServiceImpl;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import pe.edu.upc.backend.Entitie.Sensor;
-import pe.edu.upc.backend.Repository.SensorRepository;
-import pe.edu.upc.backend.Service.SensorService;
+import pe.edu.upc.backend.Entities.Sensor;
+import pe.edu.upc.backend.Repositories.SensorRepository;
+import pe.edu.upc.backend.Services.SensorService;
 
 import java.util.List;
 

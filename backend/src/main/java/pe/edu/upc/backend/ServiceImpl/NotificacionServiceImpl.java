@@ -2,9 +2,9 @@ package pe.edu.upc.backend.ServiceImpl;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import pe.edu.upc.backend.Entitie.Notificacion;
-import pe.edu.upc.backend.Repository.NotificacionRepository;
-import pe.edu.upc.backend.Service.NotificacionService;
+import pe.edu.upc.backend.Entities.Notificacion;
+import pe.edu.upc.backend.Repositories.NotificacionRepository;
+import pe.edu.upc.backend.Services.NotificacionService;
 
 import java.util.List;
 

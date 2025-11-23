@@ -2,13 +2,13 @@ package pe.edu.upc.backend.ServiceImpl;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import pe.edu.upc.backend.Entitie.LecturaSensor;
-import pe.edu.upc.backend.Entitie.Parcela;
-import pe.edu.upc.backend.Entitie.Sensor;
-import pe.edu.upc.backend.Repository.LecturaSensorRepository;
-import pe.edu.upc.backend.Repository.ParcelaRepository;
-import pe.edu.upc.backend.Repository.SensorRepository;
-import pe.edu.upc.backend.Service.LecturaSensorService;
+import pe.edu.upc.backend.Entities.LecturaSensor;
+import pe.edu.upc.backend.Entities.Parcela;
+import pe.edu.upc.backend.Entities.Sensor;
+import pe.edu.upc.backend.Repositories.LecturaSensorRepository;
+import pe.edu.upc.backend.Repositories.ParcelaRepository;
+import pe.edu.upc.backend.Repositories.SensorRepository;
+import pe.edu.upc.backend.Services.LecturaSensorService;
 
 import java.util.List;
 

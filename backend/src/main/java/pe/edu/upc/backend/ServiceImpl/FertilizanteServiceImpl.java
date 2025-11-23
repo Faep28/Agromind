@@ -2,9 +2,9 @@ package pe.edu.upc.backend.ServiceImpl;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import pe.edu.upc.backend.Entitie.Fertilizante;
-import pe.edu.upc.backend.Repository.FertilizanteRepository;
-import pe.edu.upc.backend.Service.FertilizanteService;
+import pe.edu.upc.backend.Entities.Fertilizante;
+import pe.edu.upc.backend.Repositories.FertilizanteRepository;
+import pe.edu.upc.backend.Services.FertilizanteService;
 
 import java.util.List;
 

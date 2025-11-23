@@ -2,11 +2,11 @@ package pe.edu.upc.backend.ServiceImpl;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import pe.edu.upc.backend.Entitie.Cliente;
-import pe.edu.upc.backend.Entitie.User;
-import pe.edu.upc.backend.Repository.ClienteRepository;
-import pe.edu.upc.backend.Repository.UserRepository;
-import pe.edu.upc.backend.Service.ClienteService;
+import pe.edu.upc.backend.Entities.Cliente;
+import pe.edu.upc.backend.Entities.User;
+import pe.edu.upc.backend.Repositories.ClienteRepository;
+import pe.edu.upc.backend.Repositories.UserRepository;
+import pe.edu.upc.backend.Services.ClienteService;
 
 import java.util.List;
 
