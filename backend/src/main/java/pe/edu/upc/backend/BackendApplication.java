@@ -76,13 +76,13 @@ public class BackendApplication {
             parcelaRepository.save(parcela5);
 
             // Crear cultivos y asociarlos a las parcelas (con algunos cultivos repetidos por parcela)
-            Cultivo cultivo1 = new Cultivo(null, "Cultivo de Tomate", "Tomates orgánicos", "Verano", "Activo", parcela1);
-            Cultivo cultivo2 = new Cultivo(null, "Cultivo de Maíz", "Maíz dulce", "Invierno", "Activo", parcela2);
-            Cultivo cultivo3 = new Cultivo(null, "Cultivo de Papa", "Papas orgánicas", "Primavera", "Activo", parcela3);
-            Cultivo cultivo4 = new Cultivo(null, "Cultivo de Arroz", "Arroz para consumo local", "Otoño", "Activo", parcela4);
-            Cultivo cultivo5 = new Cultivo(null, "Cultivo de Pimientos", "Pimientos orgánicos", "Verano", "Activo", parcela5);
-            Cultivo cultivo6 = new Cultivo(null, "Cultivo de Tomate", "Tomates orgánicos", "Verano", "Activo", parcela2);  // Repetido en otra parcela
-            Cultivo cultivo7 = new Cultivo(null, "Cultivo de Maíz", "Maíz dulce", "Invierno", "Activo", parcela1);  // Repetido en otra parcela
+            Cultivo cultivo1 = new Cultivo(null, "Cultivo de Tomate", "Tomates orgánicos", "Verano", LocalDate.of(2025, 10, 1), LocalDate.of(2026, 1, 15), "Activo", parcela1);
+            Cultivo cultivo2 = new Cultivo(null, "Cultivo de Maíz", "Maíz dulce", "Invierno", LocalDate.of(2025, 6, 10), LocalDate.of(2025, 9, 30), "Activo", parcela2);
+            Cultivo cultivo3 = new Cultivo(null, "Cultivo de Papa", "Papas orgánicas", "Primavera", LocalDate.of(2025, 8, 20), LocalDate.of(2025, 12, 5), "Activo", parcela3);
+            Cultivo cultivo4 = new Cultivo(null, "Cultivo de Arroz", "Arroz para consumo local", "Otoño", LocalDate.of(2025, 3, 5), LocalDate.of(2025, 7, 25), "Activo", parcela4);
+            Cultivo cultivo5 = new Cultivo(null, "Cultivo de Pimientos", "Pimientos orgánicos", "Verano", LocalDate.of(2025, 11, 1), LocalDate.of(2026, 2, 20), "Activo", parcela5);
+            Cultivo cultivo6 = new Cultivo(null, "Cultivo de Tomate", "Tomates orgánicos", "Verano", LocalDate.of(2025, 10, 10), LocalDate.of(2026, 1, 20), "Activo", parcela2);
+            Cultivo cultivo7 = new Cultivo(null, "Cultivo de Maíz", "Maíz dulce", "Invierno", LocalDate.of(2025, 6, 15), LocalDate.of(2025, 10, 5), "Activo", parcela1);
 
             cultivoRepository.save(cultivo1);
             cultivoRepository.save(cultivo2);
