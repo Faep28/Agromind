@@ -22,7 +22,7 @@ public class User {
     private String username;
     private String password;
     private String email;
-    private Boolean enabled;
+    private boolean enabled;
 
     @JsonIgnore
     @ManyToMany(fetch = FetchType.EAGER)

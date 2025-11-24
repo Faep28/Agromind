@@ -32,6 +32,16 @@ public class AuthorityServiceImpl implements AuthorityService {
         return null;  // Si no existe, devuelve null
     }
 
+    @Override
+    public Authority findById(Long id) {
+        return authorityRepository.findById(id).orElse(null);
+    }
+
+    @Override
+    public Authority findByRoleName(String roleName) {
+        return authorityRepository.findByRoleName(roleName);
+    }
+
 
     //----------------------------------CRUD----------------------------------------------------
     //----------------------------------------------------------------------------------------------------------------------

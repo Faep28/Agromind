@@ -10,6 +10,7 @@ public interface AuthorityService {
     public List<Authority> findAll();
     public Authority edit(Authority authority);
 
-
+    public Authority findById(Long id);
+    public Authority findByRoleName(String roleName);
 
 }

@@ -8,7 +8,9 @@ import java.util.List;
 
 public interface UserRepository extends JpaRepository<User,Long> {
 
-    //
+    public User findByUsername(String username);
+
+    // JPQL
     @Query("SELECT DISTINCT u FROM User u JOIN u.notificaciones n WHERE n.esLeido = false")
     List<User> findUsersWithUnreadNotifications();
 
