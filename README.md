@@ -1,18 +1,18 @@
 <h1 align="center">🌱 AgroMinds - Plataforma de Gestión Agrícola Inteligente 🌾</h1>
 
-<p align="center">
+<div align="center">
   <img src="https://img.shields.io/badge/SpringBoot-6DB33F?style=for-the-badge&logo=springboot&logoColor=white" />
   <img src="https://img.shields.io/badge/PostgreSQL-316192?style=for-the-badge&logo=postgresql&logoColor=white" />
   <img src="https://img.shields.io/badge/JPA-Hibernate-59666C?style=for-the-badge&logo=hibernate&logoColor=white" />
-  <img src="https://img.shields.io/badge/Java-17-ED8B00?style=for-the-badge&logo=java&logoColor=white" />
-</p>
+  <img src="https://img.shields.io/badge/Java-25-ED8B00?style=for-the-badge&logo=java&logoColor=white" />
+</div>
 
-<p align="center">
-  <a href="#"><img src="https://img.shields.io/github/stars/tuusuario/turepo?style=social" /></a>
-  <a href="#"><img src="https://img.shields.io/github/forks/tuusuario/turepo?style=social" /></a>
-  <a href="#"><img src="https://img.shields.io/github/issues/tuusuario/turepo" /></a>
-  <a href="#"><img src="https://img.shields.io/github/last-commit/tuusuario/turepo" /></a>
-</p>
+<div align="center">
+  <a href="#"><img src="https://img.shields.io/github/stars/Faep28/Agromind?style=social" /></a>
+  <a href="#"><img src="https://img.shields.io/github/forks/Faep28/Agromind?style=social" /></a>
+  <a href="#"><img src="https://img.shields.io/github/issues/Faep28/Agromind" /></a>
+  <a href="#"><img src="https://img.shields.io/github/last-commit/Faep28/Agromind" /></a>
+</div>
 
 ---
 
@@ -27,21 +27,21 @@ El proyecto sigue una arquitectura **por capas (Entities, Repositories, Services
 
 ## 🧩 Módulos Principales
 
-| Módulo | Descripción |
-|--------|--------------|
-| 👨‍🌾 **Usuarios y Clientes** | Gestión de usuarios, roles y clientes vinculados. |
-| 🌿 **Cultivos y Parcelas** | Registro, seguimiento y estadísticas de cultivos. |
+| Módulo                              | Descripción |
+|-------------------------------------|--------------|
+| 👨‍🌾 **Usuarios y Clientes**       | Gestión de usuarios, roles y clientes vinculados. |
+| 🌿 **Cultivos y Parcelas**          | Registro, seguimiento y estadísticas de cultivos. |
 | 🧪 **Fertilizantes y Aplicaciones** | Control de fertilizantes utilizados por cultivo. |
-| ⚙️ **Sensores y Lecturas** | Monitoreo de humedad, temperatura y pH en tiempo real. |
-| 📰 **Noticias y Notificaciones** | Comunicación de eventos, alertas y novedades al usuario. |
-| 💬 **Servicios y Solicitudes** | Solicitud de asesorías, mantenimiento y recursos agrícolas. |
+| ⚙️ **Sensores y Lecturas**          | Monitoreo de humedad, temperatura y pH en tiempo real. |
+| 📰 **Noticias y Notificaciones**    | Comunicación de eventos, alertas y novedades al usuario. |
+| 💬 **Servicios y Solicitudes**      | Solicitud de asesorías, mantenimiento y recursos agrícolas. |
 
 ---
 
 ## 🏗️ Tecnologías Utilizadas
 
-- ☕ **Java 17**
-- 🍃 **Spring Boot 3.x**
+- ☕ **Java 25**
+- 🍃 **Spring Boot 3.5.5**
 - 🧭 **Spring Data JPA**
 - 🐘 **PostgreSQL**
 - 🔁 **JPQL y SQL Nativo**
@@ -52,17 +52,28 @@ El proyecto sigue una arquitectura **por capas (Entities, Repositories, Services
 
 ## 📡 Estructura del Proyecto
 
+
 ```
-📦 backend
-│
-├── 📁 pe.edu.upc.backend
-├── 🎯 Controller
-├── 🧩 Dto
-├── 🧱 Entitie
-├── 💾 Repository
-├── ⚙️ Service
-├── 🔧 ServiceImpl
-└── 🚀 BackendApplication.java
+.
+├── 📂 backend
+│   ├── 📁 com.prueba.backend
+│   ├── 🎯 Controller
+│   ├── 🧩 Dto
+│   ├── 🧱 Entity 
+│   ├── 💾 Repository 
+│   ├── ⚙️ Service 
+│   ├── 🔧 ServiceImpl
+│   ├── 🚀 BackendApplication.java
+│   └── ❗ Exceptions
+├── 📂 frontend
+│   ├── 📁 src
+│   ├── 📁 app
+│   ├── 📁 assets
+│   ├── ⚙️ config
+│   ├── 🧩 components
+│   ├── 🧩 services
+│   └── 🧩 app.module.ts
+└─── README.md    
 ```
 
 ## 👨‍💻 Equipo de Desarrollo
@@ -70,13 +81,13 @@ El proyecto sigue una arquitectura **por capas (Entities, Repositories, Services
 **Universidad Peruana de Ciencias Aplicadas - UPC**
 Proyecto académico del curso **Análisis y Diseño de Sistemas de Información (ASI-705)**
 
-| Integrante          | Rol          | GitHub                                     |
-|---------------------| ------------ |--------------------------------------------|
-| 👑 George Baca      | Backend Dev  | [@usuario1](https://github.com/202318756)  |
-| 💻 Joshua Piero     | Backend Dev | [@usuario2](https://github.com/Josh2004-code)   |
-| 🧠 Angelo Paolo     | Backend Dev  | [@usuario3](https://github.com/Angelo0309) |
-| 📊 Rodrigo Otoniel  | Backend Dev     | [@usuario4](https://github.com/Chamart17)                              |
-| 📊 Frank Antoni  | Backend Dev     | [@usuario5](https://github.com/Faep28)   |
+| Integrante         | Rol           |                                                 GitHub                                                  |
+|--------------------|---------------|:-------------------------------------------------------------------------------------------------------:|
+| 💻 George Baca     | Fullstack Dev | <img src="https://avatars.githubusercontent.com/u/185106239?v=4" alt="angelo" width="32" height="auto"> |
+| 💻 Joshua Piero    | Fullstack Dev | <img src="https://avatars.githubusercontent.com/u/176424079?v=4" alt="angelo" width="32" height="auto"> |
+| 💻 Angelo Paolo    | Fullstack Dev | <img src="https://avatars.githubusercontent.com/u/136656996?v=4" alt="angelo" width="32" height="auto"> |
+| 💻 Rodrigo Otoniel | Fullstack Dev | <img src="https://avatars.githubusercontent.com/u/93228774?v=4" alt="angelo" width="32" height="auto">  |
+| 💻 Frank Antoni    | Fullstack Dev | <img src="https://avatars.githubusercontent.com/u/186503826?v=4" alt="angelo" width="32" height="auto"> |
 ---
 
 ## ⭐ ¡Apoya el Proyecto!
