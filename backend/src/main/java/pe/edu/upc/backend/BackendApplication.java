@@ -4,8 +4,11 @@ import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.Bean;
+import pe.edu.upc.backend.dtos.UserDTO;
 import pe.edu.upc.backend.entities.*;
 import pe.edu.upc.backend.repositories.*;
+import pe.edu.upc.backend.services.AuthorityService;
+import pe.edu.upc.backend.services.UserService;
 
 import java.time.LocalDateTime;
 import java.time.LocalDate;
@@ -18,49 +21,82 @@ public class BackendApplication {
         SpringApplication.run(BackendApplication.class, args);
     }
     @Bean
-    public CommandLineRunner startConfiguration(UserRepository userRepository,
-                                                AuthorityRepository authorityRepository,
-                                                ClienteRepository clienteRepository,
-                                                ParcelaRepository parcelaRepository,
-                                                CultivoRepository cultivoRepository,
-                                                ServicioRepository servicioRepository,
-                                                SolicitudServicioRepository solicitudServicioRepository,
-                                                FertilizanteRepository fertilizanteRepository,
-                                                CultivoFertilizanteRepository cultivoFertilizanteRepository,
-                                                NotificacionRepository notificacionRepository, SensorRepository sensorRepository,LecturaSensorRepository lecturaSensorRepository,
-                                                NoticiasRepository noticiasRepository
+    public CommandLineRunner startConfiguration(
+            UserRepository userRepository,
+            AuthorityRepository authorityRepository,
+            ClienteRepository clienteRepository,
+            ParcelaRepository parcelaRepository,
+            CultivoRepository cultivoRepository,
+            ServicioRepository servicioRepository,
+            SolicitudServicioRepository solicitudServicioRepository,
+            FertilizanteRepository fertilizanteRepository,
+            CultivoFertilizanteRepository cultivoFertilizanteRepository,
+            NotificacionRepository notificacionRepository,
+            SensorRepository sensorRepository,
+            LecturaSensorRepository lecturaSensorRepository,
+            NoticiasRepository noticiasRepository,
+
+            UserService userService,
+            AuthorityService authorityService
     ) {
         return args -> {
-            Authority adminRole = new Authority(null, "ADMIN", null);
-            Authority userRole = new Authority(null, "USER", null);
-            authorityRepository.save(adminRole);
-            authorityRepository.save(userRole);
 
-            // Crear usuarios
-            User juanPerezUser = new User(null, "juanperez", "admin123", "juan.perez@example.com", true, List.of(adminRole), null, null, null);
-            User mariaLopezUser = new User(null, "mariaLopez", "user123", "maria.lopez@example.com", true, List.of(userRole), null, null, null);
-            User carlosGarciaUser = new User(null, "carlosgarcia", "carlo1234", "carlos.garcia@example.com", true, List.of(userRole), null, null, null);
-            User luisMartinezUser = new User(null, "luismartinez", "luis1234", "luis.martinez@example.com", true, List.of(userRole), null, null, null);
-            User pedroLopezUser = new User(null, "pedrolopez", "pedro1234", "pedro.lopez@example.com", true, List.of(adminRole), null, null, null);
+            // ==== Creacion de roles ====
+            Authority adminRole  = authorityService.add(new Authority(null, "ROLE_ADMIN", null));
+            Authority userRole   = authorityService.add(new Authority(null, "ROLE_USER", null));
 
-            userRepository.save(juanPerezUser);
-            userRepository.save(mariaLopezUser);
-            userRepository.save(carlosGarciaUser);
-            userRepository.save(luisMartinezUser);
-            userRepository.save(pedroLopezUser);
+            // ==== Creacion de usuarios ====
+            UserDTO userJuan  = new UserDTO(null, "juanperez", "admin123", "juan.perez@example.com", "ROLE_ADMIN", null);
+            UserDTO userMaria = new UserDTO(null, "marialopez", "user123", "maria.lopez@example.com", "ROLE_ASSIST", null);
+            UserDTO userCarlos= new UserDTO(null, "carlosgarcia", "carlo1234", "carlos.garcia@example.com", "ROLE_USER", null);
+            UserDTO userLuis  = new UserDTO(null, "luismartinez", "luis1234", "luis.martinez@example.com", "ROLE_USER", null);
+            UserDTO userPedro = new UserDTO(null, "pedrolopez", "pedro1234", "pedro.lopez@example.com", "ROLE_ADMIN", null);
 
-            // Crear clientes y asociarlos a los usuarios
-            Cliente cliente1 = new Cliente(null, "Juan Perez", "juan@example.com", "987654321", "Av. Lima 123", LocalDate.now(), "activo", juanPerezUser);
-            Cliente cliente2 = new Cliente(null, "Maria Lopez", "maria@example.com", "998877665", "Av. Cusco 456", LocalDate.now(), "activo", mariaLopezUser);
-            Cliente cliente3 = new Cliente(null, "Carlos Garcia", "carlos@example.com", "987654323", "Av. Piura 789", LocalDate.now(), "activo", carlosGarciaUser);
-            Cliente cliente4 = new Cliente(null, "Luis Martinez", "luis@example.com", "987654324", "Av. Arequipa 101", LocalDate.now(), "activo", luisMartinezUser);
-            Cliente cliente5 = new Cliente(null, "Pedro Lopez", "pedro@example.com", "987654325", "Av. San Isidro 202", LocalDate.now(), "activo", pedroLopezUser);
+            userService.add(userJuan);
+            userService.add(userMaria);
+            userService.add(userCarlos);
+            userService.add(userLuis);
+            userService.add(userPedro);
 
+            User juan   = userService.findByUsername("juanperez");
+            User maria  = userService.findByUsername("marialopez");
+            User carlos = userService.findByUsername("carlosgarcia");
+            User luis   = userService.findByUsername("luismartinez");
+            User pedro  = userService.findByUsername("pedrolopez");
+
+            // Crear clientes asociados a los usuarios
+            Cliente c1 = new Cliente(null, "Juan Perez",  "juan@example.com",  "987654321", "Av. Lima 123", LocalDate.now(), "activo", juan);
+            Cliente c2 = new Cliente(null, "Maria Lopez", "maria@example.com", "998877665", "Av. Cusco 456", LocalDate.now(), "activo", maria);
+            Cliente c3 = new Cliente(null, "Carlos Garcia", "carlos@example.com", "987654323", "Av. Piura 789", LocalDate.now(), "activo", carlos);
+            Cliente c4 = new Cliente(null, "Luis Martinez", "luis@example.com", "987654324", "Av. Arequipa 101", LocalDate.now(), "activo", luis);
+            Cliente c5 = new Cliente(null, "Pedro Lopez", "pedro@example.com", "987654325", "Av. San Isidro 202", LocalDate.now(), "activo", pedro);
+
+            clienteRepository.save(c1);
+            clienteRepository.save(c2);
+            clienteRepository.save(c3);
+            clienteRepository.save(c4);
+            clienteRepository.save(c5);
+
+            System.out.println("=== Datos cargados exitosamente ===");
+
+            // Crear clientes
+            Cliente cliente1 = new Cliente(null, "Juan Perez", "juan@example.com", "987654321", "Av. Lima 123", LocalDate.now(), "activo", juan);
             clienteRepository.save(cliente1);
+            Cliente cliente2 = new Cliente(null, "Juan Perez", "juan@example.com", "987654321", "Av. Lima 123", LocalDate.now(), "activo", maria);
             clienteRepository.save(cliente2);
+
+            Cliente cliente3 = new Cliente(null, "Juan Perez", "juan@example.com", "987654321", "Av. Lima 123", LocalDate.now(), "activo", carlos);
             clienteRepository.save(cliente3);
+
+            Cliente cliente4 = new Cliente(null, "Juan Perez", "juan@example.com", "987654321", "Av. Lima 123", LocalDate.now(), "activo", luis);
             clienteRepository.save(cliente4);
+
+            Cliente cliente5 = new Cliente(null, "Juan Perez", "juan@example.com", "987654321", "Av. Lima 123", LocalDate.now(), "activo", pedro);
             clienteRepository.save(cliente5);
+
+
+            // Verificar que los usuarios y autoridades se han creado correctamente
+            System.out.println("Usuarios creados: " + userRepository.findAll());
 
             // Crear parcelas y asociarlas a los clientes
             Parcela parcela1 = new Parcela(null, "Parcela 1", 12.345678, 54.321234, 100.5, cliente1);
@@ -161,7 +197,7 @@ public class BackendApplication {
             lecturaSensorRepository.save(lectura12);
             lecturaSensorRepository.save(lectura13);
             lecturaSensorRepository.save(lectura14);
-
+            /*
             // Crear noticias y asociarlas a los usuarios
             Noticia noticia1 = new Noticia(null, "Nuevo servicio disponible", "Ahora puedes solicitar servicios de asesoría técnica.", LocalDate.of(2025, 4, 15), juanPerezUser);
             Noticia noticia2 = new Noticia(null, "Mantenimiento de equipos", "Recuerda que el mantenimiento de equipos agrícolas será este fin de semana.", LocalDate.of(2025, 4, 10), mariaLopezUser);
@@ -221,7 +257,7 @@ public class BackendApplication {
                     n17,
                     n18, n19, n20
             ));
-
+            */
 
 
         };
