@@ -72,7 +72,8 @@ public class UserServiceImpl implements UserService {
 
         User newUser = new User(null, userDTO.getUsername(),
                 new BCryptPasswordEncoder().encode(userDTO.getPassword()),
-                null, true,authorityList, null, null, null);
+                userDTO.getEmail(), true, authorityList, null,
+                null, null);
 
         newUser = userRepository.save(newUser);
         userDTO.setUserId(newUser.getId());
@@ -93,10 +94,4 @@ public class UserServiceImpl implements UserService {
     public List<Object[]> findUsersWithMoreThanNotificationsNative(int minCount) {
         return userRepository.findUsersWithMoreThanNotificationsNative(minCount);
     }
-
-
-
-    //----------------------------------CRUD----------------------------------------------------
-    //----------------------------------------------------------------------------------------------------------------------
-
 }

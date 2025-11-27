@@ -41,10 +41,4 @@ public class AuthorityServiceImpl implements AuthorityService {
     public Authority findByRoleName(String roleName) {
         return authorityRepository.findByRoleName(roleName);
     }
-
-
-    //----------------------------------CRUD----------------------------------------------------
-    //----------------------------------------------------------------------------------------------------------------------
-
-
 }

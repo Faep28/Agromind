@@ -5,6 +5,7 @@ import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import lombok.ToString;
 
 import java.util.List;
 
@@ -47,10 +48,14 @@ public class User {
 
     // Relación OneToMany con Cliente
 
+    @ToString.Exclude
+    @JsonIgnore
     @OneToMany(mappedBy = "user", fetch = FetchType.EAGER, cascade = CascadeType.ALL)
     private List<Cliente> clientes;
 
     // Asociación de uno a muchos con la entidad notificación
+    @ToString.Exclude
+    @JsonIgnore
     @OneToMany(
             mappedBy = "usuario",
             fetch = FetchType.EAGER,
@@ -58,9 +63,10 @@ public class User {
     )
     private List<Notificacion>notificaciones;
 
+    @ToString.Exclude
+    @JsonIgnore
     @OneToMany(mappedBy = "usuarioRelacionado", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
     private List<Noticia> noticias;
-
 
 }
 

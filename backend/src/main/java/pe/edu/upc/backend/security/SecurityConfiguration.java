@@ -28,10 +28,10 @@ public class SecurityConfiguration {
 
 
             // -- Login
-            "upc/users/login/**",
+            "api/users/login/**",
 
             // -- Registro de nuevo usuarios
-            "upc/users/register/**",
+            "api/users/register/**",
 
     };
 
@@ -80,17 +80,17 @@ public class SecurityConfiguration {
         http.authorizeHttpRequests(
 
                 (auth) -> auth
-                        .anyRequest().permitAll()
-/*
+                        //.anyRequest().permitAll()
+
                         .requestMatchers(AUTH_WHITELIST).permitAll()
 
-                        .requestMatchers(HttpMethod.GET,"/upc/faculties/**").hasAnyAuthority("ROLE_ADMIN","ROLE_USER")
-                        .requestMatchers(HttpMethod.PUT,"/upc/faculties/**").hasAnyAuthority("ROLE_ADMIN","ROLE_ASSIST")
-                        .requestMatchers(HttpMethod.POST,"/upc/faculties/**").hasAnyAuthority("ROLE_ADMIN")
-                        .requestMatchers(HttpMethod.DELETE,"/upc/faculties/**").hasAnyAuthority("ROLE_ADMIN")
+                        .requestMatchers(HttpMethod.GET,"/api/cultivos/**").hasAnyAuthority("ROLE_ADMIN","ROLE_USER")
+                        .requestMatchers(HttpMethod.PUT,"/api/cultivos/**").hasAnyAuthority("ROLE_ADMIN","ROLE_ASSIST")
+                        .requestMatchers(HttpMethod.POST,"/api/cultivos/**").hasAnyAuthority("ROLE_ADMIN")
+                        .requestMatchers(HttpMethod.DELETE,"/api/cultivos/**").hasAnyAuthority("ROLE_ADMIN")
 
                         .anyRequest().authenticated()
-*/
+
         );
 
         http.sessionManagement(
