@@ -1,18 +1,35 @@
-<h1 align="center">🌱 AgroMinds - Plataforma de Gestión Agrícola Inteligente 🌾</h1>
+<h1 style="text-align: center">🌱 AgroMinds - Plataforma de Gestión Agrícola Inteligente 🌾</h1>
 
-<div align="center">
-  <img src="https://img.shields.io/badge/SpringBoot-6DB33F?style=for-the-badge&logo=springboot&logoColor=white" />
-  <img src="https://img.shields.io/badge/PostgreSQL-316192?style=for-the-badge&logo=postgresql&logoColor=white" />
-  <img src="https://img.shields.io/badge/JPA-Hibernate-59666C?style=for-the-badge&logo=hibernate&logoColor=white" />
-  <img src="https://img.shields.io/badge/Java-25-ED8B00?style=for-the-badge&logo=java&logoColor=white" />
+<div style="text-align: center">
+    <img src="https://img.shields.io/badge/Spring%20Boot-6DB33F?style=for-the-badge&logo=spring-boot&logoColor=white" />
+    <img src="https://img.shields.io/badge/PostgreSQL-336791?style=for-the-badge&logo=postgresql&logoColor=white" />
+    <img src="https://img.shields.io/badge/Java-007396?style=for-the-badge&logo=java&logoColor=white" />
+    <img src="https://img.shields.io/badge/Maven-C71A36?style=for-the-badge&logo=apache-maven&logoColor=white" />
 </div>
 
-<div align="center">
-  <a href="#"><img src="https://img.shields.io/github/stars/Faep28/Agromind?style=social" /></a>
-  <a href="#"><img src="https://img.shields.io/github/forks/Faep28/Agromind?style=social" /></a>
-  <a href="#"><img src="https://img.shields.io/github/issues/Faep28/Agromind" /></a>
-  <a href="#"><img src="https://img.shields.io/github/last-commit/Faep28/Agromind" /></a>
+<div style="text-align: center">
+    <img src="https://img.shields.io/badge/Angular-DD0031?style=for-the-badge&logo=angular&logoColor=white" />
+    <img src="https://img.shields.io/badge/Node.js-339933?style=for-the-badge&logo=node.js&logoColor=white" />
+    <img src="https://img.shields.io/badge/HTML5-E34F26?style=for-the-badge&logo=html5&logoColor=white" />
+    <img src="https://img.shields.io/badge/CSS5-1572B6?style=for-the-badge&logo=css&logoColor=white" />
+    <img src="https://img.shields.io/badge/TypeScript-3178C6?style=for-the-badge&logo=typescript&logoColor=white" />
 </div>
+
+<div style="text-align: center; margin-top: 30px;">
+  <a style="margin: 0 5px;">
+    <img src="https://img.shields.io/github/stars/Faep28/Agromind?style=for-the-badge&logo=github&logoColor=white" alt="Stars" />
+  </a>
+  <a style="margin: 0 5px;">
+    <img src="https://img.shields.io/github/forks/Faep28/Agromind?style=for-the-badge&logo=github&logoColor=white" alt="Forks" />
+  </a>
+  <a style="margin: 0 5px;">
+    <img src="https://img.shields.io/github/issues/Faep28/Agromind?style=for-the-badge&logo=github&logoColor=white" alt="Issues" />
+  </a>
+  <a style="margin: 0 5px;">
+    <img src="https://img.shields.io/github/last-commit/Faep28/Agromind?style=for-the-badge&logo=github&logoColor=white" alt="Last Commit" />
+  </a>
+</div>
+
 
 ---
 
@@ -53,27 +70,27 @@ El proyecto sigue una arquitectura **por capas (Entities, Repositories, Services
 ## 📡 Estructura del Proyecto
 
 
-```
-.
-├── 📂 backend
-│   ├── 📁 com.prueba.backend
-│   ├── 🎯 Controller
-│   ├── 🧩 Dto
-│   ├── 🧱 Entity 
-│   ├── 💾 Repository 
-│   ├── ⚙️ Service 
-│   ├── 🔧 ServiceImpl
-│   ├── 🚀 BackendApplication.java
-│   └── ❗ Exceptions
-├── 📂 frontend
-│   ├── 📁 src
-│   ├── 📁 app
-│   ├── 📁 assets
-│   ├── ⚙️ config
-│   ├── 🧩 components
-│   ├── 🧩 services
-│   └── 🧩 app.module.ts
-└─── README.md    
+```mermaid
+graph LR
+  A[🍃 Backend] --> B[📁 com.prueba.backend]
+  A --> C[🎯 Controller]
+  A --> D[🧩 Dto]
+  A --> E[🧱 Entity]
+  A --> F[💾 Repository]
+  A --> G[⚙️ Service]
+  A --> H[🔧 ServiceImpl]
+  A --> I[🚀 BackendApplication.java]
+  A --> J[❗ Exceptions]
+
+  K[🅰️ Frontend] --> L[📁 src]
+  K --> M[📁 app]
+  K --> N[📁 assets]
+  K --> O[⚙️ config]
+  K --> P[🧩 components]
+  K --> Q[🧩 services]
+  K --> R[🧩 app.module.ts]
+
+  S[Archivos Raíz] --> T[📄 README.md]
 ```
 
 ## 👨‍💻 Equipo de Desarrollo
