@@ -3,6 +3,11 @@ import { BrowserModule } from '@angular/platform-browser';
 
 import { AppRoutingModule } from './app-routing-module';
 import { App } from './app';
+import { HttpClientModule, provideHttpClient, withInterceptors } from '@angular/common/http';
+import { MaterialModule } from './modules/material-module';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { provideNativeDateAdapter } from '@angular/material/core';
 
 @NgModule({
   declarations: [
@@ -10,10 +15,20 @@ import { App } from './app';
   ],
   imports: [
     BrowserModule,
-    AppRoutingModule
+    AppRoutingModule,
+
+    HttpClientModule,
+    MaterialModule,
+    FormsModule,
+    ReactiveFormsModule,
+    BrowserAnimationsModule,
+    //NgxChartsModule, falta
   ],
   providers: [
-    provideBrowserGlobalErrorListeners()
+    provideBrowserGlobalErrorListeners(),
+
+    provideNativeDateAdapter(),
+    
   ],
   bootstrap: [App]
 })
