@@ -8,15 +8,21 @@ import { MaterialModule } from './modules/material-module';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { provideNativeDateAdapter } from '@angular/material/core';
+import { Login } from './components/login/login';
+import { Home } from './components/home/home';
+import { autorizacionInterceptor } from './interceptors/autorizacion-interceptor';
+import { Header } from './header/header';
 
 @NgModule({
   declarations: [
-    App
+    App,
+    Login,
+    Home,
+    Header
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
-
     HttpClientModule,
     MaterialModule,
     FormsModule,
@@ -28,6 +34,9 @@ import { provideNativeDateAdapter } from '@angular/material/core';
     provideBrowserGlobalErrorListeners(),
 
     provideNativeDateAdapter(),
+    provideHttpClient(
+      withInterceptors([autorizacionInterceptor])
+    )
     
   ],
   bootstrap: [App]
