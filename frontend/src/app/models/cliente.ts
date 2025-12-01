@@ -8,4 +8,5 @@ export interface Cliente {
   fechaRegistro: string; // o Date si luego lo conviertes
   estado: string;
   userId: number;  
+
 }
