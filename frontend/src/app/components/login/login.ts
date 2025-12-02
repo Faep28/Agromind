@@ -41,7 +41,6 @@ export class Login {
         id: 0,
         username: this.loginForm.get("username")?.value,
         password: this.loginForm.get("password")?.value,
-        email:"",
         enabled: true,
     }
 

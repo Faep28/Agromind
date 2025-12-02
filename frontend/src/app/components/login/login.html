@@ -1,42 +1,52 @@
-<h3>Bienvenido Usuario</h3>
-<br>
-<form [formGroup]="loginForm">
+<div class="container">
 
-<mat-form-field>
-    <mat-label>Usuario</mat-label>
-    <input matInput formControlName="username"> 
-</mat-form-field>
-<br>
-<mat-form-field>
-    <mat-label>Password</mat-label>
-    <input matInput formControlName="password" type="password"> 
-</mat-form-field>
+<!-- seccion de la imagen -->
+<div class="image-section">
+  <img src="assets/img/Inicio.png" alt="Imagen inicial" />
+</div>
 
+<!-- seccion del formulario -->
+<div class="form-section">
+  <form [formGroup]="loginForm">
 
-</form>
-<br>
-<button mat-raised-button routerLink="/register-user" >Registrar</button>
- | 
-<button mat-flat-button (click)="Login()"  >Ingresar</button>
+    <div class="logo">
+        <img src="assets/img/logo.jpg" alt="Logo" />
+    </div>
 
-<h3>Bienvenido Usuario</h3>
-<br>
-<form [formGroup]="loginForm">
+    <mat-form-field appearance="outline" class="full-width">
+      <mat-label>Usuario</mat-label>
+      <input matInput formControlName="username" />
+    </mat-form-field>
 
-<mat-form-field>
-    <mat-label>Usuario</mat-label>
-    <input matInput formControlName="username"> 
-</mat-form-field>
-<br>
-<mat-form-field>
-    <mat-label>Password</mat-label>
-    <input matInput formControlName="password" type="password"> 
-</mat-form-field>
+    <mat-form-field appearance="outline" class="full-width">
+      <mat-label>Contraseña</mat-label>
+      <input matInput type="password" formControlName="password" />
+    </mat-form-field>
 
+    <button mat-flat-button color="primary" class="full-width" (click)="Login()">
+      Iniciar Sesión
+    </button>
 
-</form>
-<br>
-<button mat-raised-button routerLink="/register-user" >Registrar</button>
- | 
-<button mat-flat-button (click)="Login()"  >Ingresar</button>
+    <p class="register-link">
+      <!-- implementar componente -->
+      <a routerLink="/register-user">Regístrate</a>
+    </p>
 
+    <div class="divider">
+      <span></span>
+      <p>o</p>
+      <span></span>
+    </div>
+
+    <button mat-stroked-button class="social-button facebook full-width">
+      <img src="assets/img/Facebook.png" class="icon" /> Iniciar sesión con Facebook
+    </button>
+
+    <button mat-stroked-button class="social-button google full-width">
+      <img src="assets/img/Google.png" class="icon" /> Iniciar sesión con Google
+    </button>
+
+  </form>
+</div>
+
+</div>

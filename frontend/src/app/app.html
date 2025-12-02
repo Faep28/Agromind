@@ -1,5 +1,6 @@
-<!-- Solo muestra el header si el usuario está logueado -->
-<app-header></app-header>
+<!-- Solo muestra el header si no estamos en las rutas donde no se necesita -->
+<!-- Lo definen en el app.ts (ver)-->
+<app-header *ngIf="!isNoHeaderPage"></app-header>
 
 <!-- Aquí se cargan las rutas -->
 <router-outlet></router-outlet>
