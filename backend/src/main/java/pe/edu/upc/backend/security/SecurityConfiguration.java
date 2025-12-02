@@ -31,7 +31,8 @@ public class SecurityConfiguration {
             "api/users/login/**",
 
             // -- Registro de nuevo usuarios
-            "api/users/register/**",
+            "api/users/insert/**",
+            "api/users/register/**"
 
     };
 
