@@ -1,0 +1,62 @@
+/* header.css */
+
+.main-toolbar {
+  background-color: #ffffff;
+  color: #222;
+  padding: 0 32px;
+  box-shadow: 0 2px 4px rgba(0,0,0,.08);
+}
+
+.logo img {
+  height: 40px;
+}
+
+.spacer {
+  flex: 1 1 auto;
+}
+
+button[mat-button] {
+  font-weight: 500;
+  margin: 0 4px;
+}
+
+button[mat-raised-button] {
+  margin-left: 16px;
+  border-radius: 20px;
+}
+
+/* ----------- ADMIN BUTTONS ---------------- */
+.admin-btn {
+  color: #2e7d32;               /* verde oscuro */
+  font-weight: 600;             /* semi-bold */
+  background: #e8f5e9;          /* verde pastel clarito */
+  border-radius: 20px;
+  margin: 0 4px;
+  padding: 4px 12px;
+  transition: 0.25s;
+}
+
+.admin-btn:hover {
+  background: #c8e6c9;          /* un pelín más oscuro al hacer hover */
+}
+
+.admin-icon {
+  font-size: 18px;
+  margin-right: 4px;
+}
+
+/* ----------- LOGOUT BUTTON ---------------- */
+.logout-btn {
+  background: #43a047 !important;  /* VERDE bonito */
+  color: white !important;
+  border-radius: 20px;
+  padding: 6px 20px;
+  font-weight: 600;
+  box-shadow: 0 2px 4px rgba(0,0,0,.15);
+  transition: 0.25s;
+}
+
+.logout-btn:hover {
+  background: #2e7d32 !important; /* verde más intenso */
+}
+
