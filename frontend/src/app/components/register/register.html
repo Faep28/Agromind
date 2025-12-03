@@ -1,0 +1,68 @@
+<div class="container">
+  <div class="image-section">
+    <img src="assets/img/Inicio.png" alt="Imagen inicial" />
+  </div>
+
+  <div class="form-section">
+    <form [formGroup]="registerForm" (ngSubmit)="onRegister()">
+      <button mat-button routerLink="/" class="back-button">Regresar</button>
+
+      <div class="logo">
+        <img src="assets/img/logo.jpg" alt="Logo" />
+      </div>
+
+      <mat-form-field appearance="outline" class="full-width">
+        <mat-label>Usuario</mat-label>
+        <input matInput formControlName="username" />
+      </mat-form-field>
+
+      <mat-form-field appearance="outline" class="full-width">
+        <mat-label>Correo electrónico</mat-label>
+        <input matInput formControlName="email" />
+      </mat-form-field>
+
+      <mat-form-field appearance="outline" class="full-width">
+        <mat-label>Contraseña</mat-label>
+        <input matInput type="password" formControlName="password" />
+      </mat-form-field>
+
+      <mat-form-field appearance="outline" class="full-width">
+        <mat-label>Confirmar Contraseña</mat-label>
+        <input matInput type="password" formControlName="confirmPassword" />
+      </mat-form-field>
+
+      <!-- <mat-form-field appearance="outline" class="full-width">
+        <mat-label>Rol (Authorities)</mat-label>
+        <input matInput formControlName="authorities" />
+      </mat-form-field> -->
+      <mat-form-field appearance="outline" class="full-width">
+        <mat-label>Rol</mat-label>
+        <mat-select formControlName="authorities">
+          <mat-option *ngFor="let role of ROLES_ADMITIDOS" [value]="role">
+            {{ role }}
+          </mat-option>
+        </mat-select>
+      </mat-form-field>
+
+      <button mat-flat-button color="primary" class="full-width" type="submit" [disabled]="registerForm.invalid">Registrar</button>
+
+      <p class="register-link">
+        <a routerLink="/login">¿Ya tiene cuenta? Iniciar Sesion</a>
+      </p>
+
+      <div class="divider">
+        <span></span>
+        <p>o</p>
+        <span></span>
+      </div>
+
+      <button mat-stroked-button class="social-button facebook full-width">
+        <img src="assets/img/Facebook.png" class="icon" /> Regístrate con Facebook
+      </button>
+
+      <button mat-stroked-button class="social-button google full-width">
+        <img src="assets/img/Google.png" class="icon" /> Regístrate con Google
+      </button>
+    </form>
+  </div>
+</div>

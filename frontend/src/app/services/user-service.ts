@@ -3,6 +3,7 @@ import { Injectable } from '@angular/core';
 import { User } from '../models/user';
 import { TokenDTO } from '../models/tokenDTO';
 import { tap } from 'rxjs';
+import { UserDTO } from '../models/userDTO';
 
 @Injectable({
   providedIn: 'root',
@@ -24,6 +25,10 @@ export class UserService {
         localStorage.setItem("authorities", respuesta.authorities);
       })
     );
+  }
+
+  register(newUser:UserDTO) {
+    return this.http.post<UserDTO>(this.ruta_servidor + "/register", newUser);
   }
 
    // Método de logout
