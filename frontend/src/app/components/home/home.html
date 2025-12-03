@@ -1,1 +1,90 @@
-<p>home works!</p>
+<div class="home-container">
+  <!-- seccion bienvenida -->
+  <section class="welcome-section">
+    <h1>Bienvenido, {{ username }}!</h1>
+    <p>Optimiza el rendimiento de tus cultivos con AgroMinds.</p>
+    <button mat-raised-button color="primary" routerLink="/recomendaciones">Ver recomendaciones</button>
+  </section>
+
+  <!-- Resumen de actividad y alertas -->
+  <section class="activity-alerts-section">
+    <!-- Resumen de activiad -->
+    <div class="activity-summary">
+      <h2>Resumen de Actividad</h2>
+      <div class="summary-cards">
+        <mat-card class="summary-card">
+          <mat-card-title>Condiciones Meteorológicas</mat-card-title>
+          <mat-card-content>{{ weatherSummary }}</mat-card-content>
+          <button mat-flat-button color="accent" routerLink="/clima">Ver más</button>
+        </mat-card>
+
+        <mat-card class="summary-card">
+          <mat-card-title>Recomendaciones de Riego</mat-card-title>
+          <mat-card-content>{{ irrigationRecommendation }}</mat-card-content>
+          <button mat-flat-button color="accent" routerLink="/riego">Ver más</button>
+        </mat-card>
+
+        <mat-card class="summary-card">
+          <mat-card-title>Estado de Cultivos</mat-card-title>
+          <mat-card-content>{{ cropStatus }}</mat-card-content>
+          <button mat-flat-button color="accent" routerLink="/cultivos">Ver detalles</button>
+        </mat-card>
+      </div>
+    </div>
+
+    <!-- Alertas -->
+    <div class="alerts-section">
+      <h2>Alertas</h2>
+      <div class="alert-cards">
+        <mat-card *ngFor="let alert of alerts" class="alert-card">
+          <mat-card-title>{{ alert.title }}</mat-card-title>
+          <mat-card-content>{{ alert.description }}</mat-card-content>
+          <button mat-button color="warn" (click)="markAsRead(alert)">Marcar como leída</button>
+        </mat-card>
+      </div>
+    </div>
+  </section>
+
+  <!-- aaacciones rapidas -->
+  <section class="quick-actions">
+    <h2>Acciones Rápidas</h2>
+    <div class="actions-grid">
+      <mat-card class="action-card">
+        <img src="assets/img/semillas.png" alt="Siembra" />
+        <button mat-raised-button color="primary" routerLink="/siembra">Registrar Siembra</button>
+      </mat-card>
+
+      <mat-card class="action-card">
+        <img src="assets/img/semillas.png" alt="Fertilización" />
+        <button mat-raised-button color="accent" routerLink="/fertilizacion">Registrar Fertilización</button>
+      </mat-card>
+
+      <mat-card class="action-card">
+        <img src="assets/img/semillas.png" alt="Cosecha" />
+        <button mat-raised-button color="warn" routerLink="/cosecha">Registrar Cosecha</button>
+      </mat-card>
+    </div>
+  </section>
+
+  <!-- Botron flotante -->
+<button class="notification-bell" (click)="showNotifications = !showNotifications">
+  <mat-icon>notifications</mat-icon>
+</button>
+
+<!-- Panel de notificaciones-->
+<div *ngIf="showNotifications" class="notification-panel">
+  <div class="notification-header">
+    <h3>Notificaciones</h3>
+  </div>
+
+  <div class="notification-list">
+    <div *ngFor="let alert of alerts" class="notification-item">
+      <p>{{ alert.title }}</p>
+    </div>
+  </div>
+
+  <div style="display: flex;justify-content: center;">
+    <button mat-raised-button color="primary" routerLink="/notificaciones" class="view-all-button">Ver todas</button>
+  </div>
+</div>
+</div>

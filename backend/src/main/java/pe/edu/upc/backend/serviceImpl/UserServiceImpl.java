@@ -68,6 +68,12 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public UserDTO add(UserDTO userDTO) {
+
+        User existingUser = userRepository.findByUsername(userDTO.getUsername());
+        if (existingUser != null) {
+            return null;
+        }
+
         List<Authority> authorityList=authoritiesFromString(userDTO.getAuthorities());
 
         User newUser = new User(null, userDTO.getUsername(),

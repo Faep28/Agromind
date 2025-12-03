@@ -1,52 +1,46 @@
 <div class="container">
-
-<!-- seccion de la imagen -->
-<div class="image-section">
-  <img src="assets/img/Inicio.png" alt="Imagen inicial" />
-</div>
-
-<!-- seccion del formulario -->
-<div class="form-section">
-  <form [formGroup]="loginForm">
-
-    <div class="logo">
+    <div class="form-section">
+    <form [formGroup]="loginForm" (ngSubmit)="Login()">
+      <div class="logo">
         <img src="assets/img/logo.jpg" alt="Logo" />
-    </div>
+      </div>
 
-    <mat-form-field appearance="outline" class="full-width">
-      <mat-label>Usuario</mat-label>
-      <input matInput formControlName="username" />
-    </mat-form-field>
+      <mat-form-field appearance="outline" class="full-width">
+        <mat-label>Usuario</mat-label>
+        <input matInput formControlName="username" />
+      </mat-form-field>
 
-    <mat-form-field appearance="outline" class="full-width">
-      <mat-label>Contraseña</mat-label>
-      <input matInput type="password" formControlName="password" />
-    </mat-form-field>
+      <mat-form-field appearance="outline" class="full-width">
+        <mat-label>Contraseña</mat-label>
+        <input matInput type="password" formControlName="password" />
+      </mat-form-field>
 
-    <button mat-flat-button color="primary" class="full-width" (click)="Login()">
-      Iniciar Sesión
-    </button>
+      <button mat-flat-button color="primary" class="full-width" type="submit">
+        Iniciar Sesión
+      </button>
 
-    <p class="register-link">
-      <!-- implementar componente -->
-      <a routerLink="/register-user">Regístrate</a>
-    </p>
+      <p class="register-link">
+        <a routerLink="/register">¿No tiene cuenta? Regístrate</a>
+      </p>
 
-    <div class="divider">
-      <span></span>
-      <p>o</p>
-      <span></span>
-    </div>
+      <div class="divider">
+        <span></span>
+        <p>o</p>
+        <span></span>
+      </div>
 
-    <button mat-stroked-button class="social-button facebook full-width">
-      <img src="assets/img/Facebook.png" class="icon" /> Iniciar sesión con Facebook
-    </button>
+      <button mat-stroked-button class="social-button facebook full-width">
+        <img src="assets/img/Facebook.png" class="icon" /> Iniciar sesión con Facebook
+      </button>
 
-    <button mat-stroked-button class="social-button google full-width">
-      <img src="assets/img/Google.png" class="icon" /> Iniciar sesión con Google
-    </button>
-
-  </form>
+      <button mat-stroked-button class="social-button google full-width">
+        <img src="assets/img/Google.png" class="icon" /> Iniciar sesión con Google
+      </button>
+    </form>
+  </div>
+  <div class="image-section">
+    <img src="assets/img/Inicio.png" alt="Imagen inicial" />
+  </div>
 </div>
 
-</div>
+<button mat-button routerLink="/" class="back-button">Regresar al inicio</button>

@@ -11,13 +11,17 @@ import { Home } from './components/home/home';
 import { autorizacionInterceptor } from './interceptors/autorizacion-interceptor';
 import { Header } from './header/header';
 import { MaterialModule } from './modules/material/material-module';
+import { LandingPage } from './components/landing-page/landing-page';
+import { Register } from './components/register/register';
 
 @NgModule({
   declarations: [
     App,
     Login,
     Home,
-    Header
+    Header,
+    LandingPage,
+    Register
   ],
   imports: [
     BrowserModule,

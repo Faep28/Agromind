@@ -17,6 +17,9 @@ import { MatSnackBarModule } from '@angular/material/snack-bar';
 import { MatTimepickerModule } from '@angular/material/timepicker';
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatTooltipModule } from '@angular/material/tooltip';
+import { MatMenuModule } from '@angular/material/menu';
+import { MatListModule } from '@angular/material/list';
+import { MatSidenavModule } from '@angular/material/sidenav';
 
 
 @NgModule({
@@ -40,6 +43,9 @@ import { MatTooltipModule } from '@angular/material/tooltip';
     MatTimepickerModule,
     MatToolbarModule,
     MatTooltipModule,
+    MatMenuModule,
+    MatListModule,
+    MatSidenavModule
   ],
   exports:[
     MatTableModule,
@@ -58,7 +64,10 @@ import { MatTooltipModule } from '@angular/material/tooltip';
     MatSnackBarModule,
     MatTimepickerModule,
     MatToolbarModule,
-    MatTooltipModule
+    MatTooltipModule,
+    MatMenuModule,
+    MatListModule,
+    MatSidenavModule
   ]
 })
 export class MaterialModule { }
