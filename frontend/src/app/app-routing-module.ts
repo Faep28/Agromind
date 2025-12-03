@@ -7,10 +7,10 @@ import { LandingPage } from './components/landing-page/landing-page';
 import { Register } from './components/register/register';
 
 const routes: Routes = [
-  {path:"", component:LandingPage }, // Cambiar a landing Page (en proceso)  
+  {path:"", component:LandingPage }, // Cambiar a landing Page (hecho)  
   {path:"login", component:Login},
   {path:"home", component:Home, canActivate:[autorizarLogeadoGuard]},
-  {path:"register", component:Register}
+  {path:"register", component:Register }
 ];
 
 @NgModule({
