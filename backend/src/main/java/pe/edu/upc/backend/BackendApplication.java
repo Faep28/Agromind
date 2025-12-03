@@ -46,7 +46,7 @@ public class BackendApplication {
             Authority userRole   = authorityService.add(new Authority(null, "ROLE_USER", null));
 
             // ==== Creacion de usuarios ====
-            UserDTO userJuan  = new UserDTO(null, "juanperez", "admin123", "juan.perez@example.com", "ROLE_ADMIN", null);
+            UserDTO userJuan  = new UserDTO(null, "juanperez", "admin123", "juan.perez@example.com", "ROLE_ADMIN", null );
             UserDTO userMaria = new UserDTO(null, "marialopez", "user123", "maria.lopez@example.com", "ROLE_ASSIST", null);
             UserDTO userCarlos= new UserDTO(null, "carlosgarcia", "carlo1234", "carlos.garcia@example.com", "ROLE_USER", null);
             UserDTO userLuis  = new UserDTO(null, "luismartinez", "luis1234", "luis.martinez@example.com", "ROLE_USER", null);
@@ -197,18 +197,18 @@ public class BackendApplication {
             lecturaSensorRepository.save(lectura12);
             lecturaSensorRepository.save(lectura13);
             lecturaSensorRepository.save(lectura14);
-            /*
+
             // Crear noticias y asociarlas a los usuarios
-            Noticia noticia1 = new Noticia(null, "Nuevo servicio disponible", "Ahora puedes solicitar servicios de asesoría técnica.", LocalDate.of(2025, 4, 15), juanPerezUser);
-            Noticia noticia2 = new Noticia(null, "Mantenimiento de equipos", "Recuerda que el mantenimiento de equipos agrícolas será este fin de semana.", LocalDate.of(2025, 4, 10), mariaLopezUser);
-            Noticia noticia3 = new Noticia(null, "Actualización de la plataforma", "La plataforma ha sido actualizada con nuevas funcionalidades.", LocalDate.of(2025, 4, 1), carlosGarciaUser);
-            Noticia noticia4 = new Noticia(null, "Cultivo de tomates", "Guía completa sobre el cultivo de tomates en tu parcela.", LocalDate.of(2025, 4, 5), luisMartinezUser);
+            Noticia noticia1 = new Noticia(null, "Nuevo servicio disponible", "Ahora puedes solicitar servicios de asesoría técnica.", LocalDate.of(2025, 4, 15), juan);
+            Noticia noticia2 = new Noticia(null, "Mantenimiento de equipos", "Recuerda que el mantenimiento de equipos agrícolas será este fin de semana.", LocalDate.of(2025, 4, 10), pedro);
+            Noticia noticia3 = new Noticia(null, "Actualización de la plataforma", "La plataforma ha sido actualizada con nuevas funcionalidades.", LocalDate.of(2025, 4, 1), juan);
+            Noticia noticia4 = new Noticia(null, "Cultivo de tomates", "Guía completa sobre el cultivo de tomates en tu parcela.", LocalDate.of(2025, 4, 5), pedro);
 
             noticiasRepository.save(noticia1);
             noticiasRepository.save(noticia2);
             noticiasRepository.save(noticia3);
             noticiasRepository.save(noticia4);
-
+/*
             // 13. Crear notificaciones y asociarlas a los usuarios
             Notificacion notificacion1 = new Notificacion(null, "Nuevo mantenimiento programado", "El mantenimiento de equipos será el 20 de octubre.", LocalDateTime.now(), false, "Mantenimiento", juanPerezUser);
             Notificacion notificacion2 = new Notificacion(null, "Nueva actualización en la plataforma", "La plataforma se actualizará el 25 de octubre con nuevas funciones.", LocalDateTime.now(), false, "Actualización", mariaLopezUser);
