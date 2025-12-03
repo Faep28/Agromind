@@ -69,6 +69,8 @@ export class UserService {
    // Verificar si el usuario está logueado
   isLogged() {
     if (this.getToken() == null || this.getToken() == "") {
+      
+      // podramos implementar para q redirija a la landing
       return false;
     }
     return true;
