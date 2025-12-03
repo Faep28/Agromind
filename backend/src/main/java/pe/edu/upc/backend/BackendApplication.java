@@ -197,12 +197,12 @@ public class BackendApplication {
             lecturaSensorRepository.save(lectura12);
             lecturaSensorRepository.save(lectura13);
             lecturaSensorRepository.save(lectura14);
-            /*
+
             // Crear noticias y asociarlas a los usuarios
-            Noticia noticia1 = new Noticia(null, "Nuevo servicio disponible", "Ahora puedes solicitar servicios de asesoría técnica.", LocalDate.of(2025, 4, 15), juanPerezUser);
-            Noticia noticia2 = new Noticia(null, "Mantenimiento de equipos", "Recuerda que el mantenimiento de equipos agrícolas será este fin de semana.", LocalDate.of(2025, 4, 10), mariaLopezUser);
-            Noticia noticia3 = new Noticia(null, "Actualización de la plataforma", "La plataforma ha sido actualizada con nuevas funcionalidades.", LocalDate.of(2025, 4, 1), carlosGarciaUser);
-            Noticia noticia4 = new Noticia(null, "Cultivo de tomates", "Guía completa sobre el cultivo de tomates en tu parcela.", LocalDate.of(2025, 4, 5), luisMartinezUser);
+            Noticia noticia1 = new Noticia(null, "Nuevo servicio disponible", "Ahora puedes solicitar servicios de asesoría técnica.", LocalDate.of(2025, 4, 15), juan);
+            Noticia noticia2 = new Noticia(null, "Mantenimiento de equipos", "Recuerda que el mantenimiento de equipos agrícolas será este fin de semana.", LocalDate.of(2025, 4, 10), maria);
+            Noticia noticia3 = new Noticia(null, "Actualización de la plataforma", "La plataforma ha sido actualizada con nuevas funcionalidades.", LocalDate.of(2025, 4, 1), carlos);
+            Noticia noticia4 = new Noticia(null, "Cultivo de tomates", "Guía completa sobre el cultivo de tomates en tu parcela.", LocalDate.of(2025, 4, 5), luis);
 
             noticiasRepository.save(noticia1);
             noticiasRepository.save(noticia2);
@@ -210,11 +210,11 @@ public class BackendApplication {
             noticiasRepository.save(noticia4);
 
             // 13. Crear notificaciones y asociarlas a los usuarios
-            Notificacion notificacion1 = new Notificacion(null, "Nuevo mantenimiento programado", "El mantenimiento de equipos será el 20 de octubre.", LocalDateTime.now(), false, "Mantenimiento", juanPerezUser);
-            Notificacion notificacion2 = new Notificacion(null, "Nueva actualización en la plataforma", "La plataforma se actualizará el 25 de octubre con nuevas funciones.", LocalDateTime.now(), false, "Actualización", mariaLopezUser);
-            Notificacion notificacion3 = new Notificacion(null, "Fertilización programada", "Recuerda que la fertilización de tu parcela es el 15 de octubre.", LocalDateTime.now(), false, "Fertilización", carlosGarciaUser);
-            Notificacion notificacion4 = new Notificacion(null, "Nueva plaga detectada", "Se detectó una plaga en tu cultivo de tomate. Contáctanos para asesoría.", LocalDateTime.now(), false, "Plaga", luisMartinezUser);
-            Notificacion notificacion5 = new Notificacion(null, "Aviso importante", "Las lluvias de esta semana pueden afectar tu cultivo. Revisa tus sistemas de drenaje.", LocalDateTime.now(), false, "Clima", pedroLopezUser);
+            Notificacion notificacion1 = new Notificacion(null, "Nuevo mantenimiento programado", "El mantenimiento de equipos será el 20 de octubre.", LocalDateTime.now(), false, "Mantenimiento", juan);
+            Notificacion notificacion2 = new Notificacion(null, "Nueva actualización en la plataforma", "La plataforma se actualizará el 25 de octubre con nuevas funciones.", LocalDateTime.now(), false, "Actualización", maria);
+            Notificacion notificacion3 = new Notificacion(null, "Fertilización programada", "Recuerda que la fertilización de tu parcela es el 15 de octubre.", LocalDateTime.now(), false, "Fertilización", carlos);
+            Notificacion notificacion4 = new Notificacion(null, "Nueva plaga detectada", "Se detectó una plaga en tu cultivo de tomate. Contáctanos para asesoría.", LocalDateTime.now(), false, "Plaga", luis);
+            Notificacion notificacion5 = new Notificacion(null, "Aviso importante", "Las lluvias de esta semana pueden afectar tu cultivo. Revisa tus sistemas de drenaje.", LocalDateTime.now(), false, "Clima", pedro);
 
 // Guardar notificaciones
             notificacionRepository.save(notificacion1);
@@ -225,29 +225,29 @@ public class BackendApplication {
 
             // 🔔 Notificaciones adicionales (variadas por usuario)
 // Usuario: Juan Perez
-            Notificacion n6 = new Notificacion(null, "Aviso de fertilización", "Recuerda aplicar fertilizante Nitrofoska mañana.", LocalDateTime.now().minusDays(2), false, "Fertilizante", juanPerezUser);
-            Notificacion n7 = new Notificacion(null, "Lectura de sensor", "La humedad del suelo ha disminuido un 20%.", LocalDateTime.now().minusDays(1), false, "Sensor", juanPerezUser);
-            Notificacion n8 = new Notificacion(null, "Revisión de plagas", "Se detectó una posible plaga en el cultivo de tomate.", LocalDateTime.now(), false, "Plaga", juanPerezUser);
-            Notificacion n9 = new Notificacion(null, "Riego programado", "Tu riego automático se ejecutará en 2 horas.", LocalDateTime.now(), false, "Riego", juanPerezUser);
+            Notificacion n6 = new Notificacion(null, "Aviso de fertilización", "Recuerda aplicar fertilizante Nitrofoska mañana.", LocalDateTime.now().minusDays(2), false, "Fertilizante", juan);
+            Notificacion n7 = new Notificacion(null, "Lectura de sensor", "La humedad del suelo ha disminuido un 20%.", LocalDateTime.now().minusDays(1), false, "Sensor", juan);
+            Notificacion n8 = new Notificacion(null, "Revisión de plagas", "Se detectó una posible plaga en el cultivo de tomate.", LocalDateTime.now(), false, "Plaga", juan);
+            Notificacion n9 = new Notificacion(null, "Riego programado", "Tu riego automático se ejecutará en 2 horas.", LocalDateTime.now(), false, "Riego", juan);
 
 // Usuario: María Lopez
-            Notificacion n10 = new Notificacion(null, "Nuevo artículo", "Consulta el nuevo artículo sobre control de humedad.", LocalDateTime.now().minusDays(3), false, "Noticia", mariaLopezUser);
-            Notificacion n11 = new Notificacion(null, "Mantenimiento completado", "El mantenimiento de tu sensor ha finalizado exitosamente.", LocalDateTime.now(), false, "Mantenimiento", mariaLopezUser);
+            Notificacion n10 = new Notificacion(null, "Nuevo artículo", "Consulta el nuevo artículo sobre control de humedad.", LocalDateTime.now().minusDays(3), false, "Noticia", maria);
+            Notificacion n11 = new Notificacion(null, "Mantenimiento completado", "El mantenimiento de tu sensor ha finalizado exitosamente.", LocalDateTime.now(), false, "Mantenimiento", maria);
 
 // Usuario: Carlos Garcia
-            Notificacion n12 = new Notificacion(null, "Alerta climática", "Se esperan lluvias intensas esta noche.", LocalDateTime.now().minusDays(2), false, "Clima", carlosGarciaUser);
-            Notificacion n13 = new Notificacion(null, "Nivel de pH bajo", "El pH del suelo está por debajo del rango óptimo.", LocalDateTime.now().minusDays(1), false, "Sensor", carlosGarciaUser);
-            Notificacion n14 = new Notificacion(null, "Fertilizante agotado", "Tu reserva de Urea está por agotarse.", LocalDateTime.now(), false, "Fertilizante", carlosGarciaUser);
-            Notificacion n15 = new Notificacion(null, "Plaga controlada", "La plaga detectada en tu cultivo fue eliminada.", LocalDateTime.now(), false, "Plaga", carlosGarciaUser);
-            Notificacion n16 = new Notificacion(null, "Lectura de temperatura", "Temperatura promedio de 22°C en tu parcela.", LocalDateTime.now(), false, "Sensor", carlosGarciaUser);
+            Notificacion n12 = new Notificacion(null, "Alerta climática", "Se esperan lluvias intensas esta noche.", LocalDateTime.now().minusDays(2), false, "Clima", carlos);
+            Notificacion n13 = new Notificacion(null, "Nivel de pH bajo", "El pH del suelo está por debajo del rango óptimo.", LocalDateTime.now().minusDays(1), false, "Sensor", carlos);
+            Notificacion n14 = new Notificacion(null, "Fertilizante agotado", "Tu reserva de Urea está por agotarse.", LocalDateTime.now(), false, "Fertilizante", carlos);
+            Notificacion n15 = new Notificacion(null, "Plaga controlada", "La plaga detectada en tu cultivo fue eliminada.", LocalDateTime.now(), false, "Plaga", carlos);
+            Notificacion n16 = new Notificacion(null, "Lectura de temperatura", "Temperatura promedio de 22°C en tu parcela.", LocalDateTime.now(), false, "Sensor", carlos);
 
 // Usuario: Luis Martinez
-            Notificacion n17 = new Notificacion(null, "Recordatorio de riego", "Activa el riego en la parcela 4 antes del medio día.", LocalDateTime.now(), false, "Riego", luisMartinezUser);
+            Notificacion n17 = new Notificacion(null, "Recordatorio de riego", "Activa el riego en la parcela 4 antes del medio día.", LocalDateTime.now(), false, "Riego", luis);
 
 // Usuario: Pedro Lopez
-            Notificacion n18 = new Notificacion(null, "Actualización del sistema", "Se ha actualizado el módulo de cultivos.", LocalDateTime.now().minusDays(1), false, "Sistema", pedroLopezUser);
-            Notificacion n19 = new Notificacion(null, "Alerta de humedad", "El sensor reporta 18% de humedad, por debajo del óptimo.", LocalDateTime.now(), false, "Sensor", pedroLopezUser);
-            Notificacion n20 = new Notificacion(null, "Recomendación de cultivo", "El cultivo de pimientos presenta buenas condiciones.", LocalDateTime.now(), false, "Asesoría", pedroLopezUser);
+            Notificacion n18 = new Notificacion(null, "Actualización del sistema", "Se ha actualizado el módulo de cultivos.", LocalDateTime.now().minusDays(1), false, "Sistema", pedro);
+            Notificacion n19 = new Notificacion(null, "Alerta de humedad", "El sensor reporta 18% de humedad, por debajo del óptimo.", LocalDateTime.now(), false, "Sensor", pedro);
+            Notificacion n20 = new Notificacion(null, "Recomendación de cultivo", "El cultivo de pimientos presenta buenas condiciones.", LocalDateTime.now(), false, "Asesoría", pedro);
 
 // Guardar las nuevas notificaciones
             notificacionRepository.saveAll(List.of(
@@ -257,7 +257,7 @@ public class BackendApplication {
                     n17,
                     n18, n19, n20
             ));
-            */
+
 
 
         };
