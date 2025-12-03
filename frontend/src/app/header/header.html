@@ -1,11 +1,39 @@
-<mat-toolbar style="background-color: brown; color: white;">
-  <h1 style="font-weight: bold;">Agromind App v1.0</h1>
-  <span class="example-spacer"></span>
-  <button  routerLink="/home"  matIconButton style="color: white;">
-    <mat-icon>home</mat-icon>
+<!-- header.html -->
+
+<mat-toolbar class="main-toolbar">
+  <!-- Logo -->
+  <div class="logo">
+    <img src="assets/img/logo.jpg" alt="AgroMinds" />
+  </div>
+
+  <span class="spacer"></span>
+
+  <!-- Menú común para todos los logueados -->
+  <button mat-button routerLink="/home">Inicio</button>
+
+  <!-- Opciones de USER (y también las verá el ADMIN) -->
+  <button mat-button *ngIf="isUser" routerLink="/cultivos">
+    Mis Cultivos
   </button>
-  <button (click)="Logout()"  matIconButton style="color: white;">
-    <mat-icon>logout</mat-icon>
+  <button mat-button *ngIf="isUser" routerLink="/tareas">
+    Tareas recomendadas
   </button>
+
+  <!-- Admin -->
+<button mat-button class="admin-btn" *ngIf="isAdmin" routerLink="/">
+  <mat-icon class="admin-icon">admin_panel_settings</mat-icon>
+  Ver página pública
+</button>
+
+<button mat-button class="admin-btn" *ngIf="isAdmin" routerLink="/reportes">
+  <mat-icon class="admin-icon">bar_chart</mat-icon>
+  Reportes
+</button>
+
+<!-- Logout -->
+<button mat-raised-button class="logout-btn" (click)="Logout()">
+  Cerrar sesión
+</button>
+  
+
 </mat-toolbar>
-  <br>
