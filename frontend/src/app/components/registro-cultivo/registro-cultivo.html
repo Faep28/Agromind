@@ -1,0 +1,48 @@
+<div class="registro-cultivo-container">
+  <h2>Registrar Cultivo</h2>
+
+  <form [formGroup]="cultivoForm" (ngSubmit)="onSubmit()" class="form">
+    <label>
+      Nombre
+      <input formControlName="nombre" type="text" />
+    </label>
+
+    <label>
+      Descripción
+      <textarea formControlName="descripcion"></textarea>
+    </label>
+
+    <label>
+      Temporada
+      <input formControlName="temporada" type="text" />
+    </label>
+
+    <label>
+      Fecha de siembra
+      <input formControlName="fechaSiembra" type="date" />
+    </label>
+
+    <label>
+      Fecha de cosecha esperada
+      <input formControlName="fechaCosechaEsperada" type="date" />
+    </label>
+
+    <label>
+      Estado
+      <select formControlName="estado">
+        <option value="planificado">Planificado</option>
+        <option value="en_proceso">En proceso</option>
+        <option value="finalizado">Finalizado</option>
+      </select>
+    </label>
+
+    <label>
+      ID de Parcela
+      <input formControlName="parcelaId" type="number" />
+    </label>
+
+    <div class="actions">
+      <button type="submit" [disabled]="cultivoForm.invalid">Registrar</button>
+    </div>
+  </form>
+</div>
