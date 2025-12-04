@@ -84,10 +84,12 @@ public class BackendApplication {
 
             // Crear parcelas y asociarlas a los clientes
             Parcela parcela1 = new Parcela(null, "Parcela 1", 12.345678, 54.321234, 100.5, c1);
-            Parcela parcela2 = new Parcela(null, "Parcela 2", 15.678910, 50.123456, 120.75, c2);
-            Parcela parcela3 = new Parcela(null, "Parcela 3", 14.567890, 53.123457, 80.25, c3);
-            Parcela parcela4 = new Parcela(null, "Parcela 4", 16.543210, 52.234567, 95.60, c4);
-            Parcela parcela5 = new Parcela(null, "Parcela 5", 17.234567, 51.234567, 85.00, c5);
+            Parcela parcela2 = new Parcela(null, "Parcela 2", 15.678910, 50.123456, 120.75, c1);
+            Parcela parcela3 = new Parcela(null, "Parcela 3", 14.567890, 53.123457, 80.25, c1);
+            Parcela parcela4 = new Parcela(null, "Parcela 1", 16.543210, 52.234567, 95.60, c2);
+            Parcela parcela5 = new Parcela(null, "Parcela 2", 17.234567, 51.234567, 85.00, c2);
+            Parcela parcela6 = new Parcela(null, "Parcela 3", 15.572567, 50.341567, 90.00, c2);
+
 
             parcelaRepository.save(parcela1);
             parcelaRepository.save(parcela2);
