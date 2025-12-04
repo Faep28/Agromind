@@ -15,16 +15,17 @@ import { LandingPage } from './components/landing-page/landing-page';
 import { Register } from './components/register/register';
 import { RegistroCultivo } from './components/registro-cultivo/registro-cultivo';
 import { RegistroNoticias } from './components/registro-noticias/registro-noticias';
+import { ParcelaList } from './components/parcelas/parcela-list/parcela-list';
 
 @NgModule({
   declarations: [
     App,
-    Login,
-    Home,
+    Login, 
+    Home, 
     Header,
     LandingPage,
     Register
-    ,RegistroCultivo, RegistroNoticias
+    ,RegistroCultivo, RegistroNoticias, ParcelaList 
   ],
   imports: [
     BrowserModule,
