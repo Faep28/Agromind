@@ -79,7 +79,7 @@ public class BackendApplication {
 
             System.out.println("=== Datos cargados exitosamente ===");
 
-            // Crear clientes
+            /* Crear clientes
             Cliente cliente1 = new Cliente(null, "Juan Perez", "juan@example.com", "987654321", "Av. Lima 123", LocalDate.now(), "activo", juan);
             clienteRepository.save(cliente1);
             Cliente cliente2 = new Cliente(null, "Juan Perez", "juan@example.com", "987654321", "Av. Lima 123", LocalDate.now(), "activo", maria);
@@ -93,17 +93,17 @@ public class BackendApplication {
 
             Cliente cliente5 = new Cliente(null, "Juan Perez", "juan@example.com", "987654321", "Av. Lima 123", LocalDate.now(), "activo", pedro);
             clienteRepository.save(cliente5);
-
+            */
 
             // Verificar que los usuarios y autoridades se han creado correctamente
             System.out.println("Usuarios creados: " + userRepository.findAll());
 
             // Crear parcelas y asociarlas a los clientes
-            Parcela parcela1 = new Parcela(null, "Parcela 1", 12.345678, 54.321234, 100.5, cliente1);
-            Parcela parcela2 = new Parcela(null, "Parcela 2", 15.678910, 50.123456, 120.75, cliente2);
-            Parcela parcela3 = new Parcela(null, "Parcela 3", 14.567890, 53.123457, 80.25, cliente3);
-            Parcela parcela4 = new Parcela(null, "Parcela 4", 16.543210, 52.234567, 95.60, cliente4);
-            Parcela parcela5 = new Parcela(null, "Parcela 5", 17.234567, 51.234567, 85.00, cliente5);
+            Parcela parcela1 = new Parcela(null, "Parcela 1", 12.345678, 54.321234, 100.5, c1);
+            Parcela parcela2 = new Parcela(null, "Parcela 2", 15.678910, 50.123456, 120.75, c2);
+            Parcela parcela3 = new Parcela(null, "Parcela 3", 14.567890, 53.123457, 80.25, c3);
+            Parcela parcela4 = new Parcela(null, "Parcela 4", 16.543210, 52.234567, 95.60, c4);
+            Parcela parcela5 = new Parcela(null, "Parcela 5", 17.234567, 51.234567, 85.00, c5);
 
             parcelaRepository.save(parcela1);
             parcelaRepository.save(parcela2);
