@@ -96,6 +96,7 @@ public class BackendApplication {
             parcelaRepository.save(parcela3);
             parcelaRepository.save(parcela4);
             parcelaRepository.save(parcela5);
+            parcelaRepository.save(parcela6);
 
             // Crear cultivos y asociarlos a las parcelas (con algunos cultivos repetidos por parcela)
             Cultivo cultivo1 = new Cultivo(null, "Cultivo de Tomate", "Tomates orgánicos", "Verano", LocalDate.of(2025, 10, 1), LocalDate.of(2026, 1, 15), "Activo", parcela1);
