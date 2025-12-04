@@ -79,22 +79,6 @@ public class BackendApplication {
 
             System.out.println("=== Datos cargados exitosamente ===");
 
-            /* Crear clientes
-            Cliente cliente1 = new Cliente(null, "Juan Perez", "juan@example.com", "987654321", "Av. Lima 123", LocalDate.now(), "activo", juan);
-            clienteRepository.save(cliente1);
-            Cliente cliente2 = new Cliente(null, "Juan Perez", "juan@example.com", "987654321", "Av. Lima 123", LocalDate.now(), "activo", maria);
-            clienteRepository.save(cliente2);
-
-            Cliente cliente3 = new Cliente(null, "Juan Perez", "juan@example.com", "987654321", "Av. Lima 123", LocalDate.now(), "activo", carlos);
-            clienteRepository.save(cliente3);
-
-            Cliente cliente4 = new Cliente(null, "Juan Perez", "juan@example.com", "987654321", "Av. Lima 123", LocalDate.now(), "activo", luis);
-            clienteRepository.save(cliente4);
-
-            Cliente cliente5 = new Cliente(null, "Juan Perez", "juan@example.com", "987654321", "Av. Lima 123", LocalDate.now(), "activo", pedro);
-            clienteRepository.save(cliente5);
-            */
-
             // Verificar que los usuarios y autoridades se han creado correctamente
             System.out.println("Usuarios creados: " + userRepository.findAll());
 
