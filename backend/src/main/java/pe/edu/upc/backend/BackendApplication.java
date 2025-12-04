@@ -199,15 +199,16 @@ public class BackendApplication {
             lecturaSensorRepository.save(lectura14);
 
             // Crear noticias y asociarlas a los usuarios
-            Noticia noticia1 = new Noticia(null, "Nuevo servicio disponible", "Ahora puedes solicitar servicios de asesoría técnica.", LocalDate.of(2025, 4, 15),null, juan);
-            Noticia noticia2 = new Noticia(null, "Mantenimiento de equipos", "Recuerda que el mantenimiento de equipos agrícolas será este fin de semana.", LocalDate.of(2025, 4, 10),null, pedro);
-            Noticia noticia3 = new Noticia(null, "Actualización de la plataforma", "La plataforma ha sido actualizada con nuevas funcionalidades.", LocalDate.of(2025, 4, 1),null, juan);
-            Noticia noticia4 = new Noticia(null, "Cultivo de tomates", "Guía completa sobre el cultivo de tomates en tu parcela.", LocalDate.of(2025, 4, 5),null, pedro);
+            Noticia noticia1 = new Noticia(null, "Verificación de la construcción de canales en sectores agrícolas", "En la reunión se abordó la solicitud de verificación de la construcción de canales en estos sectores. Junto con la Oficina de Planificación Agraria de la GRA y en colaboración con la Junta de Usuarios de Chancay Lambayeque, se determinaron las necesidades prioritarias. Además, se alcanzaron acuerdos donde la Gerencia de Agricultura brindará el apoyo necesario a los pobladores para avanzar con los proyectos mencionados.", LocalDate.of(2025, 3, 25), null, juan);
+
+            Noticia noticia2 = new Noticia(null, "Acciones conjuntas para la preservación ambiental en Lambayeque", "En un esfuerzo conjunto, el Gobierno Regional de Lambayeque a través de la Gerencia Regional de Agricultura y la comunidad de Cañaris, articulan acciones orientadas a la preservación y el desarrollo sostenible ambiental, con la forestación y gestión del recurso hídrico. Se enfatizó que en el aspecto ambiental, la actividad contribuirá a evitar el deterioro de los suelos, proteger el deslizamiento de tierra, mejorar la captura de CO2 y servirá de cortina rompeviento y captura de partículas de polvo.", LocalDate.of(2025, 3, 18), null, pedro);
+
+            Noticia noticia3 = new Noticia(null, "Impacto de los incendios forestales en 22 regiones del país", "Los incendios forestales han generado grave afectación en 22 regiones del país, no solo en zonas de bosques sino también de cultivos. Además ya se registran 16 personas muertas debido a estos siniestros. Así lo indicó el presidente de la Asociación de Gremios Productores Agrarios del Perú (AGAP), Gabriel Amaro Alzamora, quien dijo que estos incendios, que se producen todos los años, se originan principalmente por la realización de malas prácticas como la quema de residuos agrícolas o restos vegetales para originar lluvias.", LocalDate.of(2025, 3, 10), null, juan);
 
             noticiasRepository.save(noticia1);
             noticiasRepository.save(noticia2);
             noticiasRepository.save(noticia3);
-            noticiasRepository.save(noticia4);
+
 /*
             // 13. Crear notificaciones y asociarlas a los usuarios
             Notificacion notificacion1 = new Notificacion(null, "Nuevo mantenimiento programado", "El mantenimiento de equipos será el 20 de octubre.", LocalDateTime.now(), false, "Mantenimiento", juanPerezUser);
