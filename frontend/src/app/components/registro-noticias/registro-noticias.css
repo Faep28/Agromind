@@ -1,0 +1,36 @@
+.container {
+  max-width: 800px;
+  margin: 0 auto;
+  padding: 20px;
+}
+
+mat-form-field {
+  width: 100%;
+  margin-bottom: 20px; /* Espaciado entre campos */
+}
+
+mat-form-field textarea {
+  min-height: 150px; /* Asegura que el campo de contenido sea lo suficientemente grande */
+  resize: vertical; /* Permite al usuario redimensionar el campo de texto verticalmente */
+}
+
+button {
+  margin-top: 20px;
+  width: 100%;
+}
+
+.file-input {
+  margin-bottom: 20px;
+}
+
+mat-error {
+  color: red;
+}
+
+h2, h3 {
+  font-weight: bold;
+}
+
+mat-card {
+  margin-bottom: 20px;
+}

@@ -13,6 +13,8 @@ import { Header } from './header/header';
 import { MaterialModule } from './modules/material/material-module';
 import { LandingPage } from './components/landing-page/landing-page';
 import { Register } from './components/register/register';
+import { RegistroCultivo } from './components/registro-cultivo/registro-cultivo';
+import { RegistroNoticias } from './components/registro-noticias/registro-noticias';
 
 @NgModule({
   declarations: [
@@ -22,6 +24,7 @@ import { Register } from './components/register/register';
     Header,
     LandingPage,
     Register
+    ,RegistroCultivo, RegistroNoticias
   ],
   imports: [
     BrowserModule,
