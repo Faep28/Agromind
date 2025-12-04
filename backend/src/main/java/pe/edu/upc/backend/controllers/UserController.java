@@ -86,6 +86,12 @@ public class UserController {
         return new ResponseEntity<>(results, HttpStatus.OK);
     }
 
+    @GetMapping("/{id}")
+    public ResponseEntity<User> findById(@PathVariable Long id) {
+        User foundUser =  userService.findById(id);
+        return new ResponseEntity<>(foundUser, HttpStatus.OK);
+    }
+
     @Autowired
     UserDetailsService userDetailsService;
 

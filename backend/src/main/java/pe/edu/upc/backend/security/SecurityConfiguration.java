@@ -26,7 +26,7 @@ public class SecurityConfiguration {
             "swagger-ui/**",
             "swagger-resources/**",
 
-
+			"api/users/**",
             // -- Login
             "api/users/login/**",
 
