@@ -14,6 +14,7 @@ import { MaterialModule } from './modules/material/material-module';
 import { LandingPage } from './components/landing-page/landing-page';
 import { Register } from './components/register/register';
 import { RegistroCultivo } from './components/registro-cultivo/registro-cultivo';
+import { RegistroNoticias } from './components/registro-noticias/registro-noticias';
 
 @NgModule({
   declarations: [
@@ -23,7 +24,7 @@ import { RegistroCultivo } from './components/registro-cultivo/registro-cultivo'
     Header,
     LandingPage,
     Register
-    ,RegistroCultivo
+    ,RegistroCultivo, RegistroNoticias
   ],
   imports: [
     BrowserModule,
