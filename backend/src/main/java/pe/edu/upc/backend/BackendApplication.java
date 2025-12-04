@@ -199,10 +199,10 @@ public class BackendApplication {
             lecturaSensorRepository.save(lectura14);
 
             // Crear noticias y asociarlas a los usuarios
-            Noticia noticia1 = new Noticia(null, "Nuevo servicio disponible", "Ahora puedes solicitar servicios de asesoría técnica.", LocalDate.of(2025, 4, 15), juan);
-            Noticia noticia2 = new Noticia(null, "Mantenimiento de equipos", "Recuerda que el mantenimiento de equipos agrícolas será este fin de semana.", LocalDate.of(2025, 4, 10), pedro);
-            Noticia noticia3 = new Noticia(null, "Actualización de la plataforma", "La plataforma ha sido actualizada con nuevas funcionalidades.", LocalDate.of(2025, 4, 1), juan);
-            Noticia noticia4 = new Noticia(null, "Cultivo de tomates", "Guía completa sobre el cultivo de tomates en tu parcela.", LocalDate.of(2025, 4, 5), pedro);
+            Noticia noticia1 = new Noticia(null, "Nuevo servicio disponible", "Ahora puedes solicitar servicios de asesoría técnica.", LocalDate.of(2025, 4, 15),null, juan);
+            Noticia noticia2 = new Noticia(null, "Mantenimiento de equipos", "Recuerda que el mantenimiento de equipos agrícolas será este fin de semana.", LocalDate.of(2025, 4, 10),null, pedro);
+            Noticia noticia3 = new Noticia(null, "Actualización de la plataforma", "La plataforma ha sido actualizada con nuevas funcionalidades.", LocalDate.of(2025, 4, 1),null, juan);
+            Noticia noticia4 = new Noticia(null, "Cultivo de tomates", "Guía completa sobre el cultivo de tomates en tu parcela.", LocalDate.of(2025, 4, 5),null, pedro);
 
             noticiasRepository.save(noticia1);
             noticiasRepository.save(noticia2);

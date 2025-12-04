@@ -7,6 +7,7 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 
 @Data
 @AllArgsConstructor
@@ -22,7 +23,9 @@ public class Noticia {
     private String titulo; // Título
     private String contenido; // Texto del contenido
     private LocalDate fechapublicacion; // Fecha en que se publico
-
+    @Lob
+    @Basic(fetch = FetchType.LAZY)
+    private byte[] imagen;
     @JsonIgnore
     @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "user_id") // foreign key que vincula con la entidad Usuario

@@ -16,8 +16,9 @@ public class NoticiasServiceImpl implements NoticiasService {
     private NoticiasRepository noticiasRepository;
 
     @Override
-    public Noticia add (Noticia noticia) {
-        return noticiasRepository.save(noticia); //guarda la noticia en la base de datos
+    public Noticia save(Noticia noticia) {
+        // Guardar la noticia con la imagen
+        return noticiasRepository.save(noticia);
     }
 
     @Override
