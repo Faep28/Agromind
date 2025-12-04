@@ -19,8 +19,8 @@ export class ParcelaList implements AfterViewInit {
     'longitud',
     'latitud',
     'tamano',
-    'clienteId',
-    'actions'
+    'editar',
+    'eliminar'  
   ];
 
   dsParcelas = new MatTableDataSource<Parcela>();
@@ -35,19 +35,26 @@ export class ParcelaList implements AfterViewInit {
 
   listarParcelas(): void {
 
-    const clienteId = Number(localStorage.getItem('clienteId'));
+    // Tu tokenDTO guarda el id del usuario con la clave: user_id
+    const clienteId = Number(localStorage.getItem('user_id'));
+
+    console.log("Cliente ID obtenido del localStorage:", clienteId);
 
     if (!clienteId) {
-      console.error("No existe clienteId en localStorage");
+      console.error("No existe user_id en localStorage");
       return;
     }
 
     this.parcelaService.getByClienteId(clienteId).subscribe({
       next: (data) => {
+        console.log("Parcelas obtenidas desde backend:", data);
+
         this.dsParcelas.data = data;
+
+        // Conectar paginator después de tener datos
         this.dsParcelas.paginator = this.paginator;
       },
-      error: (err) => { 
+      error: (err) => {
         console.error('Error al obtener parcelas por cliente:', err);
       }
     });
