@@ -21,7 +21,10 @@ public class Noticia {
     private Long id;
 
     private String titulo; // Título
+
+    @Column(length = 2000)
     private String contenido; // Texto del contenido
+
     private LocalDate fechapublicacion; // Fecha en que se publico
     @Lob
     @Basic(fetch = FetchType.LAZY)

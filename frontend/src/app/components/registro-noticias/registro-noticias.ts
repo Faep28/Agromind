@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { ChangeDetectorRef, Component } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Noticia } from '../../models/noticia';
 import { NoticiaService } from '../../services/noticia-service';
@@ -15,10 +15,10 @@ export class RegistroNoticias {
   noticiaForm!: FormGroup;
   noticias: Noticia[] = []; 
 
-  constructor(private formBuilder: FormBuilder, private noticiaService: NoticiaService, private router: Router, private snack: MatSnackBar) {
+  constructor(private formBuilder: FormBuilder, private noticiaService: NoticiaService, private router: Router, private snack: MatSnackBar,  private cdr: ChangeDetectorRef) {
     this.noticiaForm = this.formBuilder.group({
       titulo: ['', [Validators.required]],
-      contenido: ['', [Validators.required]],
+      contenido: ['', [Validators.required, Validators.maxLength(500)]],  
       fechapublicacion: ['', [Validators.required]],
       imagen: ['', [Validators.required]]
     });
@@ -70,10 +70,19 @@ export class RegistroNoticias {
 
   // Método para cargar todas las noticias
   loadNoticias() {
-    this.noticiaService.getAll().subscribe((noticias) => {
+  this.noticiaService.getAll().subscribe({
+    next: (noticias) => {
+      console.log('Noticias cargadas:', noticias);  // Verifica que las noticias se están recibiendo correctamente
       this.noticias = noticias;
-    });
-  }
+
+      // Forzamos una detección de cambios después de actualizar los datos
+      this.cdr.detectChanges();
+    },
+    error: (err) => {
+      console.error('Error al cargar las noticias:', err);
+    }
+  });
+}
   // Método para eliminar una noticia
   eliminarNoticia(id: number) {
     if (confirm('¿Estás seguro de que deseas eliminar esta noticia?')) {

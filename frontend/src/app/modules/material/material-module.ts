@@ -20,6 +20,7 @@ import { MatTooltipModule } from '@angular/material/tooltip';
 import { MatMenuModule } from '@angular/material/menu';
 import { MatListModule } from '@angular/material/list';
 import { MatSidenavModule } from '@angular/material/sidenav';
+import { MatSortModule } from '@angular/material/sort';
 
 
 @NgModule({
@@ -45,7 +46,8 @@ import { MatSidenavModule } from '@angular/material/sidenav';
     MatTooltipModule,
     MatMenuModule,
     MatListModule,
-    MatSidenavModule
+    MatSidenavModule,
+    MatSortModule              
   ],
   exports:[
     MatTableModule,
@@ -67,7 +69,8 @@ import { MatSidenavModule } from '@angular/material/sidenav';
     MatTooltipModule,
     MatMenuModule,
     MatListModule,
-    MatSidenavModule
+    MatSidenavModule,
+    MatSortModule               
   ]
 })
 export class MaterialModule { }
