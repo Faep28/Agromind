@@ -75,7 +75,7 @@ public class ParcelaController {
         return new ResponseEntity<>(estadisticas, HttpStatus.OK);
     }
     //----------------------------------------------------------------------------------------------------------------------
-    @GetMapping("/cliente/{clienteId}")
+    @GetMapping("/cliente/{clienteId}")  //http://localhost:8080/api/parcelas/cliente/{clienteId}
     public ResponseEntity<List<Parcela>> getParcelasByCliente(@PathVariable Long clienteId) {
         List<Parcela> parcelas = parcelaService.findByClienteId(clienteId);
         return new ResponseEntity<>(parcelas, HttpStatus.OK);

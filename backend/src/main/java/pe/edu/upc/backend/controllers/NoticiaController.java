@@ -3,13 +3,18 @@ package pe.edu.upc.backend.controllers;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 import pe.edu.upc.backend.entities.Noticia;
 import pe.edu.upc.backend.entities.User;
 import pe.edu.upc.backend.repositories.UserRepository;
+import pe.edu.upc.backend.security.JwtUtilService;
 import pe.edu.upc.backend.services.NoticiasService;
 
+import java.io.IOException;
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.List;
 
 @CrossOrigin("*")
@@ -22,24 +27,11 @@ public class NoticiaController {
 
     @Autowired
     private UserRepository userRepository;
+    @Autowired
+    private JwtUtilService jwtUtilService;
 
     // -------------------------- CRUD --------------------------
     // Crear una nueva noticia asociada a un usuario
-    @PostMapping("/insert/{userId}")
-    public ResponseEntity<Noticia> add(@PathVariable Long userId, @RequestBody Noticia noticia) {
-        // Buscar el usuario asociado
-        User usuario = userRepository.findById(userId).orElse(null);
-        if (usuario == null) {
-            return new ResponseEntity<>(HttpStatus.BAD_REQUEST); // Usuario no encontrado
-        }
-
-        // Asociar usuario y fecha actual
-        noticia.setUsuarioRelacionado(usuario);
-        noticia.setFechapublicacion(LocalDate.now());
-
-        Noticia createdNoticia = noticiasService.add(noticia);
-        return new ResponseEntity<>(createdNoticia, HttpStatus.CREATED);
-    }
 
     // Obtener todas las noticias
     @GetMapping("/list")
@@ -82,5 +74,30 @@ public class NoticiaController {
             return new ResponseEntity<>(HttpStatus.BAD_REQUEST);  // Retorna 400 si la fecha no es válida
         }
     }
+    // Crear noticia con imagen
+
+    // Método para crear noticia
+    @PostMapping("/create")
+    @PreAuthorize("hasRole('ROLE_ADMIN')")  // Solo el admin puede acceder a esta ruta
+    public ResponseEntity<Noticia> createNoticia(
+            @RequestParam("titulo") String titulo,
+            @RequestParam("contenido") String contenido,
+            @RequestParam("fechapublicacion") String fechapublicacion,
+            @RequestParam("imagen") MultipartFile imagen) throws IOException {
+
+        // Convertir la imagen a byte[] y guardar la noticia
+        byte[] imagenBytes = imagen.getBytes();
+        Noticia noticia = new Noticia();
+        noticia.setTitulo(titulo);
+        noticia.setContenido(contenido);
+        noticia.setFechapublicacion(LocalDate.parse(fechapublicacion));
+        noticia.setImagen(imagenBytes);
+
+        // Guardar la noticia
+        Noticia savedNoticia = noticiasService.save(noticia);
+
+        return ResponseEntity.ok(savedNoticia);
+    }
+
 }
 

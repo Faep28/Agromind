@@ -12,7 +12,7 @@
   <button mat-button routerLink="/home">Inicio</button>
 
   <!-- Opciones de USER (y también las verá el ADMIN) -->
-  <button mat-button *ngIf="isUser" routerLink="/cultivos">
+  <button mat-button *ngIf="isUser" routerLink="/parcelas">
     Mis Cultivos
   </button>
   <button mat-button *ngIf="isUser" routerLink="/tareas">
@@ -20,9 +20,9 @@
   </button>
 
   <!-- Admin -->
-<button mat-button class="admin-btn" *ngIf="isAdmin" routerLink="/">
+<button mat-button class="admin-btn" *ngIf="isAdmin" routerLink="/noticias">
   <mat-icon class="admin-icon">admin_panel_settings</mat-icon>
-  Ver página pública
+  Nueva noticia
 </button>
 
 <button mat-button class="admin-btn" *ngIf="isAdmin" routerLink="/reportes">

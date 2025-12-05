@@ -109,7 +109,7 @@ public class UserController {
     }
 
 
-    @PostMapping("/login")
+    @PostMapping("/login")   //http://localhost:8080/api/users/login
     public ResponseEntity<TokenDTO> login(@RequestBody User user){
 
         authenticationManager.authenticate(

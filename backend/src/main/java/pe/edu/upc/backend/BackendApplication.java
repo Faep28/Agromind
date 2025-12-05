@@ -46,7 +46,7 @@ public class BackendApplication {
             Authority userRole   = authorityService.add(new Authority(null, "ROLE_USER", null));
 
             // ==== Creacion de usuarios ====
-            UserDTO userJuan  = new UserDTO(null, "juanperez", "admin123", "juan.perez@example.com", "ROLE_ADMIN", null);
+            UserDTO userJuan  = new UserDTO(null, "juanperez", "admin123", "juan.perez@example.com", "ROLE_ADMIN", null );
             UserDTO userMaria = new UserDTO(null, "marialopez", "user123", "maria.lopez@example.com", "ROLE_ASSIST", null);
             UserDTO userCarlos= new UserDTO(null, "carlosgarcia", "carlo1234", "carlos.garcia@example.com", "ROLE_USER", null);
             UserDTO userLuis  = new UserDTO(null, "luismartinez", "luis1234", "luis.martinez@example.com", "ROLE_USER", null);
@@ -79,37 +79,24 @@ public class BackendApplication {
 
             System.out.println("=== Datos cargados exitosamente ===");
 
-            // Crear clientes
-            Cliente cliente1 = new Cliente(null, "Juan Perez", "juan@example.com", "987654321", "Av. Lima 123", LocalDate.now(), "activo", juan);
-            clienteRepository.save(cliente1);
-            Cliente cliente2 = new Cliente(null, "Juan Perez", "juan@example.com", "987654321", "Av. Lima 123", LocalDate.now(), "activo", maria);
-            clienteRepository.save(cliente2);
-
-            Cliente cliente3 = new Cliente(null, "Juan Perez", "juan@example.com", "987654321", "Av. Lima 123", LocalDate.now(), "activo", carlos);
-            clienteRepository.save(cliente3);
-
-            Cliente cliente4 = new Cliente(null, "Juan Perez", "juan@example.com", "987654321", "Av. Lima 123", LocalDate.now(), "activo", luis);
-            clienteRepository.save(cliente4);
-
-            Cliente cliente5 = new Cliente(null, "Juan Perez", "juan@example.com", "987654321", "Av. Lima 123", LocalDate.now(), "activo", pedro);
-            clienteRepository.save(cliente5);
-
-
             // Verificar que los usuarios y autoridades se han creado correctamente
             System.out.println("Usuarios creados: " + userRepository.findAll());
 
             // Crear parcelas y asociarlas a los clientes
-            Parcela parcela1 = new Parcela(null, "Parcela 1", 12.345678, 54.321234, 100.5, cliente1);
-            Parcela parcela2 = new Parcela(null, "Parcela 2", 15.678910, 50.123456, 120.75, cliente2);
-            Parcela parcela3 = new Parcela(null, "Parcela 3", 14.567890, 53.123457, 80.25, cliente3);
-            Parcela parcela4 = new Parcela(null, "Parcela 4", 16.543210, 52.234567, 95.60, cliente4);
-            Parcela parcela5 = new Parcela(null, "Parcela 5", 17.234567, 51.234567, 85.00, cliente5);
+            Parcela parcela1 = new Parcela(null, "Parcela 1", 12.345678, 54.321234, 100.5, c1);
+            Parcela parcela2 = new Parcela(null, "Parcela 2", 15.678910, 50.123456, 120.75, c1);
+            Parcela parcela3 = new Parcela(null, "Parcela 3", 14.567890, 53.123457, 80.25, c1);
+            Parcela parcela4 = new Parcela(null, "Parcela 1", 16.543210, 52.234567, 95.60, c2);
+            Parcela parcela5 = new Parcela(null, "Parcela 2", 17.234567, 51.234567, 85.00, c2);
+            Parcela parcela6 = new Parcela(null, "Parcela 3", 15.572567, 50.341567, 90.00, c2);
+
 
             parcelaRepository.save(parcela1);
             parcelaRepository.save(parcela2);
             parcelaRepository.save(parcela3);
             parcelaRepository.save(parcela4);
             parcelaRepository.save(parcela5);
+            parcelaRepository.save(parcela6);
 
             // Crear cultivos y asociarlos a las parcelas (con algunos cultivos repetidos por parcela)
             Cultivo cultivo1 = new Cultivo(null, "Cultivo de Tomate", "Tomates orgánicos", "Verano", LocalDate.of(2025, 10, 1), LocalDate.of(2026, 1, 15), "Activo", parcela1);
@@ -207,8 +194,8 @@ public class BackendApplication {
             noticiasRepository.save(noticia1);
             noticiasRepository.save(noticia2);
             noticiasRepository.save(noticia3);
-            noticiasRepository.save(noticia4);
 
+/*
             // 13. Crear notificaciones y asociarlas a los usuarios
             Notificacion notificacion1 = new Notificacion(null, "Nuevo mantenimiento programado", "El mantenimiento de equipos será el 20 de octubre.", LocalDateTime.now(), false, "Mantenimiento", juan);
             Notificacion notificacion2 = new Notificacion(null, "Nueva actualización en la plataforma", "La plataforma se actualizará el 25 de octubre con nuevas funciones.", LocalDateTime.now(), false, "Actualización", maria);

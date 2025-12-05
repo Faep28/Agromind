@@ -20,4 +20,6 @@ public interface CultivoRepository extends JpaRepository<Cultivo, Long> {
     //Query method para contar cuántos cultivos están activos vs inactivos
     Long countByEstadoIgnoreCase(String estado);
 
+    List<Cultivo> findByParcelaId(Long parcelaId);
+
 }

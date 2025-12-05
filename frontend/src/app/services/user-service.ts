@@ -55,11 +55,8 @@ export class UserService {
   }
 
   // Obtener el token JWT
-  getToken() {
-    if (typeof localStorage !== "undefined") {
-      return localStorage.getItem("jwtToken");
-    }
-    return null;
+  getToken(): string | null {
+    return localStorage.getItem('jwtToken');  // Recupera el token almacenado en el localStorage
   }
 
   // Obtener los authorities del usuario

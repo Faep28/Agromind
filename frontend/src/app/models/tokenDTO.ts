@@ -1,5 +1,5 @@
 export interface TokenDTO {
-     jwtToken: string,
+    jwtToken: string,
     id: number,
     authorities: string 
 }

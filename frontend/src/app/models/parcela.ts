@@ -4,5 +4,4 @@ export interface Parcela {
     longitud: number;
     latitud: number;
     tamano: number;
-    clienteId: number; 
 }

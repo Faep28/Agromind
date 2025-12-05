@@ -3,5 +3,6 @@ export interface Noticia {
     titulo: string;
     contenido: string;
     fechapublicacion: string; // LocalDate → string en el JSON
-    userId: number;    
+    userId: number;  
+    imagen: File;   
 }

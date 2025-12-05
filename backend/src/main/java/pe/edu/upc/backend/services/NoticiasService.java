@@ -7,7 +7,7 @@ import java.util.List;
 
 public interface NoticiasService {
 
-    Noticia add(Noticia noticia);  // Registrar una nueva noticia
+    Noticia save(Noticia noticia);  // Registrar una nueva noticia
     List<Noticia> findAll();       // Listar todas las noticias
     Noticia edit(Long id, Noticia noticia);  // Modificar una noticia
     void deleteById(Long id);      // Borrar una noticia
@@ -15,6 +15,8 @@ public interface NoticiasService {
     //PRIMER QUERY NATIVE
     // Nuevo método para obtener noticias después de una fecha específica
     List<Noticia> findNoticiasAfterFecha(LocalDate fecha);
+
+
 }
 
 

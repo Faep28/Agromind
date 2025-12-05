@@ -61,5 +61,10 @@ public class CultivoServiceImpl implements CultivoService {
         return cultivoRepository.countByEstadoIgnoreCase(estado);
     }
 
+    @Override
+    public List<Cultivo> findByParcelaId(Long parcelaId) {
+        return cultivoRepository.findByParcelaId(parcelaId); // Llama al método del repositorio
+    }
+
 
 }
