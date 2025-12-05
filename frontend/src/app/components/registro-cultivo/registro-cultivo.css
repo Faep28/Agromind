@@ -1,50 +1,47 @@
-.registro-cultivo-container {
-  max-width: 700px;
-  margin: 24px auto;
-  padding: 16px;
-  border-radius: 6px;
-  background: #fff;
-  box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+.container {
+  max-width: 800px;
+  margin: 0 auto;
+  padding: 20px;
 }
 
-.registro-cultivo-container h2 {
-  margin-top: 0;
-  margin-bottom: 12px;
-}
-
-.form label {
-  display: block;
-  margin-bottom: 12px;
-  font-size: 14px;
-}
-
-.form input[type="text"],
-.form input[type="date"],
-.form input[type="number"],
-.form textarea,
-.form select {
+mat-form-field {
   width: 100%;
-  padding: 8px 10px;
-  margin-top: 6px;
-  box-sizing: border-box;
-  border: 1px solid #ccc;
-  border-radius: 4px;
+  margin-bottom: 20px;
 }
 
-.form textarea { min-height: 80px; }
+mat-form-field textarea {
+  min-height: 100px;
+  resize: vertical;
+}
 
-.actions { text-align: right; margin-top: 16px; }
-
-.actions button {
-  background-color: #1976d2;
+.registrar-btn {
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+  width: 100%;
+  padding: 10px 20px;
+  border-radius: 5px;
+  background-color: #4CAF50;
   color: white;
-  border: none;
-  padding: 8px 16px;
-  border-radius: 4px;
+  font-weight: bold;
+  text-transform: uppercase;
   cursor: pointer;
+  transition: background-color 0.3s ease;
 }
 
-.actions button:disabled {
-  opacity: 0.6;
+.registrar-btn:hover:not(:disabled) {
+  background-color: #45a049;
+}
+
+.registrar-btn:disabled {
+  background-color: #ccc;
   cursor: not-allowed;
+}
+
+mat-error {
+  color: red;
+}
+
+h2 {
+  font-weight: bold;
 }

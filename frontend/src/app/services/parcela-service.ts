@@ -24,14 +24,9 @@ export class ParcelaService {
   }
 
   // Crear parcela
-  create(clienteId: number, parcela: Parcela): Observable<Parcela> {
-    const token = this.userService.getToken();  // Obtener el token JWT desde el servicio UserService
-    if (!token) {
-      console.error('Token JWT no encontrado');
-    }
-
+  create(clienteId: number, parcela: Parcela, token: string): Observable<Parcela> {
     const headers = new HttpHeaders({
-      'Authorization': `Bearer ${token}`  // Agregar el token al encabezado
+      'Authorization': `Bearer ${token}`  // Añadir el token JWT en los encabezados
     });
 
     return this.http.post<Parcela>(`${this.apiUrl}/insert/${clienteId}`, parcela, { headers });

@@ -31,40 +31,51 @@ export class AddEditParcela implements OnInit {
   }
 
   guardarParcela(): void {
-    if (this.formParcela.invalid) {
-      this.formParcela.markAllAsTouched();
-      console.log('Formulario inválido:', this.formParcela);
-      return;
-    }
-
-    // El id del usuario/cliente se guarda en el token (localStorage)
-    const clienteId = Number(localStorage.getItem('user_id') ?? localStorage.getItem('clienteId'));
-
-    if (!clienteId || clienteId === 0) {
-      console.error('No se encontró clienteId/user_id en localStorage');
-      return;
-    }
-
-    const nuevaParcela: Parcela = {
-      // tu modelo Parcela no tiene clienteId en el JSON devuelto; backend asocia cliente en el POST
-      id: 0, // backend generará el id; poner 0 o null es opcional pero evita TS errors
-      nombre: this.formParcela.value.nombre,
-      longitud: Number(this.formParcela.value.longitud),
-      latitud: Number(this.formParcela.value.latitud),
-      tamano: Number(this.formParcela.value.tamano)
-    };
-
-    this.submitting = true;
-    this.parcelaService.create(clienteId, nuevaParcela).subscribe({
-      next: (created) => {
-        this.submitting = false;
-        // navegar de vuelta a la lista de parcelas
-        this.router.navigate(['/parcelas']);
-      },
-      error: (err) => {
-        this.submitting = false;
-        console.error('Error al crear parcela:', err);
-      }
-    });
+  // Verificar que el formulario es válido
+  if (this.formParcela.invalid) {
+    this.formParcela.markAllAsTouched();
+    console.log('Formulario inválido:', this.formParcela);
+    return;
   }
+
+  // Obtener el token JWT desde el localStorage
+  const token = localStorage.getItem('jwtToken');
+  if (!token) {
+    console.error('No se encontró JWT en localStorage');
+    return;  // Salir si no hay token
+  }
+
+  // Obtener el user_id desde el localStorage, que es el ID del cliente
+  const clienteId = Number(localStorage.getItem('user_id'));
+  if (!clienteId || clienteId === 0) {
+    console.error('No se encontró clienteId/user_id en localStorage');
+    return;  // Salir si no hay clienteId
+  }
+
+  // Crear el objeto nuevaParcela con los valores del formulario
+  const nuevaParcela: Parcela = {
+    id: 0,  // El id será generado por el backend
+    nombre: this.formParcela.value.nombre,
+    longitud: Number(this.formParcela.value.longitud),
+    latitud: Number(this.formParcela.value.latitud),
+    tamano: Number(this.formParcela.value.tamano)
+  };
+
+  // Marcar como "en proceso" para evitar múltiples envíos
+  this.submitting = true;
+
+  // Llamar al servicio para crear la parcela, pasando el token en los encabezados
+  this.parcelaService.create(clienteId, nuevaParcela, token).subscribe({
+    next: (created) => {
+      this.submitting = false;
+      // Navegar de vuelta a la lista de parcelas
+      this.router.navigate(['/parcelas']);
+    },
+    error: (err) => {
+      this.submitting = false;
+      console.error('Error al crear parcela:', err);
+    }
+  });
+}
+
 }
