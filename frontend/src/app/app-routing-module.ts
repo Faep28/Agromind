@@ -9,6 +9,7 @@ import { RegistroCultivo } from './components/registro-cultivo/registro-cultivo'
 import { RegistroNoticias } from './components/registro-noticias/registro-noticias';
 import { autorizarAdminGuard } from './guards/autorizar-admin-guard';
 import { ParcelaList } from './components/parcelas/parcela-list/parcela-list';
+import { AddEditParcela } from './components/parcelas/add-edit-parcela/add-edit-parcela';
 
 const routes: Routes = [
   {path:"", component:LandingPage }, // Cambiar a landing Page (hecho)  
@@ -16,6 +17,7 @@ const routes: Routes = [
   {path:"home", component:Home, canActivate:[autorizarLogeadoGuard]},
   {path:"register", component:Register },
   {path:"parcelas", component:ParcelaList},
+  {path:"parcelas/add", component:AddEditParcela},
   {path:"cultivos", component:RegistroCultivo, canActivate:[autorizarLogeadoGuard]},
   {path:"noticias", component:RegistroNoticias, canActivate:[autorizarAdminGuard]}
 ];

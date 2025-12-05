@@ -16,6 +16,7 @@ import { Register } from './components/register/register';
 import { RegistroCultivo } from './components/registro-cultivo/registro-cultivo';
 import { RegistroNoticias } from './components/registro-noticias/registro-noticias';
 import { ParcelaList } from './components/parcelas/parcela-list/parcela-list';
+import { AddEditParcela } from './components/parcelas/add-edit-parcela/add-edit-parcela';
 
 @NgModule({
   declarations: [
@@ -25,7 +26,7 @@ import { ParcelaList } from './components/parcelas/parcela-list/parcela-list';
     Header,
     LandingPage,
     Register
-    ,RegistroCultivo, RegistroNoticias, ParcelaList 
+    ,RegistroCultivo, RegistroNoticias, ParcelaList, AddEditParcela 
   ],
   imports: [
     BrowserModule,
