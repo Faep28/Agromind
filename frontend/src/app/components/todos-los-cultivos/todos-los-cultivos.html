@@ -67,6 +67,16 @@
     <td mat-cell *matCellDef="let element"> {{ element.estado }} </td>
   </ng-container>
 
+  <!-- Fertilizantes -->
+  <ng-container matColumnDef="fertilizantes">
+    <th mat-header-cell *matHeaderCellDef> Fertilizantes </th>
+    <td mat-cell *matCellDef="let element">
+      <button mat-icon-button color="primary" (click)="verFertilizantes(element.id)" title="Ver Fertilizantes">
+        <mat-icon>science</mat-icon>
+      </button>
+    </td>
+  </ng-container>
+
   <!-- Editar -->
   <ng-container matColumnDef="editar">
     <th mat-header-cell *matHeaderCellDef> Editar </th>

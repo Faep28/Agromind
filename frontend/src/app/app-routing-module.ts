@@ -12,7 +12,7 @@ import { RegistroNoticias } from './components/registro-noticias/registro-notici
 import { autorizarAdminGuard } from './guards/autorizar-admin-guard';
 import { AddEditParcela } from './components/parcelas/add-edit-parcela/add-edit-parcela';
 import { TodosLosCultivosComponent } from './components/todos-los-cultivos/todos-los-cultivos';
- 
+import { FertilizantesCultivoComponent } from './components/fertilizantes-cultivo/fertilizantes-cultivo';
 import { RecomendacionesComponent } from './components/recomendaciones/recomendaciones.component';
 
 const routes: Routes = [
@@ -27,6 +27,7 @@ const routes: Routes = [
   {path:"noticias", component:RegistroNoticias, canActivate:[autorizarAdminGuard]},
   {path: 'recomendaciones',component: RecomendacionesComponent, canActivate: [autorizarLogeadoGuard] },
   {path:"todos-los-cultivos", component:TodosLosCultivosComponent, canActivate:[autorizarLogeadoGuard]},
+  {path:"fertilizantes-cultivo/:cultivoId", component:FertilizantesCultivoComponent, canActivate:[autorizarLogeadoGuard]},
   
 ];
 
