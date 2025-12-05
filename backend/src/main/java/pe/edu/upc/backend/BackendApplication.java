@@ -182,7 +182,7 @@ public class BackendApplication {
             lecturaSensorRepository.save(lectura13);
             lecturaSensorRepository.save(lectura14);
 
-            // Crear noticias y asociarlas a los usuarios
+            //Crear noticias y asociarlas a los usuarios
             Noticia noticia1 = new Noticia(null, "Verificación de la construcción de canales en sectores agrícolas", "En la reunión se abordó la solicitud de verificación de la construcción de canales en estos sectores. Junto con la Oficina de Planificación Agraria de la GRA y en colaboración con la Junta de Usuarios de Chancay Lambayeque, se determinaron las necesidades prioritarias. Además, se alcanzaron acuerdos donde la Gerencia de Agricultura brindará el apoyo necesario a los pobladores para avanzar con los proyectos mencionados.", LocalDate.of(2025, 3, 25), null, juan);
 
             Noticia noticia2 = new Noticia(null, "Acciones conjuntas para la preservación ambiental en Lambayeque", "En un esfuerzo conjunto, el Gobierno Regional de Lambayeque a través de la Gerencia Regional de Agricultura y la comunidad de Cañaris, articulan acciones orientadas a la preservación y el desarrollo sostenible ambiental, con la forestación y gestión del recurso hídrico. Se enfatizó que en el aspecto ambiental, la actividad contribuirá a evitar el deterioro de los suelos, proteger el deslizamiento de tierra, mejorar la captura de CO2 y servirá de cortina rompeviento y captura de partículas de polvo.", LocalDate.of(2025, 3, 18), null, pedro);
