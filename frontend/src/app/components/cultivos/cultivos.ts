@@ -20,6 +20,7 @@ export class Cultivos implements AfterViewInit {
     'descripcion',
     'temporada',
     'fechaSiembra',
+    'fechaCosechaEsperada',
     'estado',
     'editar',
     'eliminar'
