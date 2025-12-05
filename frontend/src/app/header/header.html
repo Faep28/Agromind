@@ -13,6 +13,9 @@
 
   <!-- Opciones de USER (y también las verá el ADMIN) -->
   <button mat-button *ngIf="isUser" routerLink="/parcelas">
+    Registrar Cultivos
+  </button>
+  <button mat-button *ngIf="isUser" routerLink="/todos-los-cultivos">
     Mis Cultivos
   </button>
   <button mat-button *ngIf="isUser" routerLink="/tareas">

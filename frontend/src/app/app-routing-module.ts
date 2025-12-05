@@ -11,6 +11,7 @@ import { ParcelaList } from './components/parcelas/parcela-list/parcela-list';
 import { RegistroNoticias } from './components/registro-noticias/registro-noticias';
 import { autorizarAdminGuard } from './guards/autorizar-admin-guard';
 import { AddEditParcela } from './components/parcelas/add-edit-parcela/add-edit-parcela';
+import { TodosLosCultivosComponent } from './components/todos-los-cultivos/todos-los-cultivos';
  
 
 const routes: Routes = [
@@ -23,6 +24,7 @@ const routes: Routes = [
   {path:"cultivos", component:Cultivos, canActivate:[autorizarLogeadoGuard]},
   {path:"parcelas-add", component:AddEditParcela, canActivate:[autorizarLogeadoGuard]},
   {path:"noticias", component:RegistroNoticias, canActivate:[autorizarAdminGuard]},
+  {path:"todos-los-cultivos", component:TodosLosCultivosComponent, canActivate:[autorizarLogeadoGuard]},
   
 ];
 
