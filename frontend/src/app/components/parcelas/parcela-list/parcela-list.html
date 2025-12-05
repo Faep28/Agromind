@@ -70,7 +70,7 @@
 <ng-container matColumnDef="editar">
   <th mat-header-cell *matHeaderCellDef> Editar </th>
   <td mat-cell *matCellDef="let element">
-    <button mat-icon-button>
+    <button mat-icon-button (click)="editParcela(element.id)" aria-label="Editar parcela">
       <mat-icon>edit</mat-icon>
     </button>
   </td>
@@ -80,7 +80,7 @@
 <ng-container matColumnDef="eliminar">
   <th mat-header-cell *matHeaderCellDef> Eliminar </th>
   <td mat-cell *matCellDef="let element">
-    <button mat-icon-button>
+    <button mat-icon-button (click)="deleteParcela(element.id)" aria-label="Eliminar parcela">
       <mat-icon color="warn">delete</mat-icon>
     </button>
   </td>
