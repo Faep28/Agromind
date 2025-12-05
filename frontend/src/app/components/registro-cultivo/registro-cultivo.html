@@ -1,3 +1,7 @@
+<button mat-stroked-button color="primary" [routerLink]="['/cultivos']" [queryParams]="{ parcelaId: parcelaId }" *ngIf="parcelaId" style="position: absolute; top: 80px; left: 20px;">
+  Volver a Cultivos
+</button>
+
 <div class="registro-cultivo-container">
   <h2>Registrar Cultivo</h2>
 
@@ -30,9 +34,8 @@
     <label>
       Estado
       <select formControlName="estado">
-        <option value="planificado">Planificado</option>
-        <option value="en_proceso">En proceso</option>
-        <option value="finalizado">Finalizado</option>
+        <option value="Activado">Activado</option>
+        <option value="No Activado">No Activado</option>
       </select>
     </label>
 

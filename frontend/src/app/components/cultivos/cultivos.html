@@ -13,6 +13,11 @@
   </mat-form-field>
 </div>
 
+<button mat-raised-button color="accent" [routerLink]="['/registro-cultivo']" [queryParams]="{ parcelaId: parcelaId }" *ngIf="parcelaId" style="margin-bottom: 16px;">
+  <mat-icon>add</mat-icon>
+  Registrar Nuevo Cultivo
+</button>
+
 <br>
 
 <p *ngIf="parcelaId">Mostrando cultivos para parcela: {{ parcelaId }}</p>
