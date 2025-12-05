@@ -56,10 +56,10 @@ export class UserService {
   getUserId(){
     if (typeof localStorage !== "undefined" ) {
       let lsUserId = localStorage.getItem("user_id");
-      if (!lsUserId == null) {
-        return parseInt(localStorage.getItem("user_id")!.toString());
-      }   
-      return 0;   
+      if (lsUserId != null) {
+        return parseInt(lsUserId.toString());
+      }
+      return 0;
     }
     return 0;
   }

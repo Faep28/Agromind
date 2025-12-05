@@ -14,6 +14,7 @@ import { AddEditParcela } from './components/parcelas/add-edit-parcela/add-edit-
 import { TodosLosCultivosComponent } from './components/todos-los-cultivos/todos-los-cultivos';
  
 import { RecomendacionesComponent } from './components/recomendaciones/recomendaciones.component';
+import { NotificacionesList } from './components/notificaciones/notificaciones-list';
 
 const routes: Routes = [
   {path:"", component:LandingPage }, // Cambiar a landing Page (hecho)  
@@ -25,6 +26,7 @@ const routes: Routes = [
   {path:"cultivos", component:Cultivos, canActivate:[autorizarLogeadoGuard]},
   {path:"parcelas-add", component:AddEditParcela, canActivate:[autorizarLogeadoGuard]},
   {path:"noticias", component:RegistroNoticias, canActivate:[autorizarAdminGuard]},
+  {path:"notificaciones", component:NotificacionesList, canActivate:[autorizarLogeadoGuard]},
   {path: 'recomendaciones',component: RecomendacionesComponent, canActivate: [autorizarLogeadoGuard] },
   {path:"todos-los-cultivos", component:TodosLosCultivosComponent, canActivate:[autorizarLogeadoGuard]},
   

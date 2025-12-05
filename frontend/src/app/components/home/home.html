@@ -36,11 +36,18 @@
     <div class="alerts-section">
       <h2>Alertas</h2>
       <div class="alert-cards">
-        <mat-card *ngFor="let alert of alerts" class="alert-card">
-          <mat-card-title>{{ alert.title }}</mat-card-title>
-          <mat-card-content>{{ alert.description }}</mat-card-content>
-          <button mat-button color="warn" (click)="markAsRead(alert)">Marcar como leída</button>
+        <mat-card *ngFor="let n of notificacionesMostradas" class="alert-card">
+          <mat-card-title>
+            {{ n.titulo }}
+            <span *ngIf="n.esLeido" style="font-size:0.8em;color:gray;margin-left:8px;">(Leída)</span>
+          </mat-card-title>
+          <mat-card-content>{{ n.mensaje }}</mat-card-content>
+          <button mat-button color="warn" *ngIf="!n.esLeido" (click)="markAsRead(n)">Marcar como leída</button>
+          <button mat-button disabled *ngIf="n.esLeido">Leída</button>
         </mat-card>
+      </div>
+      <div style="display:flex;justify-content:center;margin-top:12px;">
+        <button mat-stroked-button color="primary" routerLink="/notificaciones">Ver todas</button>
       </div>
     </div>
   </section>
@@ -72,19 +79,20 @@
 </button>
 
 <!-- Panel de notificaciones-->
-<div *ngIf="showNotifications" class="notification-panel">
-  <div class="notification-header">
-    <h3>Notificaciones</h3>
-  </div>
+  <div *ngIf="showNotifications" class="notification-panel">
+    <div class="notification-header">
+      <h3>Notificaciones</h3>
+    </div>
 
-  <div class="notification-list">
-    <div *ngFor="let alert of alerts" class="notification-item">
-      <p>{{ alert.title }}</p>
+    <div class="notification-list">
+      <div *ngFor="let n of notificacionesMostradas" class="notification-item">
+        <p><strong>{{n.titulo}}</strong></p>
+        <p>{{n.mensaje}}</p>
+      </div>
+    </div>
+
+    <div style="display: flex;justify-content: center;">
+      <button mat-raised-button color="primary" routerLink="/notificaciones" class="view-all-button">Ver todas</button>
     </div>
   </div>
-
-  <div style="display: flex;justify-content: center;">
-    <button mat-raised-button color="primary" routerLink="/notificaciones" class="view-all-button">Ver todas</button>
-  </div>
-</div>
 </div>

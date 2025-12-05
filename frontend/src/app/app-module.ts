@@ -12,6 +12,7 @@ import { RegistroCultivo } from './components/registro-cultivo/registro-cultivo'
 import { RegistroNoticias } from './components/registro-noticias/registro-noticias';
 import { Header } from './components/header/header';
 import { RecomendacionesComponent } from './components/recomendaciones/recomendaciones.component';
+import { NotificacionesList } from './components/notificaciones/notificaciones-list';
 import { HttpClientModule, provideHttpClient, withInterceptors } from '@angular/common/http';
 import { MaterialModule } from './modules/material/material-module';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
@@ -35,6 +36,7 @@ import { provideNativeDateAdapter } from '@angular/material/core';
     RegistroNoticias,
     Header,
     RecomendacionesComponent,
+    NotificacionesList,
     ParcelaList,
     AddEditParcela
   ],
