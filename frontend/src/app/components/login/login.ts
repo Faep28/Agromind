@@ -4,7 +4,8 @@ import { UserService } from '../../services/user-service';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { Router } from '@angular/router';
 import { User } from '../../models/user';
-import { TokenDTO } from '../../models/token-dto';
+import { TokenDto } from '../../models/token-dto';
+
 
 @Component({
   selector: 'app-login',
@@ -45,7 +46,7 @@ export class Login {
     }
 
     this.userService.login(user).subscribe({
-      next:(data:TokenDTO)=>{
+      next:(data:TokenDto)=>{
         //console.log(data);
         this.router.navigate(["/home"]);
       },

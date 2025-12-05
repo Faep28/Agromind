@@ -32,7 +32,9 @@ public class SecurityConfiguration {
 
             // -- Registro de nuevo usuarios
             "api/users/insert/**",
-            "api/users/register/**"
+            "api/users/register/**",
+            // -- Noticias públicas (sin autenticación requerida)
+            "api/noticias/list/**"
 
     };
 

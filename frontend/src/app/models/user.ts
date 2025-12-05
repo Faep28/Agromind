@@ -1,6 +1,5 @@
 export interface User {
-
-    id: number,
+ id: number,
     username: string,
     password: string,
     enabled: boolean,

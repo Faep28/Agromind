@@ -3,7 +3,8 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { Router } from '@angular/router';
 import { UserService } from '../../services/user-service';
-import { UserDTO } from '../../models/userDTO';
+import { UserDto } from '../../models/user-dto';
+
 
 @Component({
   selector: 'app-register',
@@ -53,7 +54,7 @@ export class Register {
       }
 
       // Crear el objeto UserDTO
-      const userDTO: UserDTO = {
+      const userDTO: UserDto = {
         username: this.registerForm.value.username,
         password: this.registerForm.value.password,
         email: this.registerForm.value.email,

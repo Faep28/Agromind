@@ -1,6 +1,6 @@
-<h2>Agregar Parcela</h2>
+<h2>{{ editMode ? 'Editar Parcela' : 'Agregar Parcela' }}</h2>
 
-<form [formGroup]="formParcela">
+<form [formGroup]="formParcela" (ngSubmit)="guardarParcela()">
 
   <!-- Nombre -->
   <mat-form-field appearance="outline" class="w-100">
@@ -28,7 +28,7 @@
 
   <br>
 
-  <button mat-raised-button color="primary" type="submit" [disabled]="formParcela.invalid" (click)="CrearParcela()">
+  <button mat-raised-button color="primary" type="submit" [disabled]="formParcela.invalid || submitting">
     Guardar
   </button>
 
