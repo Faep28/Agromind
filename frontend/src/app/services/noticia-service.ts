@@ -1,6 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { Observable } from 'rxjs';
+import { Observable, Subject } from 'rxjs';
 import { Noticia } from '../models/noticia';
 
 @Injectable({
@@ -10,6 +10,9 @@ export class NoticiaService {
 
   ruta_servidor:string = "http://localhost:8080/api/noticias";
   recurso:string ="create";
+
+  // Subject para notificar cambios en noticias
+  private noticiasActualizadas$ = new Subject<void>();
 
   constructor(private http:HttpClient){}
 
@@ -28,5 +31,16 @@ export class NoticiaService {
     return this.http.delete<void>(`${this.ruta_servidor}/delete/${id}`);
   }
 
+  // Método para emitir cambios en noticias
+  notificarCambios() {
+    this.noticiasActualizadas$.next();
+  }
+
+  // Método para obtener el observable de cambios
+  obtenerActualizaciones$() {
+    return this.noticiasActualizadas$.asObservable();
+  }
   
 }
+
+

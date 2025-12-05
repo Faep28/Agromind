@@ -33,6 +33,11 @@ export class ParcelaService {
     return this.http.put<Parcela>(`${this.apiUrl}/update/${id}`, parcela);
   }
 
+  // Obtener parcela por id
+  getById(id: number): Observable<Parcela> {
+    return this.http.get<Parcela>(`${this.apiUrl}/${id}`);
+  }
+
   // Eliminar parcela
   delete(id: number): Observable<void> {
     return this.http.delete<void>(`${this.apiUrl}/delete/${id}`);

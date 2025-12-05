@@ -64,17 +64,25 @@
 <section class="news">
   <h2>NOTICIAS</h2>
   <div class="news-container">
-    <div class="news-card">
-      <img src="assets/img/imagen1.png" alt="Noticia 1" />
-      <p>En la reunión se abordó la solicitud de verificación</p>
-    </div>
-    <div class="news-card">
-      <img src="assets/img/imagen1.png" alt="Noticia 2" />
-      <p>En un esfuerzo conjunto, el Gobierno Regional de Lambayeque</p>
-    </div>
-    <div class="news-card">
-      <img src="assets/img/imagen1.png" alt="Noticia 3" />
-      <p>Los incendios forestales han generado grave afectación en 22 regiones</p>
+    <div *ngFor="let noticia of noticias; let i = index" class="noticia-card">
+      <mat-card class="noticia-card-container">
+        <mat-card-header class="noticia-card-header">
+          <!-- Imagen a la izquierda -->
+          <div class="noticia-image-container">
+            <img *ngIf="noticia.imagen" [src]="'data:image/jpeg;base64,' + noticia.imagen" alt="{{ noticia.titulo }}" class="noticia-image" />
+            <img *ngIf="!noticia.imagen" [src]="getImagenNoticia(i)" alt="Imagen de noticia" class="noticia-image" />
+          </div>
+
+          <!-- Contenido a la derecha -->
+          <div class="noticia-content">
+            <mat-card-title>{{ noticia.titulo }}</mat-card-title>
+            <mat-card-subtitle>{{ noticia.fechapublicacion | date }}</mat-card-subtitle>
+            <mat-card-content>
+              <p>{{ noticia.contenido }}</p>
+            </mat-card-content>
+          </div>
+        </mat-card-header>
+      </mat-card>
     </div>
   </div>
 </section>
