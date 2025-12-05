@@ -33,6 +33,10 @@ export class CultivoService {
     return this.http.delete<void>(`${this.base}/delete/${id}`);
   }
 
+  getById(id: number): Observable<Cultivo> {
+    return this.http.get<Cultivo>(`${this.base}/${id}`);
+  }
+
   estadisticasPorParcela(): Observable<any[]> {
     return this.http.get<any[]>(`${this.base}/estadisticas/por-parcela`);
   }

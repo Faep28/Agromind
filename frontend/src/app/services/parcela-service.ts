@@ -24,12 +24,8 @@ export class ParcelaService {
   }
 
   // Crear parcela
-  create(clienteId: number, parcela: Parcela, token: string): Observable<Parcela> {
-    const headers = new HttpHeaders({
-      'Authorization': `Bearer ${token}`  // Añadir el token JWT en los encabezados
-    });
-
-    return this.http.post<Parcela>(`${this.apiUrl}/insert/${clienteId}`, parcela, { headers });
+  create(clienteId: number, parcela: Parcela): Observable<Parcela> {
+    return this.http.post<Parcela>(`${this.apiUrl}/insert/${clienteId}`, parcela);
   }
 
   // Actualizar parcela

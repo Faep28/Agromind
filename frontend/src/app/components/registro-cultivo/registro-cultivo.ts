@@ -41,7 +41,6 @@ export class RegistroCultivo {
         this.cultivoForm.get('parcelaId')?.disable();
       }
       
-      // Si hay cultivoId, estamos editando
       if (cultivoId) {
         this.cultivoId = Number(cultivoId);
         this.isEditMode = true;
@@ -51,27 +50,29 @@ export class RegistroCultivo {
   }
 
   loadCultivoData(id: number): void {
-    // Cargar datos del cultivo usando el servicio
-    this.cultivoService.listAll().subscribe({
-      next: (cultivos) => {
-        const cultivo = cultivos.find(c => c.id === id);
-        if (cultivo) {
-          this.cultivoForm.patchValue({
-            nombre: cultivo.nombre,
-            descripcion: cultivo.descripcion,
-            temporada: cultivo.temporada,
-            fechaSiembra: cultivo.fechaSiembra,
-            fechaCosechaEsperada: cultivo.fechaCosechaEsperada,
-            estado: cultivo.estado,
-            parcelaId: cultivo.parcelaId
-          });
+    // Obtener todos los cultivos de la parcela y filtrar el que necesitamos
+    if (this.parcelaId) {
+      this.cultivoService.getByParcela(this.parcelaId).subscribe({
+        next: (cultivos: Cultivo[]) => {
+          const cultivo = cultivos.find(c => c.id === id);
+          if (cultivo) {
+            this.cultivoForm.patchValue({
+              nombre: cultivo.nombre,
+              descripcion: cultivo.descripcion,
+              temporada: cultivo.temporada,
+              fechaSiembra: cultivo.fechaSiembra,
+              fechaCosechaEsperada: cultivo.fechaCosechaEsperada,
+              estado: cultivo.estado,
+              parcelaId: cultivo.parcelaId
+            });
+          }
+        },
+        error: (err: any) => {
+          console.error('Error al cargar cultivo:', err);
+          this.snack.open('Error al cargar los datos del cultivo', 'OK', { duration: 4000 });
         }
-      },
-      error: (err) => {
-        console.error('Error al cargar cultivo:', err);
-        this.snack.open('Error al cargar los datos del cultivo', 'OK', { duration: 4000 });
-      }
-    });
+      });
+    }
   }
 
   CargarFormulario() {

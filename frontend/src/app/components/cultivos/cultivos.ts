@@ -43,8 +43,10 @@ export class Cultivos implements OnInit {
     private cultivoService: CultivoService,
     private snackBar: MatSnackBar
   ) {}
-
+  
   ngOnInit(): void {
+    
+    
     // Suscribirse a cambios en queryParams para recargar cuando regresamos de editar
     this.route.queryParams.subscribe(params => {
       const id = params['parcelaId'];
