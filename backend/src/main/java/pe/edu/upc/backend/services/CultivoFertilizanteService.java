@@ -11,5 +11,7 @@ public interface CultivoFertilizanteService {
     void deleteById(Long id);
     List<String> findFertilizantesByCultivoId(Long cultivoId);
 
+    List<CultivoFertilizante> findByCultivoId(Long cultivoId);
+
     List<Object[]> findTop5FertilizantesMasUsados();
 }
