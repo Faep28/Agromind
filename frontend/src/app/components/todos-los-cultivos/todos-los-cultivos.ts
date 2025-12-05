@@ -31,78 +31,78 @@ import { CultivoService } from '../../services/cultivo-service';
   templateUrl: './todos-los-cultivos.html',
   styleUrl: './todos-los-cultivos.css',
 })
-export class TodosLosCultivosComponent implements OnInit, AfterViewInit {
+// export class TodosLosCultivosComponent implements OnInit, AfterViewInit {
+export class TodosLosCultivosComponent {
+  // displayedColumns: string[] = [
+  //   'id',
+  //   'nombre',
+  //   'descripcion',
+  //   'temporada',
+  //   'fechaSiembra',
+  //   'fechaCosechaEsperada',
+  //   'estado',
+  //   'editar',
+  //   'eliminar'
+  // ];
 
-  displayedColumns: string[] = [
-    'id',
-    'nombre',
-    'descripcion',
-    'temporada',
-    'fechaSiembra',
-    'fechaCosechaEsperada',
-    'estado',
-    'editar',
-    'eliminar'
-  ];
+  // dsCultivos = new MatTableDataSource<Cultivo>();
 
-  dsCultivos = new MatTableDataSource<Cultivo>();
+  // @ViewChild(MatPaginator, { static: false }) paginator!: MatPaginator;
 
-  @ViewChild(MatPaginator, { static: false }) paginator!: MatPaginator;
-
-  constructor(
-    private http: HttpClient,
-    private router: Router,
-    private cultivoService: CultivoService,
-    private snackBar: MatSnackBar
-  ) {}
+  // constructor(
+  //   private http: HttpClient,
+  //   private router: Router,
+  //   private cultivoService: CultivoService,
+  //   private snackBar: MatSnackBar
+  // ) {}
   
-  ngOnInit(): void {
-    this.loadCultivos();
-  }
+  // ngOnInit(): void {
+  //   this.loadCultivos();
+  // }
 
-  ngAfterViewInit(): void {
-    this.dsCultivos.paginator = this.paginator;
-  }
+  // ngAfterViewInit(): void {
+  //   this.dsCultivos.paginator = this.paginator;
+  // }
 
-  loadCultivos(): void {
-    this.cultivoService.listAll().subscribe({
-      next: (data) => {
-        console.log('Datos recibidos:', data);
-        this.dsCultivos.data = data || [];
-        setTimeout(() => {
-          this.dsCultivos.paginator = this.paginator;
-        });
-      },
-      error: (err) => {
-        console.error('Error al obtener todos los cultivos:', err);
-        this.dsCultivos.data = [];
-      }
-    });
-  }
+  // loadCultivos(): void {
+  //   this.cultivoService.listAll().subscribe({
+  //     next: (data) => {
+  //       console.log('Datos recibidos:', data);
+  //       this.dsCultivos.data = data || [];
+  //       setTimeout(() => {
+  //         this.dsCultivos.paginator = this.paginator;
+  //       });
+  //     },
+  //     error: (err) => {
+  //       console.error('Error al obtener todos los cultivos:', err);
+  //       this.dsCultivos.data = [];
+  //     }
+  //   });
+  // }
 
-  applyFilter(event: Event): void {
-    const filterValue = (event.target as HTMLInputElement).value;
-    this.dsCultivos.filter = filterValue.trim().toLowerCase();
-  }
+  // applyFilter(event: Event): void {
+  //   const filterValue = (event.target as HTMLInputElement).value;
+  //   this.dsCultivos.filter = filterValue.trim().toLowerCase();
+  // }
 
-  editCultivo(id: number): void {
-    this.router.navigate(['/registro-cultivo'], { 
-      queryParams: { cultivoId: id } 
-    });
-  }
+  // editCultivo(id: number): void {
+  //   this.router.navigate(['/registro-cultivo'], { 
+  //     queryParams: { cultivoId: id } 
+  //   });
+  // }
 
-  deleteCultivo(id: number): void {
-    if (!confirm('¿Está seguro de que desea eliminar este cultivo?')) return;
+  // deleteCultivo(id: number): void {
+  //   if (!confirm('¿Está seguro de que desea eliminar este cultivo?')) return;
     
-    this.cultivoService.delete(id).subscribe({
-      next: () => {
-        this.snackBar.open('Cultivo eliminado correctamente', 'Cerrar', { duration: 3000 });
-        this.loadCultivos();
-      },
-      error: (err) => {
-        console.error('Error al eliminar cultivo:', err);
-        this.snackBar.open('Error al eliminar el cultivo', 'Cerrar', { duration: 3000 });
-      }
-    });
-  }
+  //   this.cultivoService.delete(id).subscribe({
+  //     next: () => {
+  //       this.snackBar.open('Cultivo eliminado correctamente', 'Cerrar', { duration: 3000 });
+  //       this.loadCultivos();
+  //     },
+  //     error: (err) => {
+  //       console.error('Error al eliminar cultivo:', err);
+  //       this.snackBar.open('Error al eliminar el cultivo', 'Cerrar', { duration: 3000 });
+  //     }
+  //   });
+  // }
 }
