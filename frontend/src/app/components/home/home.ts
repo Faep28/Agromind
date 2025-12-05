@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { Router } from '@angular/router';
+import { UserService } from '../../services/user-service';
 
 @Component({
   selector: 'app-home',
@@ -11,7 +12,7 @@ export class Home {
 
   // como traeriamos los datos?
   // simulando datos, luego quitarlos
-  username: string = '<Nombre de Prueba>';  // obtener de servicio.
+  username: string = 'invitado';
   weatherSummary: string = 'Soleado, 28°C, sin lluvias por los próximos 3 días';
   irrigationRecommendation: string = 'Riego recomendado para mañana por 30 minutos.';
   cropStatus: string = 'Cultivo de maíz en buen estado. Requiere fertilización en 3 días.';
@@ -23,11 +24,19 @@ export class Home {
   ];
 
   showNotifications: boolean = false;
+  
+  
+  constructor(private router: Router,
+    public userService: UserService
+    ) {
+  }
 
-  constructor(private router: Router) { }
 
   ngOnInit() {
-    
+    const storedUsername = localStorage.getItem("username");
+    if (storedUsername) {
+      this.username = storedUsername;
+    }
   }
 
   markAsRead(alert: any) {
