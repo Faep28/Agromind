@@ -1,0 +1,42 @@
+/* Estilos básicos para la lista de cultivos */
+
+mat-form-field {
+  max-width: 360px;
+}
+
+.mat-elevation-z2 {
+  overflow: auto;
+}
+
+p {
+  margin-top: 8px;
+}
+
+/* Layout header: boton + filtro */
+.cultivos-header {
+  display: flex;
+  gap: 16px;
+  align-items: center;
+  flex-wrap: wrap;
+  margin-bottom: 12px;
+}
+
+.cultivos-header .mat-form-field {
+  min-width: 260px;
+}
+
+/* Separación antes de la tabla */
+table.mat-table {
+  margin-top: 12px;
+  margin-bottom: 20px;
+}
+
+/* Ajustes del paginator */
+.mat-paginator {
+  margin-top: 8px;
+}
+
+/* Botón Volver a Parcelas: pequeño ajuste */
+button[routerLink] {
+  height: 40px;
+}
