@@ -40,8 +40,8 @@ import { NgxChartsModule } from '@swimlane/ngx-charts';
     MaterialModule,
     FormsModule,
     ReactiveFormsModule,
-    BrowserAnimationsModule,
-    NgxChartsModule
+    NgxChartsModule,
+    BrowserAnimationsModule
   ],
   providers: [
     provideBrowserGlobalErrorListeners()
