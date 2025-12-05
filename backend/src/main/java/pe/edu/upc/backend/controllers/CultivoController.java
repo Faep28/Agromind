@@ -59,15 +59,24 @@ public class CultivoController {
         return cultivoService.findAll();
     }
     // Actualizar un cultivo
-    @PutMapping("/update/{id}")   //http://localhost:8080/api/cultivos/update/{id}
+    @PutMapping("/update/{id}")
     public ResponseEntity<Cultivo> updateCultivo(@PathVariable Long id, @RequestBody Cultivo cultivoDetails) {
-        cultivoDetails.setId(id);
-        Cultivo updatedCultivo = cultivoService.edit(cultivoDetails);
-        if (updatedCultivo != null) {
-            return new ResponseEntity<>(updatedCultivo, HttpStatus.OK);  // Si la actualización es exitosa
-        } else {
-            return new ResponseEntity<>(HttpStatus.NOT_FOUND);  // Si el cultivo no fue encontrado
+        Cultivo cultivoExistente = cultivoService.findById(id);
+
+        if (cultivoExistente == null) {
+            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
         }
+
+        // Actualizar campos manteniendo la parcela existente
+        cultivoExistente.setNombre(cultivoDetails.getNombre());
+        cultivoExistente.setDescripcion(cultivoDetails.getDescripcion());
+        cultivoExistente.setTemporada(cultivoDetails.getTemporada());
+        cultivoExistente.setFechaSiembra(cultivoDetails.getFechaSiembra());
+        cultivoExistente.setFechaCosechaEsperada(cultivoDetails.getFechaCosechaEsperada());
+        cultivoExistente.setEstado(cultivoDetails.getEstado());
+
+        Cultivo updatedCultivo = cultivoService.edit(cultivoExistente);
+        return new ResponseEntity<>(updatedCultivo, HttpStatus.OK);
     }
     // Eliminar un cultivo
     @DeleteMapping("/delete/{id}")   //http://localhost:8080/api/cultivos/delete/{id}
