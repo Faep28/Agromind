@@ -18,5 +18,6 @@ public interface CultivoService {
     List<Cultivo> findByTemporadaIgnoreCase(String temporada);
 
 
+    List<Cultivo> findByParcelaId(Long parcelaId);
     Long countByEstadoIgnoreCase(String estado);
 }
