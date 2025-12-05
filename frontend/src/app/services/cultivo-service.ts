@@ -7,7 +7,7 @@ import { Cultivo } from '../models/cultivo';
   providedIn: 'root'
 })
 export class CultivoService {
-  private base = '/api/cultivos';
+  private base = 'http://localhost:8080/api/cultivos';
 
   constructor(private http: HttpClient) {}
 

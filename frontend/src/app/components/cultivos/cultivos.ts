@@ -1,4 +1,4 @@
-import { Component, ViewChild, AfterViewInit } from '@angular/core';
+import { Component, ViewChild, AfterViewInit, OnInit } from '@angular/core';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatTableDataSource } from '@angular/material/table';
 import { HttpClient } from '@angular/common/http';
@@ -13,7 +13,7 @@ import { CultivoService } from '../../services/cultivo-service';
   templateUrl: './cultivos.html',
   styleUrl: './cultivos.css',
 })
-export class Cultivos implements AfterViewInit {
+export class Cultivos implements OnInit {
 
   displayedColumns: string[] = [
     'id',
@@ -37,8 +37,7 @@ export class Cultivos implements AfterViewInit {
 
   constructor(private http: HttpClient, private route: ActivatedRoute, private cultivoService: CultivoService) {}
 
-  ngAfterViewInit(): void {
-    // Leer query param parcelaId
+  ngOnInit(): void {
     this.route.queryParams.subscribe(params => {
       const id = params['parcelaId'];
       this.parcelaId = id ? Number(id) : null;
@@ -47,31 +46,22 @@ export class Cultivos implements AfterViewInit {
   }
 
   loadCultivos(): void {
-    // Si hay parcelaId, usar endpoint específico /parcela/{id}; si no, listar todos
-    if (this.parcelaId) {
-      this.cultivoService.getByParcela(this.parcelaId).subscribe({
-        next: (data) => {
-          this.dsCultivos.data = data;
-          this.dsCultivos.paginator = this.paginator;
-        },
-        error: (err) => {
-          // Si no hay contenido (204) o falla, dejar arreglo vacío y loguear
-          console.error('Error al obtener cultivos por parcela:', err);
-          this.dsCultivos.data = [];
-        }
-      });
-    } else {
-      this.cultivoService.listAll().subscribe({
-        next: (data) => {
-          this.dsCultivos.data = data;
-          this.dsCultivos.paginator = this.paginator;
-        },
-        error: (err) => {
-          console.error('Error al obtener cultivos:', err);
-        }
-      });
-    }
+  if (this.parcelaId) {
+    this.cultivoService.getByParcela(this.parcelaId).subscribe({
+      next: (data) => {
+        console.log('Datos recibidos:', data);  // Agregar esta línea para inspeccionar los datos
+        this.dsCultivos.data = data;
+        this.dsCultivos.paginator = this.paginator;
+      },
+      error: (err) => {
+        console.error('Error al obtener cultivos por parcela:', err);
+        this.dsCultivos.data = [];
+      }
+    });
   }
+}
+
+
 
   applyFilter(event: Event): void {
     const filterValue = (event.target as HTMLInputElement).value;
