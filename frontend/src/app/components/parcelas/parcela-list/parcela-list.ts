@@ -1,6 +1,8 @@
 import { Component, ViewChild, AfterViewInit } from '@angular/core';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatTableDataSource } from '@angular/material/table';
+import { Router } from '@angular/router';
+import { ActivatedRoute } from '@angular/router';
 
 import { Parcela } from '../../../models/parcela';
 import { ParcelaService } from '../../../services/parcela-service';
@@ -14,6 +16,7 @@ import { ParcelaService } from '../../../services/parcela-service';
 export class ParcelaList implements AfterViewInit {
 
   displayedColumns: string[] = [
+    'seleccionar',
     'id',
     'nombre',
     'longitud',
@@ -25,11 +28,22 @@ export class ParcelaList implements AfterViewInit {
 
   dsParcelas = new MatTableDataSource<Parcela>();
 
+  // Id de parcela seleccionada por el usuario
+  selectedParcelaId: number | null = null;
+
   @ViewChild(MatPaginator) paginator!: MatPaginator;
 
-  constructor(private parcelaService: ParcelaService) {}
+  constructor(private parcelaService: ParcelaService, private router: Router, private route: ActivatedRoute) {}
 
   ngAfterViewInit(): void {
+    // Si venimos con query param parcelaId (por ejemplo desde Cultivos), preseleccionarla
+    this.route.queryParams.subscribe(params => {
+      const pid = params['parcelaId'];
+      if (pid) {
+        this.selectedParcelaId = Number(pid);
+      }
+    });
+
     this.listarParcelas();
   }
 
@@ -63,6 +77,22 @@ export class ParcelaList implements AfterViewInit {
   applyFilter(event: Event): void {
     const filterValue = (event.target as HTMLInputElement).value;
     this.dsParcelas.filter = filterValue.trim().toLowerCase();
+  }
+
+  // Seleccionar una parcela (marca el id)
+  selectParcela(parcela: Parcela): void {
+    // Toggle: si ya está seleccionada, deselecciona; si no, selecciona
+    if (this.selectedParcelaId === parcela.id) {
+      this.selectedParcelaId = null;
+    } else {
+      this.selectedParcelaId = parcela.id;
+    }
+  }
+
+  // Navegar a la vista de cultivos pasando la parcela seleccionada como query param
+  goToCultivos(): void {
+    if (!this.selectedParcelaId) return;
+    this.router.navigate(['/cultivos'], { queryParams: { parcelaId: this.selectedParcelaId } });
   }
 
   deleteParcela(id: number): void {

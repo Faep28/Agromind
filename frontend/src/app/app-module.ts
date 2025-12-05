@@ -14,6 +14,7 @@ import { MaterialModule } from './modules/material/material-module';
 import { LandingPage } from './components/landing-page/landing-page';
 import { Register } from './components/register/register';
 import { RegistroCultivo } from './components/registro-cultivo/registro-cultivo';
+import { Cultivos } from './components/cultivos/cultivos';
 import { RegistroNoticias } from './components/registro-noticias/registro-noticias';
 import { ParcelaList } from './components/parcelas/parcela-list/parcela-list';
 
@@ -25,7 +26,7 @@ import { ParcelaList } from './components/parcelas/parcela-list/parcela-list';
     Header,
     LandingPage,
     Register
-    ,RegistroCultivo, RegistroNoticias, ParcelaList 
+    ,RegistroCultivo, RegistroNoticias, ParcelaList, Cultivos 
   ],
   imports: [
     BrowserModule,

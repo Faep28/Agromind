@@ -1,0 +1,19 @@
+/* Resaltar fila seleccionada */
+.selected {
+	background-color: rgba(0, 150, 136, 0.06); /* verde suave */
+}
+
+/* Botón global fijo y visible */
+.go-cultivos-button {
+	position: fixed;
+	right: 24px;
+	bottom: 24px;
+	z-index: 1200;
+	box-shadow: 0 6px 18px rgba(0,0,0,0.12);
+}
+
+/* Mejor separación en el header de la tabla */
+.mat-form-field {
+	max-width: 320px;
+}
+
