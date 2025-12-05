@@ -1,1 +1,37 @@
-<p>add-edit-parcela works!</p>
+<h2>Agregar Parcela</h2>
+
+<form [formGroup]="formParcela">
+
+  <!-- Nombre -->
+  <mat-form-field appearance="outline" class="w-100">
+    <mat-label>Nombre</mat-label>
+    <input matInput formControlName="nombre" required>
+  </mat-form-field>
+
+  <!-- Longitud -->
+  <mat-form-field appearance="outline" class="w-100">
+    <mat-label>Longitud</mat-label>
+    <input matInput type="number" formControlName="longitud" required>
+  </mat-form-field>
+
+  <!-- Latitud -->
+  <mat-form-field appearance="outline" class="w-100">
+    <mat-label>Latitud</mat-label>
+    <input matInput type="number" formControlName="latitud" required>
+  </mat-form-field>
+
+  <!-- Tamaño -->
+  <mat-form-field appearance="outline" class="w-100">
+    <mat-label>Tamaño (m²)</mat-label>
+    <input matInput type="number" formControlName="tamano" required>
+  </mat-form-field>
+
+  <br>
+
+  <button mat-raised-button color="primary" type="submit" [disabled]="formParcela.invalid" (click)="CrearParcela()">
+    Guardar
+  </button>
+
+  <button mat-button routerLink="/parcelas" style="margin-left: 10px;">Cancelar</button>
+
+</form>

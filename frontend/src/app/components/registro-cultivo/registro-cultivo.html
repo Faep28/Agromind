@@ -1,1 +1,62 @@
-<p>registro-cultivo works!</p>
+<button mat-stroked-button color="primary" [routerLink]="['/cultivos']" [queryParams]="{ parcelaId: parcelaId }" *ngIf="parcelaId" style="position: absolute; top: 80px; left: 20px;">
+  Volver a Cultivos
+</button>
+
+<div class="container">
+  <h2>{{ isEditMode ? 'Editar Cultivo' : 'Registrar Cultivo' }}</h2>
+
+  <form [formGroup]="cultivoForm" (ngSubmit)="onSubmit()">
+    
+    <mat-form-field appearance="fill">
+      <mat-label>Nombre</mat-label>
+      <input matInput formControlName="nombre" type="text" />
+      <mat-error *ngIf="cultivoForm.get('nombre')?.invalid">El nombre es obligatorio (mínimo 2 caracteres).</mat-error>
+    </mat-form-field>
+
+    <mat-form-field appearance="fill">
+      <mat-label>Descripción</mat-label>
+      <textarea matInput formControlName="descripcion"></textarea>
+    </mat-form-field>
+
+    <mat-form-field appearance="fill">
+      <mat-label>Temporada</mat-label>
+      <input matInput formControlName="temporada" type="text" />
+      <mat-error *ngIf="cultivoForm.get('temporada')?.invalid">La temporada es obligatoria.</mat-error>
+    </mat-form-field>
+
+    <mat-form-field appearance="fill">
+      <mat-label>Fecha de siembra</mat-label>
+      <input matInput [matDatepicker]="pickerSiembra" formControlName="fechaSiembra">
+      <mat-datepicker-toggle matSuffix [for]="pickerSiembra"></mat-datepicker-toggle>
+      <mat-datepicker #pickerSiembra></mat-datepicker>
+      <mat-error *ngIf="cultivoForm.get('fechaSiembra')?.invalid">La fecha de siembra es obligatoria.</mat-error>
+    </mat-form-field>
+
+    <mat-form-field appearance="fill">
+      <mat-label>Fecha de cosecha esperada</mat-label>
+      <input matInput [matDatepicker]="pickerCosecha" formControlName="fechaCosechaEsperada">
+      <mat-datepicker-toggle matSuffix [for]="pickerCosecha"></mat-datepicker-toggle>
+      <mat-datepicker #pickerCosecha></mat-datepicker>
+      <mat-error *ngIf="cultivoForm.get('fechaCosechaEsperada')?.invalid">La fecha de cosecha es obligatoria.</mat-error>
+    </mat-form-field>
+
+    <mat-form-field appearance="fill">
+      <mat-label>Estado</mat-label>
+      <mat-select formControlName="estado">
+        <mat-option value="Activado">Activado</mat-option>
+        <mat-option value="No Activado">No Activado</mat-option>
+      </mat-select>
+      <mat-error *ngIf="cultivoForm.get('estado')?.invalid">El estado es obligatorio.</mat-error>
+    </mat-form-field>
+
+    <mat-form-field appearance="fill">
+      <mat-label>ID de Parcela</mat-label>
+      <input matInput formControlName="parcelaId" type="number" />
+      <mat-error *ngIf="cultivoForm.get('parcelaId')?.invalid">El ID de parcela es obligatorio.</mat-error>
+    </mat-form-field>
+
+    <button mat-raised-button type="submit" [disabled]="cultivoForm.invalid" class="registrar-btn">
+      {{ isEditMode ? 'Guardar Cambios' : 'Registrar Cultivo' }}
+    </button>
+  </form>
+</div>

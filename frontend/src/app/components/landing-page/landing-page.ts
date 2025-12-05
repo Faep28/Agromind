@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, HostListener } from '@angular/core';
 
 @Component({
   selector: 'app-landing-page',
@@ -7,13 +7,32 @@ import { Component } from '@angular/core';
   styleUrl: './landing-page.css',
 })
 export class LandingPage {
-  data = [
-    { name: 'Lima', value: 894 },
-    { name: 'Cusco', value: 120 },
-    { name: 'Arequipa', value: 150 }
-  ];
+  isMenuOpen = false;
+  isMobile = false;  
 
-  colorScheme = {
-    domain: ['#5AA454', '#A10A28', '#C7B42C', '#AAAAAA']
-  };
+  constructor() {}
+
+  ngOnInit() {
+    this.isMobile = window.innerWidth <= 800;
+  }
+
+  @HostListener('window:resize', ['$event'])
+  onResize(event: Event) {
+    this.isMobile = window.innerWidth <= 800;
+    if (!this.isMobile) {
+      this.isMenuOpen = false;
+    }
+  }
+
+  toggleMenu() {
+    this.isMenuOpen = !this.isMenuOpen;
+  }
+
+  scrollToSection() {
+    const element = document.getElementById('services');
+    if (element) {
+      element.scrollIntoView({ behavior: 'smooth' })
+    }
+  }
 }
+  

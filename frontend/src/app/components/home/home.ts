@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-home',
@@ -8,4 +9,33 @@ import { Component } from '@angular/core';
 })
 export class Home {
 
+  // como traeriamos los datos?
+  // simulando datos, luego quitarlos
+  username: string = '<Nombre de Prueba>';  // obtener de servicio.
+  weatherSummary: string = 'Soleado, 28°C, sin lluvias por los próximos 3 días';
+  irrigationRecommendation: string = 'Riego recomendado para mañana por 30 minutos.';
+  cropStatus: string = 'Cultivo de maíz en buen estado. Requiere fertilización en 3 días.';
+
+  // simular, debemos de colocar notificacoones en el backend
+  alerts: any[] = [
+    { title: 'Plaga detectada', description: 'Plaga leve detectada en el campo 1. Requiere atención.' },
+    { title: 'Lluvias en camino', description: 'Se esperan lluvias fuertes en 48 horas. Ajuste el riego.' }
+  ];
+
+  showNotifications: boolean = false;
+
+  constructor(private router: Router) { }
+
+  ngOnInit() {
+    
+  }
+
+  markAsRead(alert: any) {
+    alert.read = true;
+    // aqui podemos implementar logica para marcar la alerta como leída (podriamos actualizar en el backend).
+  }
+
+  toggleNotifications() {
+    this.showNotifications = !this.showNotifications;
+  }
 }

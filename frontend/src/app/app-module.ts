@@ -11,13 +11,17 @@ import { Register } from './components/register/register';
 import { RegistroCultivo } from './components/registro-cultivo/registro-cultivo';
 import { RegistroNoticias } from './components/registro-noticias/registro-noticias';
 import { Header } from './components/header/header';
-import { HttpClientModule } from '@angular/common/http';
+import { RecomendacionesComponent } from './components/recomendaciones/recomendaciones.component';
+import { HttpClientModule, provideHttpClient, withInterceptors } from '@angular/common/http';
 import { MaterialModule } from './modules/material/material-module';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { ParcelaList } from './components/parcelas/parcela-list/parcela-list';
 import { AddEditParcela } from './components/parcelas/add-edit-parcela/add-edit-parcela';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { NgxChartsModule } from '@swimlane/ngx-charts';
+import { autorizacionInterceptor } from './interceptors/autorizacion-interceptor';
+import { provideNativeDateAdapter } from '@angular/material/core';
+
 
 @NgModule({
   declarations: [
@@ -30,6 +34,7 @@ import { NgxChartsModule } from '@swimlane/ngx-charts';
     RegistroCultivo,
     RegistroNoticias,
     Header,
+    RecomendacionesComponent,
     ParcelaList,
     AddEditParcela
   ],
@@ -44,7 +49,12 @@ import { NgxChartsModule } from '@swimlane/ngx-charts';
     BrowserAnimationsModule
   ],
   providers: [
-    provideBrowserGlobalErrorListeners()
+    provideBrowserGlobalErrorListeners(),
+    provideNativeDateAdapter(),
+    provideHttpClient(
+      withInterceptors([autorizacionInterceptor])
+    ),
+    //provideCharts(withDefaultRegisterables())
   ],
   bootstrap: [App]
 })
