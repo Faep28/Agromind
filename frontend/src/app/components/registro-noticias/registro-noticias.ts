@@ -43,7 +43,11 @@ export class RegistroNoticias {
       const fechaISO = fecha ? fecha.toISOString().split('T')[0] : '';
     
       formData.append('fechapublicacion', fechaISO);  // Enviar la fecha en formato 'yyyy-MM-dd'
-      formData.append('imagen', this.noticiaForm.get('imagen')?.value);
+      
+      const imagen = this.noticiaForm.get('imagen')?.value;
+      if (imagen) {
+        formData.append('imagen', imagen);
+      }
 
       this.noticiaService.new(formData).subscribe({
         next: (data) => {
@@ -54,13 +58,23 @@ export class RegistroNoticias {
             duration: 3000, // Duración del mensaje (en milisegundos)
           });
 
-          // Aquí puedes agregar cualquier otra lógica que necesites
-          // Ejemplo: limpiar el formulario, cargar las noticias, etc.
-          this.noticiaForm.reset();  // Limpiar formulario
+          // Limpiar el formulario completamente
+          this.noticiaForm.reset();
+          
+          // Limpiar el input file manualmente (reset no limpia los input file)
+          const fileInput = document.querySelector('input[type="file"]') as HTMLInputElement;
+          if (fileInput) {
+            fileInput.value = '';
+          }
+          
           this.loadNoticias();       // Recargar lista de noticias
+          this.noticiaService.notificarCambios(); // Notificar a otros componentes
         },
         error: (err) => {
           console.error('Error al crear la noticia:', err);
+          this.snack.open('Error al crear la noticia. Intenta de nuevo.', 'Cerrar', {
+            duration: 3000,
+          });
         }
       });
     }
@@ -90,6 +104,7 @@ export class RegistroNoticias {
         next: () => {
           this.noticias = this.noticias.filter((noticia) => noticia.id !== id); // Actualiza la lista localmente
           alert('Noticia eliminada correctamente');
+          this.noticiaService.notificarCambios(); // Notificar a otros componentes
         },
         error: (err) => {
           console.error('Error al eliminar la noticia', err);
@@ -101,7 +116,12 @@ export class RegistroNoticias {
   // Método para manejar el cambio de archivo en el input
   onFileChange(event: any) {
     const file = event.target.files[0]; // Obtén el primer archivo
-    this.noticiaForm.get('imagen')?.setValue(file); // Establece el archivo en el campo del formulario
+    if (file) {
+      // No usar setValue con input file, solo guardar el archivo
+      // El formulario control 'imagen' almacenará la referencia al archivo
+      this.noticiaForm.get('imagen')?.patchValue(file, { emitEvent: false });
+      this.noticiaForm.get('imagen')?.markAsTouched();
+    }
   }
 
 

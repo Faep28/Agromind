@@ -1,17 +1,18 @@
 import { Component } from '@angular/core';
 import { Router } from '@angular/router';
+import { UserService } from '../../services/user-service';
 
 @Component({
   selector: 'app-home',
   standalone: false,
   templateUrl: './home.html',
-  styleUrl: './home.css',
+  styleUrls: ['./home.css'],
 })
 export class Home {
 
   // como traeriamos los datos?
   // simulando datos, luego quitarlos
-  username: string = '<Nombre de Prueba>';  // obtener de servicio.
+  username: string = '';  // obtener de servicio.
   weatherSummary: string = 'Soleado, 28°C, sin lluvias por los próximos 3 días';
   irrigationRecommendation: string = 'Riego recomendado para mañana por 30 minutos.';
   cropStatus: string = 'Cultivo de maíz en buen estado. Requiere fertilización en 3 días.';
@@ -24,10 +25,20 @@ export class Home {
 
   showNotifications: boolean = false;
 
-  constructor(private router: Router) { }
+  constructor(private router: Router, private userService: UserService) { }
 
   ngOnInit() {
-    
+    // Intentar obtener el nombre del usuario desde el token JWT (si está disponible)
+    const token = this.userService.getToken();
+    if (token) {
+      try {
+        const payload = JSON.parse(atob(token.split('.')[1]));
+        // Los campos pueden variar según el backend: pruebe 'name', 'sub', 'username', etc.
+        this.username = payload.name || payload.sub || payload.username || '';
+      } catch (e) {
+        console.warn('No se pudo decodificar el token para obtener el nombre', e);
+      }
+    }
   }
 
   markAsRead(alert: any) {

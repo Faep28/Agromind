@@ -1,9 +1,10 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { User } from '../models/user';
-import { TokenDTO } from '../models/tokenDTO';
+
 import { tap } from 'rxjs';
-import { UserDTO } from '../models/userDTO';
+import { UserDto } from '../models/user-dto';
+import { TokenDto } from '../models/token-dto';
 
 @Injectable({
   providedIn: 'root',
@@ -18,8 +19,8 @@ export class UserService {
 
   // Método de login
   login(user: User) {
-    return this.http.post<TokenDTO>(this.ruta_servidor + "/login", user).pipe(
-      tap((respuesta: TokenDTO) => {
+    return this.http.post<TokenDto>(this.ruta_servidor + "/login", user).pipe(
+      tap((respuesta: TokenDto) => {
         localStorage.setItem("jwtToken", respuesta.jwtToken);
         localStorage.setItem("user_id", respuesta.id.toString());
         localStorage.setItem("authorities", respuesta.authorities);
@@ -27,8 +28,8 @@ export class UserService {
     );
   }
 
-  register(newUser:UserDTO) {
-    return this.http.post<UserDTO>(this.ruta_servidor + "/register", newUser);
+  register(newUser:UserDto) {
+    return this.http.post<UserDto>(this.ruta_servidor + "/register", newUser);
   }
 
    // Método de logout

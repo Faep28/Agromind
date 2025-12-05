@@ -103,4 +103,9 @@ export class ParcelaList implements AfterViewInit {
       error: (err) => console.error('Error al eliminar parcela:', err)
     });
   }
+
+  editParcela(id: number): void {
+    // Navegar al formulario de agregar/editar pasando el id como query param
+    this.router.navigate(['/parcelas-add'], { queryParams: { id } });
+  }
 }

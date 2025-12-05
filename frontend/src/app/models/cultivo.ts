@@ -1,4 +1,5 @@
 export interface Cultivo {
+
     id: number;
     nombre: string;
     descripcion: string;

@@ -1,5 +1,6 @@
 export interface Notificacion {
-    id: number;
+
+     id: number;
     titulo: string;
     mensaje: string;
     fechaEnvio: string;   // LocalDateTime llega como string en el JSON
