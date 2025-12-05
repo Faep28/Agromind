@@ -66,5 +66,9 @@ public class CultivoServiceImpl implements CultivoService {
         return cultivoRepository.findByParcelaId(parcelaId); // Llama al método del repositorio
     }
 
+    @Override
+    public Cultivo findById(Long id) {
+        return cultivoRepository.findById(id).orElse(null);
+    }
 
 }
