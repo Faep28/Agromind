@@ -1,6 +1,7 @@
 import { Component, ViewChild, AfterViewInit, OnInit } from '@angular/core';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatTableDataSource } from '@angular/material/table';
+import { MatSnackBar } from '@angular/material/snack-bar';
 import { HttpClient } from '@angular/common/http';
 import { ActivatedRoute } from '@angular/router';
 
@@ -35,7 +36,12 @@ export class Cultivos implements OnInit {
 
   estadisticasPorParcela: Array<{ parcelaId: number; cantidad: number }> = [];
 
-  constructor(private http: HttpClient, private route: ActivatedRoute, private cultivoService: CultivoService) {}
+  constructor(
+    private http: HttpClient, 
+    private route: ActivatedRoute, 
+    private cultivoService: CultivoService,
+    private snackBar: MatSnackBar
+  ) {}
 
   ngOnInit(): void {
     this.route.queryParams.subscribe(params => {
@@ -74,11 +80,17 @@ export class Cultivos implements OnInit {
   }
 
   deleteCultivo(id: number): void {
-    if (!confirm('¿Eliminar cultivo?')) return;
-    // Llamada al servicio para eliminar
+    if (!confirm('¿Está seguro de que desea eliminar este cultivo?')) return;
+    
     this.cultivoService.delete(id).subscribe({
-      next: () => this.loadCultivos(),
-      error: (err) => console.error('Error al eliminar cultivo:', err)
+      next: () => {
+        this.snackBar.open('Cultivo eliminado correctamente', 'OK', { duration: 3000 });
+        this.loadCultivos();
+      },
+      error: (err) => {
+        console.error('Error al eliminar cultivo:', err);
+        this.snackBar.open('Error al eliminar el cultivo', 'OK', { duration: 4000 });
+      }
     });
   }
 
