@@ -5,6 +5,7 @@ import { HttpClient } from '@angular/common/http';
 import { ActivatedRoute } from '@angular/router';
 
 import { Cultivo } from '../../models/cultivo';
+import { CultivoService } from '../../services/cultivo-service';
 
 @Component({
   selector: 'app-cultivos',
@@ -32,7 +33,9 @@ export class Cultivos implements AfterViewInit {
 
   parcelaId: number | null = null;
 
-  constructor(private http: HttpClient, private route: ActivatedRoute) {}
+  estadisticasPorParcela: Array<{ parcelaId: number; cantidad: number }> = [];
+
+  constructor(private http: HttpClient, private route: ActivatedRoute, private cultivoService: CultivoService) {}
 
   ngAfterViewInit(): void {
     // Leer query param parcelaId
@@ -44,21 +47,30 @@ export class Cultivos implements AfterViewInit {
   }
 
   loadCultivos(): void {
-    // Llamada al backend para obtener lista de cultivos y filtrar por parcelaId
-    // Ajusta la URL si tu backend expone otra ruta
-    this.http.get<Cultivo[]>('/api/cultivos/list').subscribe({
-      next: (data) => {
-        if (this.parcelaId) {
-          this.dsCultivos.data = data.filter(c => c.parcelaId === this.parcelaId);
-        } else {
+    // Si hay parcelaId, usar endpoint específico /parcela/{id}; si no, listar todos
+    if (this.parcelaId) {
+      this.cultivoService.getByParcela(this.parcelaId).subscribe({
+        next: (data) => {
           this.dsCultivos.data = data;
+          this.dsCultivos.paginator = this.paginator;
+        },
+        error: (err) => {
+          // Si no hay contenido (204) o falla, dejar arreglo vacío y loguear
+          console.error('Error al obtener cultivos por parcela:', err);
+          this.dsCultivos.data = [];
         }
-        this.dsCultivos.paginator = this.paginator;
-      },
-      error: (err) => {
-        console.error('Error al obtener cultivos:', err);
-      }
-    });
+      });
+    } else {
+      this.cultivoService.listAll().subscribe({
+        next: (data) => {
+          this.dsCultivos.data = data;
+          this.dsCultivos.paginator = this.paginator;
+        },
+        error: (err) => {
+          console.error('Error al obtener cultivos:', err);
+        }
+      });
+    }
   }
 
   applyFilter(event: Event): void {
@@ -73,7 +85,21 @@ export class Cultivos implements AfterViewInit {
 
   deleteCultivo(id: number): void {
     if (!confirm('¿Eliminar cultivo?')) return;
-    // Implementa llamada DELETE si tu API lo soporta
-    console.log('Eliminar cultivo', id);
+    // Llamada al servicio para eliminar
+    this.cultivoService.delete(id).subscribe({
+      next: () => this.loadCultivos(),
+      error: (err) => console.error('Error al eliminar cultivo:', err)
+    });
+  }
+
+  // Obtener estadísticas (delegado al servicio)
+  loadEstadisticasPorParcela(): void {
+    this.cultivoService.estadisticasPorParcela().subscribe({
+      next: (data) => {
+        // data es lista de arrays [parcelaId, cantidad]
+        this.estadisticasPorParcela = data.map((item: any) => ({ parcelaId: Number(item[0]), cantidad: Number(item[1]) }));
+      },
+      error: (err) => console.error('Error al cargar estadisticas:', err)
+    });
   }
 }

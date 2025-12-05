@@ -3,6 +3,7 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { Router } from '@angular/router';
 import { HttpClient } from '@angular/common/http';
+import { CultivoService } from '../../services/cultivo-service';
 import { Cultivo } from '../../models/cultivo';
 
 @Component({
@@ -18,7 +19,8 @@ export class RegistroCultivo {
     private fb: FormBuilder,
     private http: HttpClient,
     private snack: MatSnackBar,
-    private router: Router
+    private router: Router,
+    private cultivoService: CultivoService
   ) {}
 
   ngOnInit() {
@@ -53,8 +55,9 @@ export class RegistroCultivo {
       parcelaId: this.cultivoForm.value.parcelaId,
     };
 
-    // Intentamos enviar al endpoint de cultivos; ajustar URL si es necesario
-    this.http.post('/api/cultivos', cultivo).subscribe({
+    // Usar servicio: el backend espera POST /api/cultivos/insert/{parcelaId}
+    const parcelaId = this.cultivoForm.value.parcelaId;
+    this.cultivoService.createForParcela(parcelaId, cultivo).subscribe({
       next: (res) => {
         this.snack.open('Cultivo registrado correctamente', 'OK', { duration: 4000 });
         this.router.navigate(['/home']);
