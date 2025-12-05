@@ -3,7 +3,7 @@ import { MatPaginator } from '@angular/material/paginator';
 import { MatTableDataSource } from '@angular/material/table';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { HttpClient } from '@angular/common/http';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 
 import { Cultivo } from '../../models/cultivo';
 import { CultivoService } from '../../services/cultivo-service';
@@ -38,7 +38,8 @@ export class Cultivos implements OnInit {
 
   constructor(
     private http: HttpClient, 
-    private route: ActivatedRoute, 
+    private route: ActivatedRoute,
+    private router: Router,
     private cultivoService: CultivoService,
     private snackBar: MatSnackBar
   ) {}
@@ -74,9 +75,11 @@ export class Cultivos implements OnInit {
     this.dsCultivos.filter = filterValue.trim().toLowerCase();
   }
 
-  // métodos placeholder para editar/eliminar
   editCultivo(id: number): void {
-    console.log('Editar cultivo', id);
+    // Navegar a registro-cultivo con parcelaId y cultivoId
+    this.router.navigate(['/registro-cultivo'], { 
+      queryParams: { parcelaId: this.parcelaId, cultivoId: id } 
+    });
   }
 
   deleteCultivo(id: number): void {
