@@ -1,0 +1,58 @@
+<div class="main-content">
+    <h2>Sistema de Recomendaciones</h2>
+
+    <div class="selector-section">
+        <label for="cultivo-select">Seleccione un tipo de cultivo:</label>
+        <select id="cultivo-select" [(ngModel)]="cultivoSeleccionadoId">
+            <option [ngValue]="null" disabled>-- Seleccione Cultivo --</option>
+            <option *ngFor="let cultivo of cultivos" [ngValue]="cultivo.id">
+                {{ cultivo.nombre }}
+            </option>
+        </select>
+        
+        <label for="servicio-select" style="margin-left: 20px;">Seleccione el Servicio:</label>
+        <select id="servicio-select" [(ngModel)]="servicioSeleccionadoId">
+            <option [ngValue]="null" disabled>-- Seleccione Servicio --</option>
+            <option *ngFor="let servicio of serviciosDisponibles" [ngValue]="servicio.id">
+                {{ servicio.nombre }}
+            </option>
+        </select>
+
+        <button (click)="obtenerRecomendaciones()" 
+                [disabled]="!cultivoSeleccionadoId || !servicioSeleccionadoId" 
+                style="margin-left: 20px;">
+            Obtener Tareas Recomendadas
+        </button>
+    </div>
+
+    <div *ngIf="mensajeError" style="color: red; margin-top: 10px;">
+        {{ mensajeError }}
+    </div>
+
+    <hr>
+    
+    <div class="recomendaciones-especificas" *ngIf="tareasRecomendadas">
+        <h3>Recomendación para el Cultivo Seleccionado</h3>
+        <div class="recomendacion-card">
+            <pre class="tarea-texto">{{ tareasRecomendadas }}</pre>
+        </div>
+    </div>
+
+    <hr *ngIf="tareasRecomendadas">
+
+    <h3>Tips para tu cultivo diario</h3>
+    <div class="tips-diarios-container">
+        <div class="tip-card">
+            <h4>💡 Riega tus plantas al amanecer</h4>
+            <p>Evita la evaporación rápida y mejora la absorción del agua.</p>
+        </div>
+        <div class="tip-card">
+            <h4>💡 Utiliza compost orgánico regularmente</h4>
+            <p>Enriquece el suelo con nutrientes esenciales sin químicos.</p>
+        </div>
+        <div class="tip-card">
+            <h4>💡 Asocia cultivos compatibles</h4>
+            <p>Plantar albahaca junto a tomates repele plagas de forma natural.</p>
+        </div>
+    </div>
+</div>
