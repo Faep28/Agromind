@@ -27,7 +27,7 @@ import { AddEditParcela } from './components/parcelas/add-edit-parcela/add-edit-
     Header,
     LandingPage,
     Register
-    ,RegistroCultivo, RegistroNoticias, ParcelaList, Cultivos 
+    ,RegistroCultivo, RegistroNoticias, ParcelaList, Cultivos, AddEditParcela 
   ],
   imports: [
     BrowserModule,
