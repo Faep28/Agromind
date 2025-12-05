@@ -14,6 +14,11 @@
   Agregar Parcela
 </button>
 
+<!-- Botón ir a cultivos: habilitado solo si hay una parcela seleccionada (estilo fijo) -->
+<button class="go-cultivos-button" mat-raised-button color="accent" [disabled]="!selectedParcelaId" (click)="goToCultivos()">
+  Ir a Cultivos
+</button>
+
 <br><br>
 
 <p>Se muestran {{ dsParcelas.data.length }} parcelas</p>
@@ -25,6 +30,16 @@
   <ng-container matColumnDef="id">
     <th mat-header-cell *matHeaderCellDef> ID </th>
     <td mat-cell *matCellDef="let element"> {{ element.id }} </td>
+  </ng-container>
+
+  <!-- Seleccionar -->
+  <ng-container matColumnDef="seleccionar">
+    <th mat-header-cell *matHeaderCellDef> </th>
+    <td mat-cell *matCellDef="let element">
+      <button mat-button color="primary" (click)="selectParcela(element)" [disabled]="selectedParcelaId===element.id">
+        {{ selectedParcelaId===element.id ? 'Seleccionada' : 'Seleccionar' }}
+      </button>
+    </td>
   </ng-container>
 
   <!-- Nombre -->
@@ -74,7 +89,7 @@
 
   <!-- Filas -->
   <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
-  <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+  <tr mat-row *matRowDef="let row; columns: displayedColumns;" [class.selected]="selectedParcelaId===row.id"></tr>
 
 </table>
 
