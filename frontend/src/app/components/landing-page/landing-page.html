@@ -1,0 +1,95 @@
+<h2>Ejemplo simple con NgxCharts Para prob</h2>
+<h3> Material tmb</h3>
+
+
+<!-- Card 1 -->
+<mat-card class="action-card">
+  <mat-card-header>
+    <mat-card-title>Card 1</mat-card-title>
+  </mat-card-header>
+  <mat-card-content>
+    <button mat-raised-button color="primary">Acción 1</button>
+  </mat-card-content>
+</mat-card>
+
+<!-- Card 2 -->
+<mat-card class="action-card">
+  <mat-card-header>
+    <mat-card-title>Card 2</mat-card-title>
+  </mat-card-header>
+  <mat-card-content>
+    <button mat-raised-button color="accent">Acción 2</button>
+  </mat-card-content>
+</mat-card>
+
+<!-- Card 3 -->
+<mat-card class="action-card">
+  <mat-card-header>
+    <mat-card-title>Card 3</mat-card-title>
+  </mat-card-header>
+  <mat-card-content>
+    <button mat-raised-button color="warn">Acción 3</button>
+  </mat-card-content>
+</mat-card>
+
+<!-- Card 4 -->
+<mat-card class="action-card">
+  <mat-card-header>
+    <mat-card-title>Card 4</mat-card-title>
+  </mat-card-header>
+  <mat-card-content>
+    <button mat-raised-button color="primary">Acción 4</button>
+  </mat-card-content>
+</mat-card>
+
+<!-- Card 5 -->
+<mat-card class="action-card">
+  <mat-card-header>
+    <mat-card-title>Card 5</mat-card-title>
+  </mat-card-header>
+  <mat-card-content>
+    <button mat-raised-button color="accent">Acción 5</button>
+  </mat-card-content>
+</mat-card>
+
+<!-- Card 6 -->
+<mat-card class="action-card">
+  <mat-card-header>
+    <mat-card-title>Card 6</mat-card-title>
+  </mat-card-header>
+  <mat-card-content>
+    <button mat-raised-button color="warn">Acción 6</button>
+  </mat-card-content>
+</mat-card>
+
+<!-- Card 7 -->
+<mat-card class="action-card">
+  <mat-card-header>
+    <mat-card-title>Card 7</mat-card-title>
+  </mat-card-header>
+  <mat-card-content>
+    <button mat-raised-button color="primary">Acción 7</button>
+  </mat-card-content>
+</mat-card>
+
+<!-- Card 8 -->
+<mat-card class="action-card">
+  <mat-card-header>
+    <mat-card-title>Card 8</mat-card-title>
+  </mat-card-header>
+  <mat-card-content>
+    <button mat-raised-button color="accent">Acción 8</button>
+  </mat-card-content>
+</mat-card>
+
+<ngx-charts-bar-vertical
+  [results]="data"
+  [gradient]="false"
+  [xAxis]="true"
+  [yAxis]="true"
+  [legend]="true"
+  [showXAxisLabel]="true"
+  [showYAxisLabel]="true"
+  xAxisLabel="Ciudad"
+  yAxisLabel="Población">
+</ngx-charts-bar-vertical>
