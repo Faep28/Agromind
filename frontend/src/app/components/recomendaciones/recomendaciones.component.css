@@ -1,0 +1,29 @@
+/* Estilos básicos para el componente de recomendaciones */
+.main-content {
+  padding: 16px;
+}
+.selector-section {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-bottom: 12px;
+}
+.recomendacion-card {
+  background: #f9f9f9;
+  padding: 12px;
+  border-radius: 6px;
+}
+.tarea-texto {
+  white-space: pre-wrap;
+}
+.tips-diarios-container {
+  display: flex;
+  gap: 12px;
+  margin-top: 12px;
+}
+.tip-card {
+  background: #fff;
+  padding: 10px;
+  border-radius: 6px;
+  box-shadow: 0 1px 3px rgba(0,0,0,0.08);
+}

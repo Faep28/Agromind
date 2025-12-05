@@ -19,6 +19,7 @@ import { RegistroNoticias } from './components/registro-noticias/registro-notici
 import { ParcelaList } from './components/parcelas/parcela-list/parcela-list';
 import { AddEditParcela } from './components/parcelas/add-edit-parcela/add-edit-parcela';
 import { NgxChartsModule } from '@swimlane/ngx-charts';
+import { RecomendacionesComponent } from './components/recomendaciones/recomendaciones.component'; 
 
 @NgModule({
   declarations: [
@@ -29,6 +30,7 @@ import { NgxChartsModule } from '@swimlane/ngx-charts';
     LandingPage,
     Register
     ,RegistroCultivo, RegistroNoticias, ParcelaList, Cultivos, AddEditParcela
+    ,RecomendacionesComponent
   ],
   imports: [
     BrowserModule,
