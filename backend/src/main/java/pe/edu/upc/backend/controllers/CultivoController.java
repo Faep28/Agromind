@@ -24,6 +24,17 @@ public class CultivoController {
     // --------------------------CRUD----------------------------------------------
     //---------------------------------------------------------------------------------------------------------------
     // Crear un nuevo cultivo asociado a una parcela
+
+    @GetMapping("/parcela/{parcelaId}")
+    public ResponseEntity<List<Cultivo>> getCultivosPorParcela(@PathVariable Long parcelaId) {
+        // Busca los cultivos asociados a la parcela con el ID
+        List<Cultivo> cultivos = cultivoService.findByParcelaId(parcelaId);
+        if (cultivos.isEmpty()) {
+            return new ResponseEntity<>(HttpStatus.NO_CONTENT); // Si no hay cultivos, responde 204
+        }
+        return new ResponseEntity<>(cultivos, HttpStatus.OK); // Si hay cultivos, responde 200
+    }
+
     @PostMapping("/insert/{parcelaId}")   //http://localhost:8080/api/cultivos/insert/{parcelaId}
     public ResponseEntity<Cultivo> add(@PathVariable Long parcelaId, @RequestBody Cultivo cultivo) {
         // Verificar que la parcela asociada existe en la base de datos
