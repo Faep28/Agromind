@@ -15,6 +15,8 @@ import { Cultivo } from '../../models/cultivo';
 export class RegistroCultivo {
   cultivoForm!: FormGroup;
   parcelaId: number | null = null;
+  cultivoId: number | null = null;
+  isEditMode: boolean = false;
 
   constructor(
     private fb: FormBuilder,
@@ -28,14 +30,46 @@ export class RegistroCultivo {
   ngOnInit() {
     this.CargarFormulario();
     
-    // Leer parcelaId de query params y precargarlo
+    // Leer parcelaId y cultivoId de query params
     this.route.queryParams.subscribe(params => {
       const parcelaId = params['parcelaId'];
+      const cultivoId = params['cultivoId'];
+      
       if (parcelaId) {
         this.parcelaId = Number(parcelaId);
         this.cultivoForm.patchValue({ parcelaId: this.parcelaId });
-        // Deshabilitar el campo para que no se pueda modificar
         this.cultivoForm.get('parcelaId')?.disable();
+      }
+      
+      // Si hay cultivoId, estamos editando
+      if (cultivoId) {
+        this.cultivoId = Number(cultivoId);
+        this.isEditMode = true;
+        this.loadCultivoData(this.cultivoId);
+      }
+    });
+  }
+
+  loadCultivoData(id: number): void {
+    // Cargar datos del cultivo usando el servicio
+    this.cultivoService.listAll().subscribe({
+      next: (cultivos) => {
+        const cultivo = cultivos.find(c => c.id === id);
+        if (cultivo) {
+          this.cultivoForm.patchValue({
+            nombre: cultivo.nombre,
+            descripcion: cultivo.descripcion,
+            temporada: cultivo.temporada,
+            fechaSiembra: cultivo.fechaSiembra,
+            fechaCosechaEsperada: cultivo.fechaCosechaEsperada,
+            estado: cultivo.estado,
+            parcelaId: cultivo.parcelaId
+          });
+        }
+      },
+      error: (err) => {
+        console.error('Error al cargar cultivo:', err);
+        this.snack.open('Error al cargar los datos del cultivo', 'OK', { duration: 4000 });
       }
     });
   }
@@ -58,7 +92,6 @@ export class RegistroCultivo {
       return;
     }
 
-    // getRawValue() obtiene valores incluso si están deshabilitados
     const formValues = this.cultivoForm.getRawValue();
     
     const cultivo: Partial<Cultivo> = {
@@ -71,17 +104,32 @@ export class RegistroCultivo {
       parcelaId: formValues.parcelaId,
     };
 
-    // Usar servicio: el backend espera POST /api/cultivos/insert/{parcelaId}
     const parcelaId = formValues.parcelaId;
-    this.cultivoService.createForParcela(parcelaId, cultivo).subscribe({
-      next: (res) => {
-        this.snack.open('Cultivo registrado correctamente', 'OK', { duration: 4000 });
-        this.router.navigate(['/cultivos'], { queryParams: { parcelaId } });
-      },
-      error: (err) => {
-        console.error('Error al crear cultivo', err);
-        this.snack.open('Error al registrar cultivo', 'OK', { duration: 5000 });
-      }
-    });
+
+    if (this.isEditMode && this.cultivoId) {
+      // Modo edición: actualizar cultivo existente
+      this.cultivoService.update(this.cultivoId, cultivo).subscribe({
+        next: (res) => {
+          this.snack.open('Cultivo actualizado correctamente', 'OK', { duration: 4000 });
+          this.router.navigate(['/cultivos'], { queryParams: { parcelaId } });
+        },
+        error: (err) => {
+          console.error('Error al actualizar cultivo', err);
+          this.snack.open('Error al actualizar cultivo', 'OK', { duration: 5000 });
+        }
+      });
+    } else {
+      // Modo creación: crear nuevo cultivo
+      this.cultivoService.createForParcela(parcelaId, cultivo).subscribe({
+        next: (res) => {
+          this.snack.open('Cultivo registrado correctamente', 'OK', { duration: 4000 });
+          this.router.navigate(['/cultivos'], { queryParams: { parcelaId } });
+        },
+        error: (err) => {
+          console.error('Error al crear cultivo', err);
+          this.snack.open('Error al registrar cultivo', 'OK', { duration: 5000 });
+        }
+      });
+    }
   }
 }

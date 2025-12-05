@@ -3,7 +3,7 @@
 </button>
 
 <div class="container">
-  <h2>Registrar Cultivo</h2>
+  <h2>{{ isEditMode ? 'Editar Cultivo' : 'Registrar Cultivo' }}</h2>
 
   <form [formGroup]="cultivoForm" (ngSubmit)="onSubmit()">
     
@@ -55,6 +55,8 @@
       <mat-error *ngIf="cultivoForm.get('parcelaId')?.invalid">El ID de parcela es obligatorio.</mat-error>
     </mat-form-field>
 
-    <button mat-raised-button type="submit" [disabled]="cultivoForm.invalid" class="registrar-btn">Registrar Cultivo</button>
+    <button mat-raised-button type="submit" [disabled]="cultivoForm.invalid" class="registrar-btn">
+      {{ isEditMode ? 'Guardar Cambios' : 'Registrar Cultivo' }}
+    </button>
   </form>
 </div>

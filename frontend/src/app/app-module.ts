@@ -18,6 +18,7 @@ import { Cultivos } from './components/cultivos/cultivos';
 import { RegistroNoticias } from './components/registro-noticias/registro-noticias';
 import { ParcelaList } from './components/parcelas/parcela-list/parcela-list';
 import { AddEditParcela } from './components/parcelas/add-edit-parcela/add-edit-parcela';
+import { NgxChartsModule } from '@swimlane/ngx-charts';
 
 @NgModule({
   declarations: [
@@ -27,7 +28,7 @@ import { AddEditParcela } from './components/parcelas/add-edit-parcela/add-edit-
     Header,
     LandingPage,
     Register
-    ,RegistroCultivo, RegistroNoticias, ParcelaList, Cultivos, AddEditParcela 
+    ,RegistroCultivo, RegistroNoticias, ParcelaList, Cultivos, AddEditParcela
   ],
   imports: [
     BrowserModule,
@@ -35,8 +36,8 @@ import { AddEditParcela } from './components/parcelas/add-edit-parcela/add-edit-
     HttpClientModule,
     FormsModule,
     ReactiveFormsModule,
-    MaterialModule
-    // NgxChartsModule //falta
+    MaterialModule,
+    NgxChartsModule
   ],
   providers: [
     provideBrowserGlobalErrorListeners(),
