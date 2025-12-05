@@ -30,7 +30,7 @@ export class Cultivos implements OnInit {
 
   dsCultivos = new MatTableDataSource<Cultivo>();
 
-  @ViewChild(MatPaginator) paginator!: MatPaginator;
+  @ViewChild(MatPaginator, { static: false }) paginator!: MatPaginator;
 
   parcelaId: number | null = null;
 
@@ -45,28 +45,39 @@ export class Cultivos implements OnInit {
   ) {}
 
   ngOnInit(): void {
+    // Suscribirse a cambios en queryParams para recargar cuando regresamos de editar
     this.route.queryParams.subscribe(params => {
       const id = params['parcelaId'];
       this.parcelaId = id ? Number(id) : null;
-      this.loadCultivos();
-    });
-  }
-
-  loadCultivos(): void {
-  if (this.parcelaId) {
-    this.cultivoService.getByParcela(this.parcelaId).subscribe({
-      next: (data) => {
-        console.log('Datos recibidos:', data);  // Agregar esta línea para inspeccionar los datos
-        this.dsCultivos.data = data;
-        this.dsCultivos.paginator = this.paginator;
-      },
-      error: (err) => {
-        console.error('Error al obtener cultivos por parcela:', err);
-        this.dsCultivos.data = [];
+      if (this.parcelaId) {
+        this.loadCultivos();
       }
     });
   }
-}
+
+  ngAfterViewInit(): void {
+    // Asignar paginator después de que la vista esté inicializada
+    this.dsCultivos.paginator = this.paginator;
+  }
+
+  loadCultivos(): void {
+    if (this.parcelaId) {
+      this.cultivoService.getByParcela(this.parcelaId).subscribe({
+        next: (data) => {
+          console.log('Datos recibidos:', data);
+          this.dsCultivos.data = data || [];
+          // Asegurar que el paginator se asigne después de que los datos estén listos
+          setTimeout(() => {
+            this.dsCultivos.paginator = this.paginator;
+          });
+        },
+        error: (err) => {
+          console.error('Error al obtener cultivos por parcela:', err);
+          this.dsCultivos.data = [];
+        }
+      });
+    }
+  }
 
 
 
