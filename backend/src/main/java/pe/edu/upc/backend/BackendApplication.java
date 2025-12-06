@@ -45,6 +45,7 @@ public class BackendApplication {
             Authority adminRole  = authorityService.add(new Authority(null, "ROLE_ADMIN", null));
             Authority userRole   = authorityService.add(new Authority(null, "ROLE_USER", null));
 
+
             // ==== Creacion de usuarios ====
             UserDTO userJuan  = new UserDTO(null, "juanperez", "admin123", "juan.perez@example.com", "ROLE_ADMIN", null );
             UserDTO userMaria = new UserDTO(null, "marialopez", "user123", "maria.lopez@example.com", "ROLE_USER", null);
