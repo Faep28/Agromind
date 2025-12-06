@@ -116,7 +116,7 @@ export class ParcelaList implements AfterViewInit {
       if (err.status === 400) {
         alert('No se puede eliminar la parcela. Verifica si tiene cultivos asociados.');
       } else if (err.status === 401 || err.status === 403) {
-        alert('No autorizado. Revisa tu sesión o token.');
+        alert('No se puede eliminar porque tiene datos asociados (FK).');
       } else {
         alert('Error al eliminar parcela: ' + (err.error?.message || err.message || 'Error desconocido'));
       }
