@@ -10,4 +10,5 @@ public interface SolicitudServicioService {
     List<SolicitudServicio> findAll();
     SolicitudServicio edit(Long id, SolicitudServicio solicitudServicio);
     void deleteById(Long id);
+    List<SolicitudServicio> findByCultivoId(Long cultivoId);
 }
