@@ -5,13 +5,14 @@ import { User } from '../models/user';
 import { tap } from 'rxjs';
 import { UserDto } from '../models/user-dto';
 import { TokenDto } from '../models/token-dto';
+import { environment } from '../../environments/environment';
 
 @Injectable({
   providedIn: 'root',
 })
 export class UserService {
 
-  ruta_servidor:string = "http://localhost:8080/api/users";
+  private apiUrl = `${environment.apiUrl}/users"`;
   recurso:string ="users";
 
   constructor(private http:HttpClient){}
@@ -19,7 +20,7 @@ export class UserService {
 
   // Método de login
   login(user: User) {
-    return this.http.post<TokenDto>(this.ruta_servidor + "/login", user).pipe(
+    return this.http.post<TokenDto>(this.apiUrl + "/login", user).pipe(
       tap((respuesta: TokenDto) => {
         localStorage.setItem("jwtToken", respuesta.jwtToken);
         localStorage.setItem("user_id", respuesta.id.toString());
@@ -29,7 +30,7 @@ export class UserService {
   }
 
   register(newUser:UserDto) {
-    return this.http.post<UserDto>(this.ruta_servidor + "/register", newUser);
+    return this.http.post<UserDto>(this.apiUrl + "/register", newUser);
   }
 
    // Método de logout

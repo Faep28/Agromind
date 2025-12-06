@@ -3,13 +3,14 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { Parcela } from '../models/parcela';
 import { UserService } from './user-service';
+import { environment } from '../../environments/environment';
 
 @Injectable({
   providedIn: 'root'
 })
 export class ParcelaService {
 
-  private apiUrl = "http://localhost:8080/api/parcelas";
+  private apiUrl = `${environment.apiUrl}/parcelas`;
 
   constructor(private http: HttpClient, private userService: UserService) {}
 
