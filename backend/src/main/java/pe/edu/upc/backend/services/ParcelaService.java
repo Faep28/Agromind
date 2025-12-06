@@ -14,4 +14,6 @@ public interface ParcelaService {
     // JPQL Query 3
     List<Object[]> obtenerTotalParcelasYCultivosPorCliente(Long clienteId);
     List<Parcela> findByClienteId(Long clienteId);
+
+    Parcela findById(Long id);
 }

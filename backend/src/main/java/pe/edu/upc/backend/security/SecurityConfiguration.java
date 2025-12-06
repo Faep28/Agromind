@@ -91,7 +91,7 @@ public class SecurityConfiguration {
                         .requestMatchers(HttpMethod.PUT,"/api/cultivos/**").hasAnyAuthority("ROLE_ADMIN","ROLE_ASSIST")
                         .requestMatchers(HttpMethod.POST,"/api/cultivos/**").hasAnyAuthority("ROLE_ADMIN")
                         .requestMatchers(HttpMethod.DELETE,"/api/cultivos/**").hasAnyAuthority("ROLE_ADMIN")
-
+                        .requestMatchers(HttpMethod.PUT,"/api/parcelas/**").hasAnyAuthority("ROLE_ADMIN", "ROLE_USER")
                         .anyRequest().authenticated()
 
         );

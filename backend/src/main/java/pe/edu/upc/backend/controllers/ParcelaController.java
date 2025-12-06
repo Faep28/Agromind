@@ -47,8 +47,8 @@ public class ParcelaController {
     }
 
     // Actualizar una parcela
-    @PutMapping("/update/{id}")  //http://localhost:8080/api/parcelas/update/{id}
-    public ResponseEntity<Parcela> updateParcela(@PathVariable Long id, @RequestBody Parcela parcelaDetails) {
+    @PutMapping("/updates/{id}")  //http://localhost:8080/api/parcelas/update/{id}
+    public ResponseEntity<Parcela> updateParcelas(@PathVariable Long id, @RequestBody Parcela parcelaDetails) {
         parcelaDetails.setId(id);  // Establecemos el ID de la parcela desde la URL
         Parcela updatedParcela = parcelaService.edit(parcelaDetails);
         if (updatedParcela != null) {
@@ -57,6 +57,30 @@ public class ParcelaController {
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);  // Si la parcela no fue encontrada
         }
     }
+
+    //Actualizar parcela
+    @PutMapping("/update/{id}")
+    public ResponseEntity<Parcela> updateParcela(
+            @PathVariable Long id,
+            @RequestBody Parcela parcelaDetails
+    ) {
+        Parcela existing = parcelaService.findById(id);
+
+        if (existing == null) {
+            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+        }
+
+        existing.setNombre(parcelaDetails.getNombre());
+        existing.setLongitud(parcelaDetails.getLongitud());
+        existing.setLatitud(parcelaDetails.getLatitud());
+        existing.setTamano(parcelaDetails.getTamano());
+        // cliente NO se toca, se mantiene
+
+        Parcela updated = parcelaService.edit(existing);
+        return new ResponseEntity<>(updated, HttpStatus.OK);
+    }
+
+
 
     // Eliminar una parcela
     @DeleteMapping("/delete/{id}") //http://localhost:8080/api/parcelas/delete/{id}
