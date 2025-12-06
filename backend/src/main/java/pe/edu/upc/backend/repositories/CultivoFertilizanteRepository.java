@@ -19,4 +19,7 @@ public interface CultivoFertilizanteRepository extends JpaRepository<CultivoFert
             "LIMIT 5", nativeQuery = true)
     List<Object[]> findTop5FertilizantesMasUsados();
 
+    List<CultivoFertilizante> findByCultivoId(Long cultivoId);
+    List<CultivoFertilizante> findByCultivoIdAndFertilizanteId(Long cultivoId, Long fertilizanteId);
+
 }

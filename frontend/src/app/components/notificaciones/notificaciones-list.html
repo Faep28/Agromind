@@ -1,0 +1,22 @@
+<div class="notificaciones-container">
+  <h2>Notificaciones</h2>
+
+  <div class="info">Mostrando: {{ notificaciones.length }} notificación(es)</div>
+  <div *ngIf="notificaciones.length === 0">No hay notificaciones.</div>
+
+  <div class="notificacion" *ngFor="let n of notificaciones">
+    <div class="meta">
+      <strong>{{n.titulo}}</strong>
+      <span class="fecha">{{n.fechaEnvio}}</span>
+    </div>
+    <div class="mensaje">{{n.mensaje}}</div>
+    <div class="acciones">
+      <button *ngIf="!n.esLeido" mat-button color="primary" (click)="marcarComoLeida(n)">Marcar como leída</button>
+      <button mat-button color="warn" (click)="eliminar(n)">Eliminar</button>
+    </div>
+  </div>
+
+  <div class="volver">
+    <button mat-stroked-button (click)="volver()">Volver</button>
+  </div>
+</div>

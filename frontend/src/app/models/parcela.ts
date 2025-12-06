@@ -6,3 +6,4 @@ export interface Parcela {
     latitud: number;
     tamano: number;
 }
+
