@@ -17,7 +17,6 @@ import pe.edu.upc.backend.services.UserService;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Arrays;
-import java.util.List;
 
 @Service
 public class UserServiceImpl implements UserService {
