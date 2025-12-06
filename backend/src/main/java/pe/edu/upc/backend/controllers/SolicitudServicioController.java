@@ -4,6 +4,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import pe.edu.upc.backend.dtos.SolicitudServicioResponseDTO;
 import pe.edu.upc.backend.entities.SolicitudServicio;
 import pe.edu.upc.backend.services.SolicitudServicioService;
 
@@ -48,4 +49,33 @@ public class SolicitudServicioController {
         solicitudServicioService.deleteById(id);
         return new ResponseEntity<>(HttpStatus.NO_CONTENT);  // 204 No Content indica que la eliminación fue exitosa
     }
+
+    // POST /api/solicitudes-servicios/servicio/{servicioId}/cultivo/{cultivoId}
+    @PostMapping("/servicio/{servicioId}/cultivo/{cultivoId}")
+    public ResponseEntity<SolicitudServicioResponseDTO> createSolicitud(
+            @PathVariable Long servicioId,
+            @PathVariable Long cultivoId,
+            @RequestBody SolicitudServicio solicitudDetails) {
+        try {
+            // 1. Crear la Solicitud, que devuelve la entidad con el Servicio asociado
+            SolicitudServicio newSolicitud = solicitudServicioService.add(servicioId, cultivoId, solicitudDetails);
+
+            // 2. Construir el DTO de respuesta con la información clave
+            SolicitudServicioResponseDTO responseDTO = new SolicitudServicioResponseDTO(
+                    newSolicitud.getId(),
+                    newSolicitud.getFechaSolicitud(),
+                    newSolicitud.getEstado(),
+                    newSolicitud.getCultivo().getNombre(),
+                    newSolicitud.getServicio().getNombre(),
+                    newSolicitud.getServicio().getTareasRecomendadas() // Tareas recomendadas!
+            );
+
+            return new ResponseEntity<>(responseDTO, HttpStatus.CREATED);
+
+        } catch (RuntimeException e) {
+            // Error si el Servicio o Cultivo no se encuentran
+            return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+        }
+    }
+
 }
