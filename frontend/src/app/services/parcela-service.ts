@@ -33,7 +33,7 @@ export class ParcelaService {
   update(id: number, parcela: Parcela): Observable<Parcela> {
     return this.http.put<Parcela>(`${this.apiUrl}/update/${id}`, parcela);
   }
-
+ 
   // Eliminar parcela
   delete(id: number): Observable<void> {
     return this.http.delete<void>(`${this.apiUrl}/delete/${id}`);

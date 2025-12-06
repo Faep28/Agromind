@@ -46,18 +46,6 @@ public class ParcelaController {
         return parcelaService.findAll();  // Llamamos al servicio para obtener todas las parcelas
     }
 
-    // Actualizar una parcela
-    @PutMapping("/updates/{id}")  //http://localhost:8080/api/parcelas/update/{id}
-    public ResponseEntity<Parcela> updateParcelas(@PathVariable Long id, @RequestBody Parcela parcelaDetails) {
-        parcelaDetails.setId(id);  // Establecemos el ID de la parcela desde la URL
-        Parcela updatedParcela = parcelaService.edit(parcelaDetails);
-        if (updatedParcela != null) {
-            return new ResponseEntity<>(updatedParcela, HttpStatus.OK);  // Si la actualización es exitosa
-        } else {
-            return new ResponseEntity<>(HttpStatus.NOT_FOUND);  // Si la parcela no fue encontrada
-        }
-    }
-
     //Actualizar parcela
     @PutMapping("/update/{id}")
     public ResponseEntity<Parcela> updateParcela(
