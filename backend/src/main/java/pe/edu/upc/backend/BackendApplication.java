@@ -196,13 +196,14 @@ public class BackendApplication {
             noticiasRepository.save(noticia2);
             noticiasRepository.save(noticia3);
 
-/*
+
             // 13. Crear notificaciones y asociarlas a los usuarios
-            Notificacion notificacion1 = new Notificacion(null, "Nuevo mantenimiento programado", "El mantenimiento de equipos será el 20 de octubre.", LocalDateTime.now(), false, "Mantenimiento", juanPerezUser);
-            Notificacion notificacion2 = new Notificacion(null, "Nueva actualización en la plataforma", "La plataforma se actualizará el 25 de octubre con nuevas funciones.", LocalDateTime.now(), false, "Actualización", mariaLopezUser);
-            Notificacion notificacion3 = new Notificacion(null, "Fertilización programada", "Recuerda que la fertilización de tu parcela es el 15 de octubre.", LocalDateTime.now(), false, "Fertilización", carlosGarciaUser);
-            Notificacion notificacion4 = new Notificacion(null, "Nueva plaga detectada", "Se detectó una plaga en tu cultivo de tomate. Contáctanos para asesoría.", LocalDateTime.now(), false, "Plaga", luisMartinezUser);
-            Notificacion notificacion5 = new Notificacion(null, "Aviso importante", "Las lluvias de esta semana pueden afectar tu cultivo. Revisa tus sistemas de drenaje.", LocalDateTime.now(), false, "Clima", pedroLopezUser);
+            Notificacion notificacion1 = new Notificacion(null, "Nuevo mantenimiento programado", "El mantenimiento de equipos será el 20 de octubre.", LocalDateTime.now(), false, "Mantenimiento", juan);
+            Notificacion notificacion2 = new Notificacion(null, "Nueva actualización en la plataforma", "La plataforma se actualizará el 25 de octubre con nuevas funciones.", LocalDateTime.now(), false, "Actualización", juan);
+            Notificacion notificacion3 = new Notificacion(null, "Fertilización programada", "Recuerda que la fertilización de tu parcela es el 15 de octubre.", LocalDateTime.now(), false, "Fertilización", juan);
+            Notificacion notificacion4 = new Notificacion(null, "Nueva plaga detectada", "Se detectó una plaga en tu cultivo de tomate. Contáctanos para asesoría.", LocalDateTime.now(), false, "Plaga", carlos);
+            Notificacion notificacion5 = new Notificacion(null, "Aviso importante", "Las lluvias de esta semana pueden afectar tu cultivo. Revisa tus sistemas de drenaje.", LocalDateTime.now(), false, "Clima", carlos);
+
 
 // Guardar notificaciones
             notificacionRepository.save(notificacion1);
@@ -210,7 +211,7 @@ public class BackendApplication {
             notificacionRepository.save(notificacion3);
             notificacionRepository.save(notificacion4);
             notificacionRepository.save(notificacion5);
-
+/*
             // 🔔 Notificaciones adicionales (variadas por usuario)
 // Usuario: Juan Perez
             Notificacion n6 = new Notificacion(null, "Aviso de fertilización", "Recuerda aplicar fertilizante Nitrofoska mañana.", LocalDateTime.now().minusDays(2), false, "Fertilizante", juanPerezUser);
