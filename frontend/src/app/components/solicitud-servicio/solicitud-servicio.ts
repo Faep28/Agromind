@@ -22,6 +22,7 @@ export class SolicitudServicio implements OnInit, AfterViewInit {
 
   cultivos: Cultivo[] = [];
   servicios: Servicio[] = [];
+  cultivoFiltroId: number | null = null;
 
   // Campos del formulario (template-driven)
   cultivoId: number | null = null;
@@ -156,5 +157,30 @@ export class SolicitudServicio implements OnInit, AfterViewInit {
     const s = this.servicios.find(x => x.id === id);
     return s ? s.nombre : `#${id}`;
   }
+
+  filtrarPorCultivo(): void {
+  if (!this.cultivoFiltroId) {
+    this.loadSolicitudes();
+    return;
+  }
+
+  this.solicitudService.listByCultivo(this.cultivoFiltroId).subscribe({
+    next: (data: any[]) => {
+      const mapped = (data || []).map((item: any) => {
+        const cultivoId = item.cultivoId ?? item.cultivo?.id ?? null;
+        const servicioId = item.servicioId ?? item.servicio?.id ?? null;
+        const fecha = item.fechaSolicitud;
+        return { ...item, cultivoId, servicioId, fechaSolicitud: fecha };
+      });
+
+      this.solicitudes = mapped;
+      this.dataSource.data = mapped;
+    },
+    error: err => {
+      console.error('Error listando por cultivo:', err);
+      this.dataSource.data = [];
+    }
+  });
+}
 
 }

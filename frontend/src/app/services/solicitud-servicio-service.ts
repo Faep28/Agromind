@@ -21,4 +21,10 @@ export class SolicitudServicioService {
   createForServicioAndCultivo(servicioId: number, cultivoId: number, payload: Partial<SolicitudServicio>) {
     return this.http.post(`${this.base}/insert/${servicioId}/${cultivoId}`, payload);
   }
+
+  // Listar solicitudes por cultivo
+  listByCultivo(cultivoId: number): Observable<SolicitudServicio[]> {
+  return this.http.get<SolicitudServicio[]>(`${this.base}/cultivo/${cultivoId}`);
+}
+
 }
