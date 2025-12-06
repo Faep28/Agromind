@@ -7,5 +7,6 @@ export interface Cultivo {
     fechaSiembra: string;           
     fechaCosechaEsperada: string;   
     estado: string;
-    parcelaId: number;
+    parcelaId?: number;
+    parcela?: { id: number };
 }

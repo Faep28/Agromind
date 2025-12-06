@@ -8,6 +8,8 @@ import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
+import { MatCardModule } from '@angular/material/card';
+import { MatTooltipModule } from '@angular/material/tooltip';
 import { HttpClient } from '@angular/common/http';
 import { Router } from '@angular/router';
 
@@ -26,7 +28,9 @@ import { CultivoService } from '../../services/cultivo-service';
     MatIconModule,
     MatFormFieldModule,
     MatInputModule,
-    MatSnackBarModule
+    MatSnackBarModule,
+    MatCardModule,
+    MatTooltipModule
   ],
   templateUrl: './todos-los-cultivos.html',
   styleUrl: './todos-los-cultivos.css',
@@ -98,6 +102,7 @@ export class TodosLosCultivosComponent implements OnInit, AfterViewInit {
   }
 
   editCultivo(id: number): void {
+    // Navegar solo con cultivoId, el componente cargará los datos del backend
     this.router.navigate(['/registro-cultivo'], { 
       queryParams: { cultivoId: id } 
     });
@@ -106,6 +111,7 @@ export class TodosLosCultivosComponent implements OnInit, AfterViewInit {
   deleteCultivo(id: number): void {
     if (!confirm('¿Está seguro de que desea eliminar este cultivo?')) return;
     
+    // Intentar primero con DELETE
     this.cultivoService.delete(id).subscribe({
       next: () => {
         this.snackBar.open('Cultivo eliminado correctamente', 'Cerrar', { duration: 3000 });
@@ -113,7 +119,24 @@ export class TodosLosCultivosComponent implements OnInit, AfterViewInit {
       },
       error: (err) => {
         console.error('Error al eliminar cultivo:', err);
-        this.snackBar.open('Error al eliminar el cultivo', 'Cerrar', { duration: 3000 });
+        
+        // Si falla por permisos (403), intentar soft delete
+        if (err.status === 403) {
+          console.log('Intentando soft delete...');
+          this.cultivoService.softDelete(id).subscribe({
+            next: () => {
+              this.snackBar.open('Cultivo marcado como inactivo', 'Cerrar', { duration: 3000 });
+              this.loadCultivos();
+            },
+            error: (softErr) => {
+              console.error('Error en soft delete:', softErr);
+              this.snackBar.open('Error: No se pudo eliminar el cultivo', 'Cerrar', { duration: 5000 });
+            }
+          });
+        } else {
+          const errorMsg = err.error?.message || err.message || 'Error al eliminar el cultivo';
+          this.snackBar.open(`Error: ${errorMsg}`, 'Cerrar', { duration: 5000 });
+        }
       }
     });
   }

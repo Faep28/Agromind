@@ -50,29 +50,48 @@ export class RegistroCultivo {
   }
 
   loadCultivoData(id: number): void {
-    // Obtener todos los cultivos de la parcela y filtrar el que necesitamos
-    if (this.parcelaId) {
-      this.cultivoService.getByParcela(this.parcelaId).subscribe({
-        next: (cultivos: Cultivo[]) => {
-          const cultivo = cultivos.find(c => c.id === id);
-          if (cultivo) {
-            this.cultivoForm.patchValue({
-              nombre: cultivo.nombre,
-              descripcion: cultivo.descripcion,
-              temporada: cultivo.temporada,
-              fechaSiembra: cultivo.fechaSiembra,
-              fechaCosechaEsperada: cultivo.fechaCosechaEsperada,
-              estado: cultivo.estado,
-              parcelaId: cultivo.parcelaId
-            });
-          }
-        },
-        error: (err: any) => {
-          console.error('Error al cargar cultivo:', err);
-          this.snack.open('Error al cargar los datos del cultivo', 'OK', { duration: 4000 });
-        }
-      });
+    // Obtener todos los cultivos del cliente y buscar el que necesitamos
+    const clienteId = Number(localStorage.getItem('user_id'));
+    
+    if (!clienteId) {
+      this.snack.open('Error: Usuario no autenticado', 'OK', { duration: 4000 });
+      return;
     }
+
+    this.cultivoService.getCultivosByCliente(clienteId).subscribe({
+      next: (cultivos: Cultivo[]) => {
+        const cultivo = cultivos.find(c => c.id === id);
+        
+        if (cultivo) {
+          // Extraer parcelaId del objeto (puede venir como parcelaId o dentro del objeto parcela)
+          const parcelaIdFromData = cultivo.parcelaId || cultivo.parcela?.id || (cultivo as any).id_parcela;
+          
+          this.cultivoForm.patchValue({
+            nombre: cultivo.nombre,
+            descripcion: cultivo.descripcion,
+            temporada: cultivo.temporada,
+            fechaSiembra: cultivo.fechaSiembra,
+            fechaCosechaEsperada: cultivo.fechaCosechaEsperada,
+            estado: cultivo.estado,
+            parcelaId: parcelaIdFromData
+          });
+          
+          // Actualizar parcelaId si no estaba establecido
+          if (!this.parcelaId && parcelaIdFromData) {
+            this.parcelaId = parcelaIdFromData;
+            this.cultivoForm.get('parcelaId')?.disable();
+          }
+
+          // Marcar el formulario como pristine para detectar cambios futuros
+          this.cultivoForm.markAsPristine();
+          this.cultivoForm.markAsUntouched();
+        }
+      },
+      error: (err: any) => {
+        console.error('Error al cargar cultivo:', err);
+        this.snack.open('Error al cargar los datos del cultivo', 'OK', { duration: 4000 });
+      }
+    });
   }
 
   CargarFormulario() {
@@ -112,7 +131,7 @@ export class RegistroCultivo {
       this.cultivoService.update(this.cultivoId, cultivo).subscribe({
         next: (res) => {
           this.snack.open('Cultivo actualizado correctamente', 'OK', { duration: 4000 });
-          this.router.navigate(['/cultivos'], { queryParams: { parcelaId } });
+          this.router.navigate(['/todos-los-cultivos']);
         },
         error: (err) => {
           console.error('Error al actualizar cultivo', err);

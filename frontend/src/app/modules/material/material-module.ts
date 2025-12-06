@@ -1,5 +1,6 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { RouterModule } from '@angular/router';
 import { MatTableModule } from '@angular/material/table';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatButtonModule } from '@angular/material/button';
@@ -27,6 +28,7 @@ import { MatSortModule } from '@angular/material/sort';
   declarations: [],
   imports: [
     CommonModule,
+    RouterModule,
     MatTableModule,
     MatFormFieldModule,
     MatButtonModule,
@@ -50,6 +52,7 @@ import { MatSortModule } from '@angular/material/sort';
     MatSortModule              
   ],
   exports:[
+    RouterModule,
     MatTableModule,
     MatFormFieldModule,
     MatButtonModule,

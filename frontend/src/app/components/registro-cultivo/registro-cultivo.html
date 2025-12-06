@@ -82,7 +82,7 @@
             <mat-icon>cancel</mat-icon>
             Cancelar
           </button>
-          <button mat-raised-button color="primary" type="submit" [disabled]="cultivoForm.invalid" class="submit-btn">
+          <button mat-raised-button color="primary" type="submit" [disabled]="cultivoForm.invalid || (isEditMode && !cultivoForm.dirty)" class="submit-btn">
             <mat-icon>{{ isEditMode ? 'save' : 'add_circle' }}</mat-icon>
             {{ isEditMode ? 'Actualizar Cultivo' : 'Registrar Cultivo' }}
           </button>
