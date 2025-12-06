@@ -96,13 +96,34 @@ export class ParcelaList implements AfterViewInit {
   }
 
   deleteParcela(id: number): void {
-    if (!confirm('¿Eliminar parcela?')) return;
-
-    this.parcelaService.delete(id).subscribe({
-      next: () => this.listarParcelas(),
-      error: (err) => console.error('Error al eliminar parcela:', err)
-    });
+  console.log('DEBUG deleteParcela llamado con id =', id);
+  if (!id && id !== 0) {
+    alert('ID inválido al intentar eliminar.');
+    return;
   }
+
+  if (!confirm('¿Eliminar parcela?')) return;
+
+  this.parcelaService.delete(id).subscribe({
+    next: () => {
+      console.log('Parcela eliminada correctamente');
+      // actualizamos localmente sin recargar toda la lista
+      this.dsParcelas.data = this.dsParcelas.data.filter(p => p.id !== id);
+      // opcional: this.listarParcelas(); // si prefieres recargar desde backend
+    },
+    error: (err) => {
+      console.error('Error al eliminar parcela:', err);
+      if (err.status === 400) {
+        alert('No se puede eliminar la parcela. Verifica si tiene cultivos asociados.');
+      } else if (err.status === 401 || err.status === 403) {
+        alert('No autorizado. Revisa tu sesión o token.');
+      } else {
+        alert('Error al eliminar parcela: ' + (err.error?.message || err.message || 'Error desconocido'));
+      }
+    }
+  });
+}
+
 
   editParcela(id: number): void {
     // Navegar al formulario de agregar/editar pasando el id como query param

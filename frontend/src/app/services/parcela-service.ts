@@ -38,4 +38,6 @@ export class ParcelaService {
   delete(id: number): Observable<void> {
     return this.http.delete<void>(`${this.apiUrl}/delete/${id}`);
   }
+
+  
 }
