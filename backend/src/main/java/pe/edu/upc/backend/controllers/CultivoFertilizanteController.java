@@ -9,7 +9,7 @@ import pe.edu.upc.backend.services.CultivoFertilizanteService;
 
 import java.util.List;
 
-@CrossOrigin("*")
+//@CrossOrigin("*")
 @RestController
 @RequestMapping("/api/cultivo-fertilizante")
 public class CultivoFertilizanteController {

@@ -13,7 +13,7 @@ import pe.edu.upc.backend.services.SensorService;
 
 import java.util.List;
 
-@CrossOrigin("*")
+//@CrossOrigin("*")
 @RestController
 @RequestMapping("/api/sensores")  //http://localhost:8080/api/sensores
 public class SensorController {

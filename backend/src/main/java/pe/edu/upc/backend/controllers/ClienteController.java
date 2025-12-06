@@ -11,7 +11,7 @@ import pe.edu.upc.backend.services.ClienteService;
 
 import java.util.List;
 
-@CrossOrigin("*")
+//@CrossOrigin("*")
 @RestController
 @RequestMapping("/api/clientes") //http://localhost:8080/api/clientes
 public class ClienteController {
