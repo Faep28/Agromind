@@ -148,6 +148,17 @@ export class SolicitudServicio implements OnInit, AfterViewInit {
 
         this.solicitudes = mapped;
         this.dataSource.data = this.solicitudes;
+
+        // Ocultar columna "cultivo" si ninguna solicitud tiene cultivo conocido
+        const hasCultivo = this.solicitudes.some(r => {
+          const nombre = (r as any).cultivo?.nombre ?? this.getCultivoNombre(r.cultivoId);
+          return nombre && nombre.trim().length > 0;
+        });
+        if (hasCultivo) {
+          this.displayedColumns = ['id', 'fechaSolicitud', 'cultivo', 'servicio', 'estado'];
+        } else {
+          this.displayedColumns = ['id', 'fechaSolicitud', 'servicio', 'estado'];
+        }
       },
       error: (err: any) => {
         console.error('Error cargando solicitudes:', err);
@@ -158,7 +169,7 @@ export class SolicitudServicio implements OnInit, AfterViewInit {
   }
 
   getCultivoNombre(id: number | null): string {
-    if (!id) return '-';
+    if (!id) return '';
     const c = this.cultivos.find(x => x.id === id);
     return c ? c.nombre : `#${id}`;
   }

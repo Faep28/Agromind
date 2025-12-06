@@ -73,7 +73,7 @@
     <ng-container matColumnDef="cultivo">
       <th mat-header-cell *matHeaderCellDef> Cultivo </th>
       <td mat-cell *matCellDef="let row">
-        {{ row.cultivo?.nombre }}
+        {{ row.cultivo?.nombre || getCultivoNombre(row.cultivoId) }}
       </td>
     </ng-container>
 
@@ -81,7 +81,7 @@
     <ng-container matColumnDef="servicio">
       <th mat-header-cell *matHeaderCellDef> Servicio </th>
       <td mat-cell *matCellDef="let row">
-        {{ row.servicio?.nombre }}
+        {{ row.servicio?.nombre || getServicioNombre(row.servicioId) }}
       </td>
     </ng-container>
 
