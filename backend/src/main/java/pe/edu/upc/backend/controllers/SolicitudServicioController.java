@@ -34,6 +34,20 @@ public class SolicitudServicioController {
     public List<SolicitudServicio> getAll() {
         return solicitudServicioService.findAll();
     }
+
+    @GetMapping("/cultivo/{cultivoId}")  //http://localhost:8080/api/solicitudes-servicios/cultivo/1
+    public ResponseEntity<List<SolicitudServicio>> getByCultivoId(@PathVariable Long cultivoId) {
+        List<SolicitudServicio> solicitudes = solicitudServicioService.findByCultivoId(cultivoId);
+
+        if (solicitudes.isEmpty()) {
+            return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+        }
+
+        return new ResponseEntity<>(solicitudes, HttpStatus.OK);
+    }
+
+
+
     // Editar una solicitud de servicio
     @PutMapping("/update/{id}")  //http://localhost:8080/api/solicitudes-servicios/update/{id}
     public ResponseEntity<SolicitudServicio> update(

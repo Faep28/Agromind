@@ -70,4 +70,9 @@ public class SolicitudServicioServiceImpl implements SolicitudServicioService {
         // Eliminar la solicitud de servicio si existe
         solicitudServicioRepository.deleteById(id);
     }
+
+    @Override
+    public List<SolicitudServicio> findByCultivoId(Long cultivoId) {
+        return solicitudServicioRepository.findByCultivoId(cultivoId);
+    }
 }
