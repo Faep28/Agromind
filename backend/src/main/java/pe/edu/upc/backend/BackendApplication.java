@@ -116,31 +116,54 @@ public class BackendApplication {
             cultivoRepository.save(cultivo6);
             cultivoRepository.save(cultivo7);
 
-            // Crear servicios
-            Servicio servicio1 = new Servicio(null, "Guía de cultivo", "Asesoramiento sobre cómo cultivar tomates.", "Asesoría", 50.0, "Activo", "Sigue estos pasos para cultivar tomates de forma óptima.", null);
-            Servicio servicio2 = new Servicio(null, "Guía de recursos", "Provisión de recursos como fertilizantes y pesticidas.", "Recursos", 100.0, "Activo", "Te proporcionamos fertilizantes y equipos.", null);
-            Servicio servicio3 = new Servicio(null, "Mantenimiento preventivo", "Mantenimiento de equipos agrícolas y tierras de cultivo.", "Mantenimiento", 150.0, "Activo", "Revisión periódica de los equipos y tierras de cultivo.", null);
-            Servicio servicio4 = new Servicio(null, "Asesoría sobre pestes", "Evaluación y asesoría sobre el manejo de plagas.", "Asesoría", 75.0, "Activo", "Inspección de cultivos para detectar plagas y medidas a tomar.", null);
-            Servicio servicio5 = new Servicio(null, "Planificación de riego", "Planificación del sistema de riego para cultivos.", "Asesoría", 60.0, "Activo", "Te ayudamos a organizar un plan de riego eficiente.", null);
+                // Crear servicios
+            Servicio servicio1 = new Servicio(null, "Guía de cultivo",
+                    "Asesoramiento sobre cómo cultivar tu cosecha de manera óptima.",
+                    "Asesoría", 50.0, "Activo",
+                    "Optimiza el cultivo de tu cosecha siguiendo estas recomendaciones: Prepara el suelo con nutrientes adecuados, establece un cronograma de riego consistente, monitorea el crecimiento regularmente y ajusta las condiciones según la temporada. Implementa técnicas de poda cuando sea necesario y mantén un registro de las etapas de crecimiento para mejorar futuras siembras.",
+                    null);
 
-            servicioRepository.save(servicio1);
-            servicioRepository.save(servicio2);
-            servicioRepository.save(servicio3);
-            servicioRepository.save(servicio4);
-            servicioRepository.save(servicio5);
+            Servicio servicio2 = new Servicio(null, "Guía de recursos",
+                    "Provisión y gestión eficiente de recursos agrícolas esenciales.",
+                    "Recursos", 100.0, "Activo",
+                    "Gestiona eficientemente los recursos para tu cultivo: Selecciona fertilizantes orgánicos de calidad, utiliza pesticidas de manera controlada y responsable, invierte en herramientas de irrigación eficientes, y mantén un inventario actualizado de insumos. Considera opciones sostenibles que mejoren la productividad sin comprometer la salud del suelo.",
+                    null);
 
-            // Crear solicitudes de servicio para los cultivos
-            SolicitudServicio solicitud1 = new SolicitudServicio(null, LocalDate.now(), "Pendiente", servicio1, cultivo1);
-            SolicitudServicio solicitud2 = new SolicitudServicio(null, LocalDate.now(), "Pendiente", servicio2, cultivo2);
-            SolicitudServicio solicitud3 = new SolicitudServicio(null, LocalDate.now(), "Pendiente", servicio3, cultivo3);
-            SolicitudServicio solicitud4 = new SolicitudServicio(null, LocalDate.now(), "Pendiente", servicio4, cultivo4);
-            SolicitudServicio solicitud5 = new SolicitudServicio(null, LocalDate.now(), "Pendiente", servicio5, cultivo5);
+            Servicio servicio3 = new Servicio(null, "Mantenimiento preventivo",
+                    "Mantenimiento regular de equipos agrícolas y conservación de tierras.",
+                    "Mantenimiento", 150.0, "Activo",
+                    "Asegura la longevidad de tus equipos y tierras con mantenimiento regular: Realiza inspecciones mensuales de maquinaria agrícola, lubrica componentes mecánicos, revisa sistemas de riego para detectar fugas, analiza el pH del suelo trimestralmente, y programa rotación de cultivos para evitar el agotamiento de nutrientes. La prevención reduce costos a largo plazo.",
+                    null);
 
-            solicitudServicioRepository.save(solicitud1);
-            solicitudServicioRepository.save(solicitud2);
-            solicitudServicioRepository.save(solicitud3);
-            solicitudServicioRepository.save(solicitud4);
-            solicitudServicioRepository.save(solicitud5);
+            Servicio servicio4 = new Servicio(null, "Asesoría sobre pestes",
+                    "Evaluación y control efectivo de plagas en cultivos.",
+                    "Asesoría", 75.0, "Activo",
+                    "Protege tu cultivo contra plagas y enfermedades con estas estrategias: Identifica tempranamente señales de infestación, implementa control biológico con depredadores naturales, aplica tratamientos orgánicos como aceites esenciales, establece barreras físicas, y mantén la diversidad vegetal para equilibrar el ecosistema. Monitorea semanalmente para una intervención oportuna.",
+                    null);
+
+            Servicio servicio5 = new Servicio(null, "Planificación de riego",
+                    "Diseño de sistemas de riego eficientes y sostenibles.",
+                    "Asesoría", 60.0, "Activo",
+                    "Optimiza el consumo de agua con un plan de riego inteligente: Calcula las necesidades hídricas según el tipo de cultivo y clima, implementa sistemas de riego por goteo para mayor eficiencia, programa riegos en horas de menor evaporación (amanecer o atardecer), instala sensores de humedad del suelo, y considera la recolección de agua de lluvia como fuente alternativa sustentable.",
+                    null);
+                servicioRepository.save(servicio1);
+                servicioRepository.save(servicio2);
+                servicioRepository.save(servicio3);
+                servicioRepository.save(servicio4);
+                servicioRepository.save(servicio5);
+
+                // Crear solicitudes de servicio para los cultivos
+                SolicitudServicio solicitud1 = new SolicitudServicio(null, LocalDate.now(), "Pendiente", servicio1, cultivo1);
+                SolicitudServicio solicitud2 = new SolicitudServicio(null, LocalDate.now(), "Pendiente", servicio2, cultivo2);
+                SolicitudServicio solicitud3 = new SolicitudServicio(null, LocalDate.now(), "Pendiente", servicio3, cultivo3);
+                SolicitudServicio solicitud4 = new SolicitudServicio(null, LocalDate.now(), "Pendiente", servicio4, cultivo4);
+                SolicitudServicio solicitud5 = new SolicitudServicio(null, LocalDate.now(), "Pendiente", servicio5, cultivo5);
+
+                solicitudServicioRepository.save(solicitud1);
+                solicitudServicioRepository.save(solicitud2);
+                solicitudServicioRepository.save(solicitud3);
+                solicitudServicioRepository.save(solicitud4);
+                solicitudServicioRepository.save(solicitud5);
 
             // Crear fertilizantes
             Fertilizante fert1 = new Fertilizante(null, "Nitrofoska", "NPK", 50.00, null);
