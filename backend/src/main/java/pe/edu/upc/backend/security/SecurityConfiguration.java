@@ -105,6 +105,8 @@ public class SecurityConfiguration {
                 (session) -> session.sessionCreationPolicy(SessionCreationPolicy.STATELESS)
         );
 
+
+
         return http.build();
     }
 
