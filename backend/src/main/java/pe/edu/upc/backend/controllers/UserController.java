@@ -17,7 +17,7 @@ import pe.edu.upc.backend.services.UserService;
 import java.util.List;
 import java.util.stream.Collectors;
 
-@CrossOrigin("*")
+//@CrossOrigin("*")
 @RestController
 @RequestMapping("/api/users")  // Base URL: http://localhost:8080/api/users
 public class UserController {

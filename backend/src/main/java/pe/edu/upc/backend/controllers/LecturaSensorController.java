@@ -10,7 +10,7 @@ import pe.edu.upc.backend.services.LecturaSensorService;
 
 import java.util.List;
 
-@CrossOrigin("*")
+//@CrossOrigin("*")
 @RestController
 @RequestMapping("/api/lecturas-sensores")   //http://localhost:8080/api/lecturas-sensores
 public class LecturaSensorController {

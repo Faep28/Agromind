@@ -11,7 +11,7 @@ import pe.edu.upc.backend.services.ParcelaService;
 
 import java.util.List;
 
-@CrossOrigin("*")
+//@CrossOrigin("*")
 @RestController
 @RequestMapping("/api/parcelas")  //http://localhost:8080/api/parcelas
 public class ParcelaController {
