@@ -22,10 +22,17 @@ export class SolicitudServicio implements OnInit, AfterViewInit {
 
   cultivos: Cultivo[] = [];
   servicios: Servicio[] = [];
-  cultivoFiltroId: number | null = null;
 
   // Campos del formulario (template-driven)
-  cultivoId: number | null = null;
+  private _cultivoId: number | null = null;
+  get cultivoId(): number | null {
+    return this._cultivoId;
+  }
+  set cultivoId(value: number | null) {
+    this._cultivoId = value;
+    // recargar listado cuando cambie el cultivo seleccionado
+    this.loadSolicitudes();
+  }
   servicioId: number | null = null;
   fechaSolicitud: Date | null = null;
   estado: string = '';
@@ -51,6 +58,8 @@ export class SolicitudServicio implements OnInit, AfterViewInit {
   ngOnInit(): void {
     this.loadCultivos();
     this.loadServicios();
+    // loadSolicitudes se llamará automáticamente al cambiar cultivo
+    // y también queremos mostrar todas las solicitudes inicialmente
     this.loadSolicitudes();
   }
 
@@ -80,52 +89,54 @@ export class SolicitudServicio implements OnInit, AfterViewInit {
   }
 
   crearSolicitud(): void {
-    if (!this.cultivoId || !this.servicioId || !this.fechaSolicitud || !this.estado) {
-      this.mensaje = 'Complete todos los campos obligatorios.';
-      return;
-    }
-
-    const fechaStr = (this.fechaSolicitud instanceof Date)
-      ? this.fechaSolicitud.toISOString().split('T')[0]
-      : String(this.fechaSolicitud);
-
-    const payload: Partial<SolicitudServicioModel> = {
-      fechaSolicitud: fechaStr,
-      estado: this.estado,
-      servicioId: this.servicioId,
-      cultivoId: this.cultivoId
-    };
-
-    this.solicitudService.createForServicioAndCultivo(this.servicioId!, this.cultivoId!, payload).subscribe({
-      next: (res: any) => {
-        this.mensaje = 'Solicitud registrada correctamente.';
-        // refrescar lista y limpiar formulario
-        this.loadSolicitudes();
-        this.cultivoId = null;
-        this.servicioId = null;
-        this.fechaSolicitud = null;
-        this.estado = '';
-      },
-      error: (err: any) => {
-        console.error('Error al crear solicitud:', err);
-        this.mensaje = 'Error al registrar la solicitud. Intente más tarde.';
-      }
-    });
+  if (!this.cultivoId || !this.servicioId || !this.fechaSolicitud || !this.estado) {
+    this.mensaje = 'Complete todos los campos obligatorios.';
+    return;
   }
+
+  const fechaStr = (this.fechaSolicitud instanceof Date)
+    ? this.fechaSolicitud.toISOString().split('T')[0]
+    : String(this.fechaSolicitud);
+
+  // Ajuste: Eliminamos servicioId y cultivoId del payload, ya están en la URL
+  const payload: Partial<SolicitudServicioModel> = {
+    fechaSolicitud: fechaStr,
+    estado: this.estado
+  };
+
+  // Llamada al servicio con los IDs en la URL
+  this.solicitudService.createForServicioAndCultivo(this.servicioId!, this.cultivoId!, payload).subscribe({
+    next: (res: any) => {   
+      this.mensaje = 'Solicitud registrada correctamente.';
+      // refrescar lista y limpiar formulario
+      this.loadSolicitudes();
+      this.cultivoId = null;
+      this.servicioId = null;
+      this.fechaSolicitud = null;
+      this.estado = '';
+    },
+    error: (err: any) => {
+      console.error('Error al crear solicitud:', err);
+      this.mensaje = 'Error al registrar la solicitud. Intente más tarde.';
+    }
+  });
+}
+
 
   // LISTADO DE SOLICITUDES
   solicitudes: SolicitudServicioModel[] = [];
 
   loadSolicitudes(): void {
-    this.solicitudService.listMy().subscribe({
+    // Si hay un cultivo seleccionado, pedir las solicitudes de ese cultivo
+    const obs = this._cultivoId ?
+      this.solicitudService.listByCultivo(this._cultivoId) :
+      this.solicitudService.listAll();
+
+    obs.subscribe({
       next: (data: any[]) => {
-        // Normalizar la respuesta para soportar dos formatos comunes:
-        // 1) { id, fechaSolicitud, estado, servicioId, cultivoId }
-        // 2) { id, fechaSolicitud, estado, servicio: { id, nombre }, cultivo: { id, nombre } }
         const mapped = (data || []).map((item: any) => {
           const cultivoId = item.cultivoId ?? item.cultivo?.id ?? null;
           const servicioId = item.servicioId ?? item.servicio?.id ?? null;
-          // Asegurar fecha como string (YYYY-MM-DD) si viene como Date/LocalDate
           const fecha = item.fechaSolicitud ?? item.fecha ?? (item.fechaSolicitudLocal ? item.fechaSolicitudLocal : null);
           return {
             ...item,
@@ -157,30 +168,5 @@ export class SolicitudServicio implements OnInit, AfterViewInit {
     const s = this.servicios.find(x => x.id === id);
     return s ? s.nombre : `#${id}`;
   }
-
-  filtrarPorCultivo(): void {
-  if (!this.cultivoFiltroId) {
-    this.loadSolicitudes();
-    return;
-  }
-
-  this.solicitudService.listByCultivo(this.cultivoFiltroId).subscribe({
-    next: (data: any[]) => {
-      const mapped = (data || []).map((item: any) => {
-        const cultivoId = item.cultivoId ?? item.cultivo?.id ?? null;
-        const servicioId = item.servicioId ?? item.servicio?.id ?? null;
-        const fecha = item.fechaSolicitud;
-        return { ...item, cultivoId, servicioId, fechaSolicitud: fecha };
-      });
-
-      this.solicitudes = mapped;
-      this.dataSource.data = mapped;
-    },
-    error: err => {
-      console.error('Error listando por cultivo:', err);
-      this.dataSource.data = [];
-    }
-  });
-}
 
 }
