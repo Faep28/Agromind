@@ -134,6 +134,47 @@ export class FertilizantesCultivoComponent implements OnInit {
     });
   }
 
+  editarFertilizante(relacion: CultivoFertilizante): void {
+    const dialogRef = this.dialog.open(RegistroFertilizanteComponent, {
+      width: '500px',
+      disableClose: true,
+      data: {
+        fertilizante: relacion.fertilizante
+      }
+    });
+
+    dialogRef.afterClosed().subscribe((resultado) => {
+      if (resultado) {
+        // Recargar la lista de fertilizantes
+        this.loadFertilizantes();
+      }
+    });
+  }
+
+  editarRelacion(relacion: CultivoFertilizante): void {
+    const dialogRef = this.dialog.open(AsignarFertilizanteDialogComponent, {
+      width: '500px',
+      disableClose: true,
+      data: {
+        cultivoId: this.cultivoId,
+        cultivoNombre: this.cultivoNombre,
+        fertilizanteId: relacion.fertilizante.id,
+        fertilizanteNombre: relacion.fertilizante.nombre,
+        relacionId: relacion.id,
+        fechaAplicacion: relacion.fechaAplicacion,
+        cantidad: relacion.cantidad,
+        isEditMode: true
+      }
+    });
+
+    dialogRef.afterClosed().subscribe((resultado) => {
+      if (resultado) {
+        // Recargar la lista de fertilizantes
+        this.loadFertilizantes();
+      }
+    });
+  }
+
   eliminarRelacion(relacion: CultivoFertilizante): void {
     if (!confirm(`¿Está seguro de eliminar la relación con el fertilizante "${relacion.fertilizante.nombre}"?`)) {
       return;

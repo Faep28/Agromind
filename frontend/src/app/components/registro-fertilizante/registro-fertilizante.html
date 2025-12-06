@@ -1,4 +1,4 @@
-<h2 mat-dialog-title>Registrar Nuevo Fertilizante</h2>
+<h2 mat-dialog-title>{{ isEditMode ? 'Editar Fertilizante' : 'Registrar Nuevo Fertilizante' }}</h2>
 
 <mat-dialog-content>
   <form [formGroup]="fertilizanteForm">
@@ -49,6 +49,6 @@
     Cancelar
   </button>
   <button mat-raised-button color="primary" (click)="guardar()" [disabled]="isLoading || fertilizanteForm.invalid">
-    {{ isLoading ? 'Guardando...' : 'Guardar y Continuar' }}
+    {{ isLoading ? 'Guardando...' : (isEditMode ? 'Guardar Cambios' : 'Guardar y Continuar') }}
   </button>
 </mat-dialog-actions>
