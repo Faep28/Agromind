@@ -22,6 +22,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { NgxChartsModule } from '@swimlane/ngx-charts';
 import { autorizacionInterceptor } from './interceptors/autorizacion-interceptor';
 import { provideNativeDateAdapter } from '@angular/material/core';
+import { SolicitudServicio } from './components/solicitud-servicio/solicitud-servicio';
 
 
 @NgModule({
@@ -38,7 +39,8 @@ import { provideNativeDateAdapter } from '@angular/material/core';
     RecomendacionesComponent,
     NotificacionesList,
     ParcelaList,
-    AddEditParcela
+    AddEditParcela,
+    SolicitudServicio
   ],
   imports: [
     BrowserModule,

@@ -22,6 +22,11 @@
     Tareas recomendadas
   </button>
 
+  <!-- Nuevo botón: Nuestros Servicios -->
+  <button mat-button *ngIf="isUser" routerLink="/solicitud-servicio">
+    Nuestros Servicios
+  </button>
+
   <!-- Admin -->
 <button mat-button class="admin-btn" *ngIf="isAdmin" routerLink="/noticias">
   <mat-icon class="admin-icon">admin_panel_settings</mat-icon>
