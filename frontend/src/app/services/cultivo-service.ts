@@ -2,54 +2,56 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { Cultivo } from '../models/cultivo';
+import { environment } from '../../environments/environment';
 
 @Injectable({
   providedIn: 'root'
 })
 export class CultivoService {
-  private base = 'http://localhost:8080/api/cultivos';
+
+  private apiUrl = `${environment.apiUrl}/cultivos`;
 
   constructor(private http: HttpClient) {}
 
   listAll(): Observable<Cultivo[]> {
-    return this.http.get<Cultivo[]>(`${this.base}/list`);
+    return this.http.get<Cultivo[]>(`${this.apiUrl}/list`);
   }
 
   // Obtener cultivos por parcela (nuevo endpoint en backend)
   getByParcela(parcelaId: number): Observable<Cultivo[]> {
-    return this.http.get<Cultivo[]>(`${this.base}/parcela/${parcelaId}`);
+    return this.http.get<Cultivo[]>(`${this.apiUrl}/parcela/${parcelaId}`);
   }
 
   // Crear un cultivo asociado a una parcela
   createForParcela(parcelaId: number, cultivo: Partial<Cultivo>): Observable<Cultivo> {
-    return this.http.post<Cultivo>(`${this.base}/insert/${parcelaId}`, cultivo);
+    return this.http.post<Cultivo>(`${this.apiUrl}/insert/${parcelaId}`, cultivo);
   }
 
   update(id: number, cultivo: Partial<Cultivo>): Observable<Cultivo> {
-    return this.http.put<Cultivo>(`${this.base}/update/${id}`, cultivo);
+    return this.http.put<Cultivo>(`${this.apiUrl}/update/${id}`, cultivo);
   }
 
   delete(id: number): Observable<void> {
-    return this.http.delete<void>(`${this.base}/delete/${id}`);
+    return this.http.delete<void>(`${this.apiUrl}/delete/${id}`);
   }
 
   getById(id: number): Observable<Cultivo> {
-    return this.http.get<Cultivo>(`${this.base}/${id}`);
+    return this.http.get<Cultivo>(`${this.apiUrl}/${id}`);
   }
 
   estadisticasPorParcela(): Observable<any[]> {
-    return this.http.get<any[]>(`${this.base}/estadisticas/por-parcela`);
+    return this.http.get<any[]>(`${this.apiUrl}/estadisticas/por-parcela`);
   }
 
   buscarPorNombreYEstado(nombre: string, estado: string): Observable<Cultivo[]> {
-    return this.http.get<Cultivo[]>(`${this.base}/buscar?nombre=${encodeURIComponent(nombre)}&estado=${encodeURIComponent(estado)}`);
+    return this.http.get<Cultivo[]>(`${this.apiUrl}/buscar?nombre=${encodeURIComponent(nombre)}&estado=${encodeURIComponent(estado)}`);
   }
 
   buscarPorTemporada(temporada: string): Observable<Cultivo[]> {
-    return this.http.get<Cultivo[]>(`${this.base}/temporada/${encodeURIComponent(temporada)}`);
+    return this.http.get<Cultivo[]>(`${this.apiUrl}/temporada/${encodeURIComponent(temporada)}`);
   }
 
   estadisticasPorEstado(): Observable<any> {
-    return this.http.get<any>(`${this.base}/estadisticas/estado`);
+    return this.http.get<any>(`${this.apiUrl}/estadisticas/estado`);
   }
 }

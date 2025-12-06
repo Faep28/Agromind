@@ -41,6 +41,7 @@ export class TodosLosCultivosComponent implements OnInit, AfterViewInit {
     'fechaSiembra',
     'fechaCosechaEsperada',
     'estado',
+    'fertilizantes',
     'editar',
     'eliminar'
   ];
@@ -104,5 +105,9 @@ export class TodosLosCultivosComponent implements OnInit, AfterViewInit {
         this.snackBar.open('Error al eliminar el cultivo', 'Cerrar', { duration: 3000 });
       }
     });
+  }
+
+  verFertilizantes(cultivoId: number): void {
+    this.router.navigate(['/fertilizantes-cultivo', cultivoId]);
   }
 }
