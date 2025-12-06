@@ -24,10 +24,21 @@ public class CultivoFertilizanteServiceImpl implements CultivoFertilizanteServic
     @Autowired
     private FertilizanteRepository fertilizanteRepository;
 
+
     @Override
     public CultivoFertilizante add(Long cultivoId, Long fertilizanteId, CultivoFertilizante cultivoFertilizante) {
+        // Validar duplicados ANTES de crear
+        List<CultivoFertilizante> existentes = cultivoFertilizanteRepository
+                .findByCultivoIdAndFertilizanteId(cultivoId, fertilizanteId);
+
+        if (!existentes.isEmpty()) {
+            throw new IllegalStateException("Este fertilizante ya está asignado a este cultivo");
+        }
+
+        // Tu código actual continúa aquí (buscar cultivo, fertilizante, setear, guardar)
         Cultivo cultivo = cultivoRepository.findById(cultivoId)
                 .orElseThrow(() -> new RuntimeException("Cultivo no encontrado"));
+
         Fertilizante fertilizante = fertilizanteRepository.findById(fertilizanteId)
                 .orElseThrow(() -> new RuntimeException("Fertilizante no encontrado"));
 
@@ -69,5 +80,10 @@ public class CultivoFertilizanteServiceImpl implements CultivoFertilizanteServic
     public List<Object[]> findTop5FertilizantesMasUsados() {
         return cultivoFertilizanteRepository.findTop5FertilizantesMasUsados();
 
+    }
+
+    @Override
+    public List<CultivoFertilizante> findByCultivoId(Long cultivoId) {
+        return cultivoFertilizanteRepository.findByCultivoId(cultivoId);
     }
 }

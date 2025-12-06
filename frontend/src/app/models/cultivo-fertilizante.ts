@@ -1,8 +1,10 @@
-export interface CultivoFertilizante {
+import { Cultivo } from "./cultivo";
+import { Fertilizante } from "./fertilizante";
 
-     id: number;
-    cultivoId: number;        // relación con Cultivo
-    fertilizanteId: number;   // relación con Fertilizante
-    fechaAplicacion: string;  // LocalDate → string en el JSON
+export interface CultivoFertilizante {
+    id: number;
+    cultivo: Cultivo;           // objeto Cultivo completo
+    fertilizante: Fertilizante; // objeto Fertilizante completo
+    fechaAplicacion: string;    // LocalDate → string en el JSON
     cantidad: number;
 }

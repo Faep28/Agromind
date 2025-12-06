@@ -77,4 +77,11 @@ public class CultivoFertilizanteController {
         List<Object[]> data = cultivoFertilizanteService.findTop5FertilizantesMasUsados();
         return new ResponseEntity<>(data, HttpStatus.OK);
     }
+
+    // GET: http://localhost:8080/api/cultivo-fertilizante/cultivo/{cultivoId}
+    @GetMapping("/cultivo/{cultivoId}")
+    public ResponseEntity<List<CultivoFertilizante>> getByCultivo(@PathVariable Long cultivoId) {
+        List<CultivoFertilizante> relaciones = cultivoFertilizanteService.findByCultivoId(cultivoId);
+        return new ResponseEntity<>(relaciones, HttpStatus.OK);
+    }
 }

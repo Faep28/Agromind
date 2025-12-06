@@ -1,6 +1,8 @@
 import { Component } from '@angular/core';
 import { Router } from '@angular/router';
 import { UserService } from '../../services/user-service';
+import { NotificacionesService } from '../../services/notificaciones-service';
+import { Notificacion } from '../../models/notificacion';
 
 @Component({
   selector: 'app-home',
@@ -17,15 +19,13 @@ export class Home {
   irrigationRecommendation: string = 'Riego recomendado para mañana por 30 minutos.';
   cropStatus: string = 'Cultivo de maíz en buen estado. Requiere fertilización en 3 días.';
 
-  // simular, debemos de colocar notificacoones en el backend
-  alerts: any[] = [
-    { title: 'Plaga detectada', description: 'Plaga leve detectada en el campo 1. Requiere atención.' },
-    { title: 'Lluvias en camino', description: 'Se esperan lluvias fuertes en 48 horas. Ajuste el riego.' }
-  ];
+  // notificaciones reales
+  notificaciones: Notificacion[] = [];
+  notificacionesMostradas: Notificacion[] = [];
 
   showNotifications: boolean = false;
 
-  constructor(private router: Router, private userService: UserService) { }
+  constructor(private router: Router, private userService: UserService, private notiService: NotificacionesService) { }
 
   ngOnInit() {
     // Intentar obtener el nombre del usuario desde el token JWT (si está disponible)
@@ -39,11 +39,53 @@ export class Home {
         console.warn('No se pudo decodificar el token para obtener el nombre', e);
       }
     }
-  }
 
-  markAsRead(alert: any) {
-    alert.read = true;
-    // aqui podemos implementar logica para marcar la alerta como leída (podriamos actualizar en el backend).
+    // cargar notificaciones no leídas para mostrar en home
+    this.loadUnreadNotifications();
+
+    // suscribirse a cambios desde el servicio para refrescar
+    this.notiService.obtenerActualizaciones$().subscribe(() => {
+      this.loadUnreadNotifications();
+    });
+  }
+ 
+  loadUnreadNotifications() {
+    const userId = this.userService.getUserId();
+    if (!userId || userId === 0) {
+      this.notificaciones = [];
+      this.notificacionesMostradas = [];
+      return;
+    }
+
+    this.notiService.listByUser(userId).subscribe({
+      next: (list) => {
+        this.notificaciones = list || [];
+        // ordenar: primero no leídas, luego leídas. Mostrar hasta 2 en el home.
+        const sorted = [...this.notificaciones].sort((a, b) => {
+          if (a.esLeido === b.esLeido) return 0;
+          return a.esLeido ? 1 : -1;
+        });
+        this.notificacionesMostradas = sorted.slice(0, 2);
+      },
+      error: (err) => {
+        console.error('Error cargando notificaciones del usuario:', err);
+        this.notificaciones = [];
+        this.notificacionesMostradas = [];
+      }
+    });
+  }
+  markAsRead(n: Notificacion) {
+    const updated: Notificacion = { ...n, esLeido: true };
+    this.notiService.update(n.id, updated).subscribe({
+      next: () => {
+        // no eliminamos localmente; solo cerramos el panel y notificamos para refrescar
+        this.showNotifications = false;
+        this.notiService.notificarCambios();
+      },
+      error: (err) => {
+        console.error('Error marcando notificación como leída:', err);
+      }
+    });
   }
 
   toggleNotifications() {
