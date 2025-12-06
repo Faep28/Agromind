@@ -19,7 +19,7 @@ export class ParcelaService {
     return this.http.get<Parcela[]>(`${this.apiUrl}/cliente/${clienteId}`);
   }
 
-  // Obtener todas (por si acaso)
+  // Obtener todas
   getAll(): Observable<Parcela[]> {
     return this.http.get<Parcela[]>(`${this.apiUrl}/list`);
   }
