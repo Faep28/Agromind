@@ -1,58 +1,112 @@
 <div class="main-content">
-    <h2>Sistema de Recomendaciones</h2>
+    <mat-card class="header-card">
+        <mat-card-header>
+            <mat-card-title>
+                <mat-icon>psychology</mat-icon>
+                Sistema de Recomendaciones
+            </mat-card-title>
+            <mat-card-subtitle>Obtén recomendaciones personalizadas para tus cultivos</mat-card-subtitle>
+        </mat-card-header>
+    </mat-card>
 
-    <div class="selector-section">
-        <label for="cultivo-select">Seleccione un tipo de cultivo:</label>
-        <select id="cultivo-select" [(ngModel)]="cultivoSeleccionadoId">
-            <option [ngValue]="null" disabled>-- Seleccione Cultivo --</option>
-            <option *ngFor="let cultivo of cultivos" [ngValue]="cultivo.id">
-                {{ cultivo.nombre }}
-            </option>
-        </select>
-        
-        <label for="servicio-select" style="margin-left: 20px;">Seleccione el Servicio:</label>
-        <select id="servicio-select" [(ngModel)]="servicioSeleccionadoId">
-            <option [ngValue]="null" disabled>-- Seleccione Servicio --</option>
-            <option *ngFor="let servicio of serviciosDisponibles" [ngValue]="servicio.id">
-                {{ servicio.nombre }}
-            </option>
-        </select>
+    <mat-card class="selector-card">
+        <mat-card-content>
+            <div class="selector-section">
+                <mat-form-field appearance="outline" class="full-width">
+                    <mat-label>Seleccione un cultivo</mat-label>
+                    <mat-select [(ngModel)]="cultivoSeleccionadoId" [disabled]="isLoading || cultivos.length === 0">
+                        <mat-option [value]="null" disabled>-- Seleccione Cultivo --</mat-option>
+                        <mat-option *ngFor="let cultivo of cultivos" [value]="cultivo.id">
+                            {{ cultivo.nombre }}
+                        </mat-option>
+                    </mat-select>
+                    <mat-icon matPrefix>local_florist</mat-icon>
+                    <mat-hint *ngIf="cultivos.length === 0">No tienes cultivos registrados</mat-hint>
+                </mat-form-field>
+                
+                <mat-form-field appearance="outline" class="full-width">
+                    <mat-label>Seleccione el servicio</mat-label>
+                    <mat-select [(ngModel)]="servicioSeleccionadoId" [disabled]="isLoading">
+                        <mat-option [value]="null" disabled>-- Seleccione Servicio --</mat-option>
+                        <mat-option *ngFor="let servicio of serviciosDisponibles" [value]="servicio.id">
+                            {{ servicio.nombre }}
+                        </mat-option>
+                    </mat-select>
+                    <mat-icon matPrefix>build</mat-icon>
+                </mat-form-field>
 
-        <button (click)="obtenerRecomendaciones()" 
-                [disabled]="!cultivoSeleccionadoId || !servicioSeleccionadoId" 
-                style="margin-left: 20px;">
-            Obtener Tareas Recomendadas
-        </button>
-    </div>
+                <button mat-raised-button color="primary" 
+                        (click)="obtenerRecomendaciones()" 
+                        [disabled]="!cultivoSeleccionadoId || !servicioSeleccionadoId || isLoading"
+                        class="obtener-btn">
+                    <mat-icon>search</mat-icon>
+                    Obtener Tareas Recomendadas
+                </button>
+            </div>
 
-    <div *ngIf="mensajeError" style="color: red; margin-top: 10px;">
-        {{ mensajeError }}
-    </div>
-
-    <hr>
+            <mat-progress-bar mode="indeterminate" *ngIf="isLoading"></mat-progress-bar>
+            
+            <div *ngIf="mensajeError" class="error-message">
+                <mat-icon>error</mat-icon>
+                {{ mensajeError }}
+            </div>
+        </mat-card-content>
+    </mat-card>
     
-    <div class="recomendaciones-especificas" *ngIf="tareasRecomendadas">
-        <h3>Recomendación para el Cultivo Seleccionado</h3>
-        <div class="recomendacion-card">
-            <pre class="tarea-texto">{{ tareasRecomendadas }}</pre>
-        </div>
-    </div>
+    <mat-card class="recomendaciones-card" *ngIf="tareasRecomendadas">
+        <mat-card-header>
+            <mat-card-title>
+                <mat-icon>recommend</mat-icon>
+                Recomendación para tu Cultivo
+            </mat-card-title>
+        </mat-card-header>
+        <mat-card-content>
+            <div class="tarea-content">
+                <mat-icon class="task-icon">task_alt</mat-icon>
+                <div class="tarea-texto">{{ tareasRecomendadas }}</div>
+            </div>
+        </mat-card-content>
+    </mat-card>
 
-    <hr *ngIf="tareasRecomendadas">
-
-    <h3>Tips para tu cultivo diario</h3>
-    <div class="tips-diarios-container">
-        <div class="tip-card">
-            <h4>💡 Riega tus plantas al amanecer</h4>
-            <p>Evita la evaporación rápida y mejora la absorción del agua.</p>
-        </div>
-        <div class="tip-card">
-            <h4>💡 Utiliza compost orgánico regularmente</h4>
-            <p>Enriquece el suelo con nutrientes esenciales sin químicos.</p>
-        </div>
-        <div class="tip-card">
-            <h4>💡 Asocia cultivos compatibles</h4>
-            <p>Plantar albahaca junto a tomates repele plagas de forma natural.</p>
-        </div>
-    </div>
+    <mat-card class="tips-card">
+        <mat-card-header>
+            <mat-card-title>
+                <mat-icon>tips_and_updates</mat-icon>
+                Tips para tu cultivo diario
+            </mat-card-title>
+        </mat-card-header>
+        <mat-card-content>
+            <div class="tips-container">
+                <mat-card class="tip-item">
+                    <mat-card-content>
+                        <div class="tip-header">
+                            <mat-icon color="primary">water_drop</mat-icon>
+                            <h4>Riega tus plantas al amanecer</h4>
+                        </div>
+                        <p>Evita la evaporación rápida y mejora la absorción del agua.</p>
+                    </mat-card-content>
+                </mat-card>
+                
+                <mat-card class="tip-item">
+                    <mat-card-content>
+                        <div class="tip-header">
+                            <mat-icon color="accent">compost</mat-icon>
+                            <h4>Utiliza compost orgánico regularmente</h4>
+                        </div>
+                        <p>Enriquece el suelo con nutrientes esenciales sin químicos.</p>
+                    </mat-card-content>
+                </mat-card>
+                
+                <mat-card class="tip-item">
+                    <mat-card-content>
+                        <div class="tip-header">
+                            <mat-icon color="primary">yard</mat-icon>
+                            <h4>Asocia cultivos compatibles</h4>
+                        </div>
+                        <p>Plantar albahaca junto a tomates repele plagas de forma natural.</p>
+                    </mat-card-content>
+                </mat-card>
+            </div>
+        </mat-card-content>
+    </mat-card>
 </div>

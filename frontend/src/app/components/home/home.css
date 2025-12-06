@@ -198,3 +198,78 @@
     font-size: 1.2rem;  /* Reduce el tamaño del icono en pantallas pequeñas */
   }
 }
+
+/* Estilos para la sección de Registrar Servicios */
+.activity-summary {
+  background-color: #ffffff;
+  border-radius: 8px;
+  padding: 20px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.service-card-container {
+  display: flex;
+  flex-direction: row;
+  gap: 20px;
+  align-items: center;
+}
+
+.service-image-container {
+  flex: 0 0 150px; /* Imagen con un ancho fijo */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.service-image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  border-radius: 10px;
+  max-height: 120px; /* Limita la altura de la imagen */
+}
+
+.service-content {
+  flex: 1; /* El contenido ocupa el espacio restante */
+  padding: 10px;
+}
+
+.service-content mat-card-title {
+  color: #105e2c;
+  font-size: 1.4rem;
+  font-weight: bold;
+}
+
+.service-content .desc {
+  color: #666;
+  font-size: 1rem;
+  line-height: 1.6;
+}
+
+.service-content .price {
+  font-size: 1.2rem;
+  color: #105e2c;
+  margin-top: 10px;
+}
+
+.service-actions {
+  margin-top: 15px;
+  text-align: right;
+}
+
+/* Aseguramos que los servicios tengan un buen formato para pantallas pequeñas */
+@media (max-width: 768px) {
+  .service-card-container {
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .service-image-container {
+    margin-bottom: 10px;
+  }
+
+  .service-image {
+    max-height: 180px;
+    object-fit: contain;
+  }
+}

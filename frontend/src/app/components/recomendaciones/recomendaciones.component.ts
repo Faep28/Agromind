@@ -1,10 +1,20 @@
 import { Component, OnInit } from '@angular/core';
-import { Cultivo } from '../../models/cultivo'; // Asegúrate de que la ruta sea correcta
-import { Servicio } from '../../models/servicio'; // Asegúrate de que la ruta sea correcta
-import { SolicitudServicio } from '../../models/solicitud-servicio'; // Modelo para el payload
+import { CommonModule } from '@angular/common';
+import { FormsModule } from '@angular/forms';
+import { Cultivo } from '../../models/cultivo';
+import { Servicio } from '../../models/servicio';
+import { SolicitudServicio } from '../../models/solicitud-servicio';
 import { HttpClient } from '@angular/common/http';
 import { Router } from '@angular/router';
-import { environment } from '../../../environments/environment'; // Para la URL base del API
+import { CultivoService } from '../../services/cultivo-service';
+import { MatSnackBar, MatSnackBarModule } from '@angular/material/snack-bar';
+import { MatCardModule } from '@angular/material/card';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatSelectModule } from '@angular/material/select';
+import { MatButtonModule } from '@angular/material/button';
+import { MatIconModule } from '@angular/material/icon';
+import { MatProgressBarModule } from '@angular/material/progress-bar';
+import { environment } from '../../../environments/environment';
 
 // DTO de respuesta simplificado del backend
 interface SolicitudServicioResponseDTO {
@@ -18,7 +28,18 @@ interface SolicitudServicioResponseDTO {
 
 @Component({
     selector: 'app-recomendaciones',
-    standalone: false,
+    standalone: true,
+    imports: [
+        CommonModule,
+        FormsModule,
+        MatCardModule,
+        MatFormFieldModule,
+        MatSelectModule,
+        MatButtonModule,
+        MatIconModule,
+        MatProgressBarModule,
+        MatSnackBarModule
+    ],
     templateUrl: './recomendaciones.component.html',
     styleUrls: ['./recomendaciones.component.css']
 })
@@ -36,12 +57,14 @@ export class RecomendacionesComponent implements OnInit {
     tareasRecomendadas: string = '';
     mensajeError: string = '';
     
-    // Nota: Debes reemplazar esta URL base con la de tu entorno (ej. http://localhost:8080)
-    private apiUrl = environment.apiUrl; 
+    private apiUrl = environment.apiUrl;
+    isLoading: boolean = false;
 
     constructor(
         private http: HttpClient,
-        private router: Router // Útil para navegar si es necesario
+        private router: Router,
+        private cultivoService: CultivoService,
+        private snackBar: MatSnackBar
     ) { }
 
     ngOnInit(): void {
@@ -50,31 +73,32 @@ export class RecomendacionesComponent implements OnInit {
     }
 
     cargarCultivos(): void {
-        // GET /api/recomendaciones/cultivos
-        this.http.get<Cultivo[]>(`${this.apiUrl}/api/recomendaciones/cultivos`).subscribe({
+        this.isLoading = true;
+        // Obtener cultivos del usuario actual (necesitas implementar este endpoint)
+        this.cultivoService.listAll().subscribe({
             next: (data) => {
                 this.cultivos = data;
+                this.isLoading = false;
+                if (data.length === 0) {
+                    this.mensajeError = 'No tienes cultivos registrados.';
+                }
             },
             error: (err) => {
                 this.mensajeError = 'Error al cargar la lista de cultivos.';
                 console.error(err);
+                this.isLoading = false;
             }
         });
     }
 
     cargarServiciosDisponibles(): void {
-        // GET /api/servicios
-        this.http.get<Servicio[]>(`${this.apiUrl}/api/servicios`).subscribe({
+        this.http.get<Servicio[]>(`${this.apiUrl}/servicios/list`).subscribe({
             next: (data) => {
                 this.serviciosDisponibles = data;
-                // Opcional: Si solo hay un servicio clave, seleccionarlo por defecto.
-                if (data.length > 0 && !this.servicioSeleccionadoId) {
-                    // Puedes establecer un ID por defecto si el servicio de "Recomendaciones" es fijo (ej. ID 1)
-                    // this.servicioSeleccionadoId = 1; 
-                }
             },
             error: (err) => {
                 console.error('Error al cargar servicios:', err);
+                this.snackBar.open('Error al cargar servicios disponibles', 'Cerrar', { duration: 3000 });
             }
         });
     }
@@ -96,21 +120,24 @@ export class RecomendacionesComponent implements OnInit {
             estado: 'Recomendación', // Usamos un estado para indicar que es una consulta de recomendación
         };
         
+        this.isLoading = true;
         const cultivoId = this.cultivoSeleccionadoId;
         const servicioId = this.servicioSeleccionadoId;
         
-        // POST /api/solicitudes-servicios/servicio/{servicioId}/cultivo/{cultivoId}
-        const url = `${this.apiUrl}/api/solicitudes-servicios/servicio/${servicioId}/cultivo/${cultivoId}`;
+        const url = `${this.apiUrl}/solicitudes-servicios/servicio/${servicioId}/cultivo/${cultivoId}`;
 
         this.http.post<SolicitudServicioResponseDTO>(url, payload).subscribe({
             next: (response) => {
                 this.tareasRecomendadas = response.tareasRecomendadas;
-                // Puedes agregar lógica para mostrar los tips diarios si el backend los devuelve también.
+                this.isLoading = false;
+                this.snackBar.open('Recomendaciones obtenidas exitosamente', 'Cerrar', { duration: 3000 });
             },
             error: (err) => {
                 console.error('Error en la solicitud:', err);
                 this.mensajeError = 'Error al obtener las tareas. Verifique que el Cultivo y Servicio existan.';
                 this.tareasRecomendadas = '';
+                this.isLoading = false;
+                this.snackBar.open('Error al obtener recomendaciones', 'Cerrar', { duration: 3000 });
             }
         });
     }

@@ -6,72 +6,56 @@
     <button mat-raised-button color="primary" routerLink="/recomendaciones">Ver recomendaciones</button>
   </section>
 
-  <!-- Resumen de actividad y alertas -->
   <section class="activity-alerts-section">
-    <!-- Resumen de activiad -->
-    <div class="activity-summary">
-      <h2>Resumen de Actividad</h2>
-      <div class="summary-cards">
-        <mat-card class="summary-card">
-          <mat-card-title>Condiciones Meteorológicas</mat-card-title>
-          <mat-card-content>{{ weatherSummary }}</mat-card-content>
-          <button mat-flat-button color="accent" routerLink="/clima">Ver más</button>
-        </mat-card>
+  <!-- Registrar servicios (modificado para imagen a la izquierda y contenido a la derecha) -->
+  <div class="activity-summary">
+    <h2>Registrar Servicios</h2>
+    <div class="summary-cards services-list">
+      <mat-card *ngFor="let s of serviciosHome; let i = index" class="service-card">
+        <div class="service-card-container">
+          <!-- Imagen a la izquierda -->
+          <div class="service-image-container">
+            <img [src]="getImagenServicio(i)" alt="{{s.nombre}}" class="service-image"/>
+          </div>
 
-        <mat-card class="summary-card">
-          <mat-card-title>Recomendaciones de Riego</mat-card-title>
-          <mat-card-content>{{ irrigationRecommendation }}</mat-card-content>
-          <button mat-flat-button color="accent" routerLink="/riego">Ver más</button>
-        </mat-card>
-
-        <mat-card class="summary-card">
-          <mat-card-title>Estado de Cultivos</mat-card-title>
-          <mat-card-content>{{ cropStatus }}</mat-card-content>
-          <button mat-flat-button color="accent" routerLink="/cultivos">Ver detalles</button>
-        </mat-card>
-      </div>
-    </div>
-
-    <!-- Alertas -->
-    <div class="alerts-section">
-      <h2>Alertas</h2>
-      <div class="alert-cards">
-        <mat-card *ngFor="let n of notificacionesMostradas" class="alert-card">
-          <mat-card-title>
-            {{ n.titulo }}
-            <span *ngIf="n.esLeido" style="font-size:0.8em;color:gray;margin-left:8px;">(Leída)</span>
-          </mat-card-title>
-          <mat-card-content>{{ n.mensaje }}</mat-card-content>
-          <button mat-button color="warn" *ngIf="!n.esLeido" (click)="markAsRead(n)">Marcar como leída</button>
-          <button mat-button disabled *ngIf="n.esLeido">Leída</button>
-        </mat-card>
-      </div>
-      <div style="display:flex;justify-content:center;margin-top:12px;">
-        <button mat-stroked-button color="primary" routerLink="/notificaciones">Ver todas</button>
-      </div>
-    </div>
-  </section>
-
-  <!-- aaacciones rapidas -->
-  <section class="quick-actions">
-    <h2>Acciones Rápidas</h2>
-    <div class="actions-grid">
-      <mat-card class="action-card">
-        <img src="assets/img/semillas.png" alt="Siembra" />
-        <button mat-raised-button color="primary" routerLink="/siembra">Registrar Siembra</button>
-      </mat-card>
-
-      <mat-card class="action-card">
-        <img src="assets/img/semillas.png" alt="Fertilización" />
-        <button mat-raised-button color="accent" routerLink="/fertilizacion">Registrar Fertilización</button>
-      </mat-card>
-
-      <mat-card class="action-card">
-        <img src="assets/img/semillas.png" alt="Cosecha" />
-        <button mat-raised-button color="warn" routerLink="/cosecha">Registrar Cosecha</button>
+          <!-- Contenido a la derecha -->
+          <div class="service-content">
+            <mat-card-title>{{ s.nombre }}</mat-card-title>
+            <mat-card-content>
+              <p class="desc">{{ s.descripcion }}</p>
+              <p class="price">S/ {{ s.precio }}</p>
+            </mat-card-content>
+            <div class="service-actions">
+              <button mat-stroked-button color="primary" [routerLink]="['/solicitud-servicio']">Ver servicios</button>
+            </div>
+          </div>
+        </div>
       </mat-card>
     </div>
-  </section>
+  </div>
+
+  <!-- Alertas (sin cambios) -->
+  <div class="alerts-section">
+    <h2>Alertas</h2>
+    <div class="alert-cards">
+      <mat-card *ngFor="let n of notificacionesMostradas" class="alert-card">
+        <mat-card-title>
+          {{ n.titulo }}
+          <span *ngIf="n.esLeido" style="font-size:0.8em;color:gray;margin-left:8px;">(Leída)</span>
+        </mat-card-title>
+        <mat-card-content>{{ n.mensaje }}</mat-card-content>
+        <button mat-button color="warn" *ngIf="!n.esLeido" (click)="markAsRead(n)">Marcar como leída</button>
+        <button mat-button disabled *ngIf="n.esLeido">Leída</button>
+      </mat-card>
+    </div>
+    <div style="display:flex;justify-content:center;margin-top:12px;">
+      <button mat-stroked-button color="primary" routerLink="/notificaciones">Ver todas</button>
+    </div>
+  </div>
+</section>
+
+
+  
 
   <!-- Botron flotante -->
 <button class="notification-bell" (click)="showNotifications = !showNotifications">

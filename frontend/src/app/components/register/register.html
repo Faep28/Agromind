@@ -35,14 +35,7 @@
         <mat-label>Rol (Authorities)</mat-label>
         <input matInput formControlName="authorities" />
       </mat-form-field> -->
-      <mat-form-field appearance="outline" class="full-width">
-        <mat-label>Rol</mat-label>
-        <mat-select formControlName="authorities">
-          <mat-option *ngFor="let role of ROLES_ADMITIDOS" [value]="role">
-            {{ role }}
-          </mat-option>
-        </mat-select>
-      </mat-form-field>
+      
 
       <button mat-flat-button color="primary" class="full-width" type="submit" [disabled]="registerForm.invalid">Registrar</button>
 
