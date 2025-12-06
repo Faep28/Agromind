@@ -12,7 +12,7 @@ import pe.edu.upc.backend.services.CultivoService;
 import java.util.List;
 import java.util.Map;
 
-@CrossOrigin("*")
+//@CrossOrigin("*")
 @RestController
 @RequestMapping("/api/cultivos")   //http://localhost:8080/api/cultivos
 public class CultivoController {

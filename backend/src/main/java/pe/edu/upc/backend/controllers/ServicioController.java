@@ -9,7 +9,7 @@ import pe.edu.upc.backend.services.ServicioService;
 
 import java.util.List;
 
-@CrossOrigin("*")
+//@CrossOrigin("*")
 @RestController
 @RequestMapping("/api/servicios")  //http://localhost:8080/api/servicios
 public class ServicioController {

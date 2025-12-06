@@ -60,4 +60,9 @@ public class ParcelaServiceImpl implements ParcelaService {
     public List<Parcela> findByClienteId(Long clienteId) {
         return parcelaRepository.findParcelasByClienteId(clienteId);
     }
+
+    @Override
+    public Parcela findById(Long id) {
+        return parcelaRepository.findById(id).orElse(null);
+    }
 }

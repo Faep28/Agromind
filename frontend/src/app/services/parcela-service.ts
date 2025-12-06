@@ -19,7 +19,7 @@ export class ParcelaService {
     return this.http.get<Parcela[]>(`${this.apiUrl}/cliente/${clienteId}`);
   }
 
-  // Obtener todas (por si acaso)
+  // Obtener todas
   getAll(): Observable<Parcela[]> {
     return this.http.get<Parcela[]>(`${this.apiUrl}/list`);
   }
@@ -33,9 +33,11 @@ export class ParcelaService {
   update(id: number, parcela: Parcela): Observable<Parcela> {
     return this.http.put<Parcela>(`${this.apiUrl}/update/${id}`, parcela);
   }
-
+ 
   // Eliminar parcela
   delete(id: number): Observable<void> {
     return this.http.delete<void>(`${this.apiUrl}/delete/${id}`);
   }
+
+  
 }

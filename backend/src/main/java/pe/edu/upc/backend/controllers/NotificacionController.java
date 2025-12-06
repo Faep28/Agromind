@@ -9,7 +9,7 @@ import pe.edu.upc.backend.services.NotificacionService;
 
 import java.util.List;
 
-@CrossOrigin("*")
+//@CrossOrigin("*")
 @RestController
 @RequestMapping("/api/notificaciones") // http://localhost:8080/api/notificaciones
 public class NotificacionController {

@@ -40,7 +40,7 @@ export class AddEditParcela implements OnInit {
                 this.editMode = true;
                 this.parcelaId = Number(idParam);
                 this.loadParcela(this.parcelaId);
-            }
+            } 
         });
     }
 

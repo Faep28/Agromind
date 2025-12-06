@@ -10,7 +10,7 @@ import pe.edu.upc.backend.services.AuthorityService;
 
 import java.util.List;
 
-@CrossOrigin("*")
+//@CrossOrigin("*")
 @RestController
 @RequestMapping("/api/authorities") //http://localhost:8080/api/authorities
 public class AuthorityController {
