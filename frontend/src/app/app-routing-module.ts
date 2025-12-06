@@ -15,6 +15,7 @@ import { TodosLosCultivosComponent } from './components/todos-los-cultivos/todos
 import { FertilizantesCultivoComponent } from './components/fertilizantes-cultivo/fertilizantes-cultivo';
 import { RecomendacionesComponent } from './components/recomendaciones/recomendaciones.component';
 import { NotificacionesList } from './components/notificaciones/notificaciones-list';
+import { SolicitudServicio } from './components/solicitud-servicio/solicitud-servicio';
 
 const routes: Routes = [
   {path:"", component:LandingPage }, // Cambiar a landing Page (hecho)  
@@ -30,6 +31,7 @@ const routes: Routes = [
   {path: 'recomendaciones',component: RecomendacionesComponent, canActivate: [autorizarLogeadoGuard] },
   {path:"todos-los-cultivos", component:TodosLosCultivosComponent, canActivate:[autorizarLogeadoGuard]},
   {path:"fertilizantes-cultivo/:cultivoId", component:FertilizantesCultivoComponent, canActivate:[autorizarLogeadoGuard]},
+  {path:"solicitud-servicio", component: SolicitudServicio, canActivate:[autorizarLogeadoGuard]},
   
 ];
 
