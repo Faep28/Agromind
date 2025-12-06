@@ -24,6 +24,8 @@ public class Servicio {
     private String categoria;
     private Double precio;  // Cambio aquí: usando `double` para el precio
     private String estado;
+
+    @Column(columnDefinition = "TEXT")  // ← AGREGAR ESTO
     private String tareasRecomendadas;  // Texto de tareas recomendadas o adicionales
 
     // Relación OneToMany con SolicitudServicio
