@@ -7,17 +7,13 @@
 #COPY --from=build /target/*.jar agromind.jar
 #EXPOSE 8080
 #ENTRYPOINT ["java", "-jar", "agromind.jar"]
-# Etapa de build
+
 FROM eclipse-temurin:24-jdk AS build
 WORKDIR /app
-COPY mvnw .
-COPY .mvn .mvn
-COPY pom.xml .
-RUN ./mvnw dependency:go-offline
-COPY src src
+COPY . .
+RUN chmod +x mvnw
 RUN ./mvnw clean package -DskipTests
 
-# Etapa de runtime
 FROM eclipse-temurin:24-jre
 WORKDIR /app
 COPY --from=build /app/target/*.jar app.jar
