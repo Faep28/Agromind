@@ -5,75 +5,87 @@
 <div class="form-container">
   <form (ngSubmit)="crearSolicitud()" #solForm="ngForm">
 
+    <!-- Cultivo -->
     <mat-form-field appearance="outline" class="full-width">
       <mat-label>Cultivo *</mat-label>
       <mat-select name="cultivoId" required [(ngModel)]="cultivoId">
         <mat-option [value]="null" disabled>-- Seleccione cultivo --</mat-option>
-        <mat-option *ngFor="let c of cultivos" [value]="c.id">{{ c.nombre }}</mat-option>
+        <mat-option *ngFor="let c of cultivos" [value]="c.id">
+          {{ c.nombre }}
+        </mat-option>
       </mat-select>
     </mat-form-field>
 
+    <!-- Fecha -->
     <mat-form-field appearance="outline" class="full-width">
       <mat-label>Fecha de solicitud *</mat-label>
-      <input matInput [matDatepicker]="picker" name="fechaSolicitud" required [(ngModel)]="fechaSolicitud">
+      <input matInput [matDatepicker]="picker" name="fechaSolicitud"
+             required [(ngModel)]="fechaSolicitud">
       <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
       <mat-datepicker #picker></mat-datepicker>
     </mat-form-field>
 
+    <!-- Estado -->
     <mat-form-field appearance="outline" class="full-width">
       <mat-label>Estado *</mat-label>
       <input matInput name="estado" required [(ngModel)]="estado" placeholder="Escriba el estado">
     </mat-form-field>
 
+    <!-- Servicio -->
     <mat-form-field appearance="outline" class="full-width">
       <mat-label>Tipo de Servicio *</mat-label>
       <mat-select name="servicioId" required [(ngModel)]="servicioId">
         <mat-option [value]="null" disabled>-- Seleccione servicio --</mat-option>
-        <mat-option *ngFor="let s of servicios" [value]="s.id">{{ s.nombre }} - {{ s.categoria }}</mat-option>
+        <mat-option *ngFor="let s of servicios" [value]="s.id">
+          {{ s.nombre }} - {{ s.categoria }}
+        </mat-option>
       </mat-select>
     </mat-form-field>
 
     <div class="actions">
-      <button mat-raised-button color="primary" type="submit">Registrar Solicitud</button>
+      <button mat-raised-button color="primary" type="submit">
+        Registrar Solicitud
+      </button>
       <span class="mensaje" *ngIf="mensaje">{{ mensaje }}</span>
     </div>
   </form>
 </div>
- 
+
+<!-- LISTA -->
 <div class="list-container" style="max-width:900px;margin:16px auto;">
   <h3>Solicitudes recientes</h3>
 
   <table mat-table [dataSource]="dataSource" class="mat-elevation-z1" style="width:100%;">
 
-    <!-- ID Column -->
+    <!-- ID -->
     <ng-container matColumnDef="id">
       <th mat-header-cell *matHeaderCellDef> ID </th>
       <td mat-cell *matCellDef="let row"> {{ row.id }} </td>
     </ng-container>
 
-    <!-- Fecha Column -->
+    <!-- Fecha -->
     <ng-container matColumnDef="fechaSolicitud">
       <th mat-header-cell *matHeaderCellDef> Fecha </th>
       <td mat-cell *matCellDef="let row"> {{ row.fechaSolicitud }} </td>
     </ng-container>
 
-    <!-- Cultivo Column -->
+    <!-- Cultivo -->
     <ng-container matColumnDef="cultivo">
       <th mat-header-cell *matHeaderCellDef> Cultivo </th>
       <td mat-cell *matCellDef="let row">
-        {{ row.cultivo?.nombre || row.cultivoNombre || getCultivoNombre(row.cultivoId) }}
+        {{ row.cultivo?.nombre || getCultivoNombre(row.cultivoId) }}
       </td>
     </ng-container>
 
-    <!-- Servicio Column -->
+    <!-- Servicio -->
     <ng-container matColumnDef="servicio">
       <th mat-header-cell *matHeaderCellDef> Servicio </th>
       <td mat-cell *matCellDef="let row">
-        {{ row.servicio?.nombre || row.servicioNombre || getServicioNombre(row.servicioId) }}
+        {{ row.servicio?.nombre || getServicioNombre(row.servicioId) }}
       </td>
     </ng-container>
 
-    <!-- Estado Column -->
+    <!-- Estado -->
     <ng-container matColumnDef="estado">
       <th mat-header-cell *matHeaderCellDef> Estado </th>
       <td mat-cell *matCellDef="let row"> {{ row.estado }} </td>
@@ -83,9 +95,13 @@
     <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
   </table>
 
-  <mat-paginator [pageSizeOptions]="[5,10,20]" showFirstLastButtons></mat-paginator>
+  <mat-paginator
+    [pageSizeOptions]="[5,10,20]" 
+    showFirstLastButtons>
+  </mat-paginator>
 
-  <div *ngIf="dataSource.data.length === 0" style="text-align:center; padding:12px; color:#666">
+  <div *ngIf="dataSource.data.length === 0"
+       style="text-align:center; padding:12px; color:#666">
     No hay solicitudes registradas todavía.
   </div>
 </div>

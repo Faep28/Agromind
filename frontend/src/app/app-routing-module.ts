@@ -28,7 +28,7 @@ const routes: Routes = [
   {path:"parcelas-add", component:AddEditParcela, canActivate:[autorizarLogeadoGuard]},
   {path:"noticias", component:RegistroNoticias, canActivate:[autorizarAdminGuard]},
   {path:"notificaciones", component:NotificacionesList, canActivate:[autorizarLogeadoGuard]},
-  {path: 'recomendaciones',component: RecomendacionesComponent, canActivate: [autorizarLogeadoGuard] },
+  {path:"recomendaciones",component: RecomendacionesComponent, canActivate: [autorizarLogeadoGuard] },
   {path:"todos-los-cultivos", component:TodosLosCultivosComponent, canActivate:[autorizarLogeadoGuard]},
   {path:"fertilizantes-cultivo/:cultivoId", component:FertilizantesCultivoComponent, canActivate:[autorizarLogeadoGuard]},
   {path:"solicitud-servicio", component: SolicitudServicio, canActivate:[autorizarLogeadoGuard]},

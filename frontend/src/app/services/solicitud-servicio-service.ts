@@ -6,7 +6,8 @@ import { environment } from '../../environments/environment';
 
 @Injectable({ providedIn: 'root' })
 export class SolicitudServicioService {
-  private base = `${environment.apiUrl}/api/solicitudes-servicios`;
+  // environment.apiUrl already contiene el prefijo '/api'
+  private base = `${environment.apiUrl}/solicitudes-servicios`;
 
   constructor(private http: HttpClient) {}
 
@@ -14,11 +15,14 @@ export class SolicitudServicioService {
     return this.http.get<SolicitudServicio[]>(`${this.base}/list`);
   }
 
-  listMy(): Observable<SolicitudServicio[]> {
-    return this.http.get<SolicitudServicio[]>(`${this.base}/my`);
-  }
 
   createForServicioAndCultivo(servicioId: number, cultivoId: number, payload: Partial<SolicitudServicio>) {
     return this.http.post(`${this.base}/insert/${servicioId}/${cultivoId}`, payload);
   }
+
+  // Listar solicitudes por cultivo
+  listByCultivo(cultivoId: number): Observable<SolicitudServicio[]> {
+  return this.http.get<SolicitudServicio[]>(`${this.base}/cultivo/${cultivoId}`);
+}
+
 }
