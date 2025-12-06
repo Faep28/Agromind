@@ -45,19 +45,30 @@ export class AddEditParcela implements OnInit {
     }
 
     private loadParcela(id: number): void {
-        this.parcelaService.getById(id).subscribe({
-            next: (p: Parcela) => {
-                // Rellenar el formulario con los datos existentes
-                this.formParcela.patchValue({
-                    id: p.id,
-                    nombre: p.nombre,
-                    longitud: p.longitud,
-                    latitud: p.latitud,
-                    tamano: p.tamano
-                });
+        const clienteId = Number(localStorage.getItem('user_id'));
+        if (!clienteId) {
+            console.error('No se encontró clienteId en localStorage');
+            return;
+        }
+
+        // Obtener todas las parcelas del cliente y buscar la que coincida con el ID
+        this.parcelaService.getByClienteId(clienteId).subscribe({
+            next: (parcelas: Parcela[]) => {
+                const parcela = parcelas.find(p => p.id === id);
+                if (parcela) {
+                    this.formParcela.patchValue({
+                        id: parcela.id,
+                        nombre: parcela.nombre,
+                        longitud: parcela.longitud,
+                        latitud: parcela.latitud,
+                        tamano: parcela.tamano
+                    });
+                } else {
+                    console.error('Parcela no encontrada en la lista del cliente');
+                }
             },
             error: (err) => {
-                console.error('Error al cargar parcela para editar:', err);
+                console.error('Error al cargar parcelas del cliente:', err);
             }
         });
     }
@@ -77,11 +88,11 @@ export class AddEditParcela implements OnInit {
         this.submitting = true;
 
         const parcela: Parcela = {
-            id: this.formParcela.get('id')?.value ?? 0,
-            nombre: this.formParcela.get('nombre')?.value,
-            longitud: Number(this.formParcela.get('longitud')?.value),
-            latitud: Number(this.formParcela.get('latitud')?.value),
-            tamano: Number(this.formParcela.get('tamano')?.value)
+            id:this.formParcela.get("id")?.value,
+            nombre:this.formParcela.get("nombre")?.value,
+            longitud:this.formParcela.get("longitud")?.value,
+            latitud:this.formParcela.get("latitud")?.value,
+            tamano:this.formParcela.get("tamano")?.value   
         };
 
         if (this.editMode && this.parcelaId) {

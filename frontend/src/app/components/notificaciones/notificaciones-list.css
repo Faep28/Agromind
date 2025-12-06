@@ -1,0 +1,6 @@
+.notificaciones-container { padding: 16px; }
+.notificacion { border-bottom: 1px solid #ddd; padding: 12px 0; }
+.notificacion .meta { display:flex; justify-content:space-between; align-items:center; }
+.notificacion .mensaje { margin: 8px 0; }
+.acciones button { margin-right: 8px; }
+.volver { margin-top: 16px; }
