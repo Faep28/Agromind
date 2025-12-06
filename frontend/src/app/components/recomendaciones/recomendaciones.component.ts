@@ -74,8 +74,18 @@ export class RecomendacionesComponent implements OnInit {
 
     cargarCultivos(): void {
         this.isLoading = true;
-        // Obtener cultivos del usuario actual (necesitas implementar este endpoint)
-        this.cultivoService.listAll().subscribe({
+        
+        // Obtener el ID del usuario logueado
+        const clienteId = Number(localStorage.getItem('user_id'));
+        
+        if (!clienteId) {
+            this.mensajeError = 'Error: Usuario no autenticado';
+            this.isLoading = false;
+            return;
+        }
+
+        // Obtener cultivos del usuario actual
+        this.cultivoService.getCultivosByCliente(clienteId).subscribe({
             next: (data) => {
                 this.cultivos = data;
                 this.isLoading = false;
