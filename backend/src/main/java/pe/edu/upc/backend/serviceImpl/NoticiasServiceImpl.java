@@ -3,6 +3,7 @@ package pe.edu.upc.backend.serviceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import pe.edu.upc.backend.entities.Noticia;
+import pe.edu.upc.backend.exceptions.ResourceNotFoundException;
 import pe.edu.upc.backend.repositories.NoticiasRepository;
 import pe.edu.upc.backend.services.NoticiasService;
 
@@ -29,20 +30,18 @@ public class NoticiasServiceImpl implements NoticiasService {
     @Override
     public Noticia edit(Long id, Noticia noticia) {
         if (!noticiasRepository.existsById(id)) {
-            throw new RuntimeException("Noticia no encontrada");
+            throw new ResourceNotFoundException("Noticia id: " + id + " not found");
         }
-        noticia.setId(id);  // Establecemos el ID para actualizar
+        noticia.setId(id);
         return noticiasRepository.save(noticia);
     }
 
-
     @Override
     public void deleteById(Long id) {
-        if (noticiasRepository.existsById(id)) {
-            noticiasRepository.deleteById(id);  // Eliminamos la noticia si existe
-        } else {
-            throw new RuntimeException("Noticia no encontrada");
+        if (!noticiasRepository.existsById(id)) {
+            throw new ResourceNotFoundException("Noticia id: " + id + " not found");
         }
+        noticiasRepository.deleteById(id);
     }
 
 

@@ -3,6 +3,7 @@ package pe.edu.upc.backend.serviceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import pe.edu.upc.backend.entities.Parcela;
+import pe.edu.upc.backend.exceptions.ResourceNotFoundException;
 import pe.edu.upc.backend.repositories.ClienteRepository;
 import pe.edu.upc.backend.repositories.ParcelaRepository;
 import pe.edu.upc.backend.services.ParcelaService;
@@ -33,28 +34,27 @@ public class ParcelaServiceImpl implements ParcelaService {
 
     @Override
     public Parcela edit(Parcela parcela) {
-        // Verifica si la parcela existe antes de actualizar
-        if (parcelaRepository.existsById(parcela.getId())) {
-            return parcelaRepository.save(parcela);  // Si existe, la actualiza
+        if (!parcelaRepository.existsById(parcela.getId())) {
+            throw new ResourceNotFoundException("Parcela id: " + parcela.getId() + " not found");
         }
-        return null;  // Si no existe, retorna null
+        return parcelaRepository.save(parcela);
     }
 
     @Override
     public void deleteById(Long id) {
-        if (parcelaRepository.existsById(id)) {
-            parcelaRepository.deleteById(id);  // Eliminar la parcela
+        if (!parcelaRepository.existsById(id)) {
+            throw new ResourceNotFoundException("Parcela id: " + id + " not found");
         }
+        parcelaRepository.deleteById(id);
     }
     //----------------------------------CRUD----------------------------------------------------
-    //----------------------------------------------------------------------------------------------------------------------
 
     //----------------------------------JPQL QUERY 3----------------------------------------------------
-    //----------------------------------------------------------------------------------------------------------------------
     @Override
     public List<Object[]> obtenerTotalParcelasYCultivosPorCliente(Long clienteId) {
         return parcelaRepository.obtenerTotalParcelasYCultivosPorCliente(clienteId);
     }
+
     //----------------------------------------------------------------------------------------------------------------------
     @Override
     public List<Parcela> findByClienteId(Long clienteId) {
@@ -63,6 +63,7 @@ public class ParcelaServiceImpl implements ParcelaService {
 
     @Override
     public Parcela findById(Long id) {
-        return parcelaRepository.findById(id).orElse(null);
+        return parcelaRepository.findById(id)
+                .orElseThrow(() -> new ResourceNotFoundException("Parcela id: " + id + " not found"));
     }
 }

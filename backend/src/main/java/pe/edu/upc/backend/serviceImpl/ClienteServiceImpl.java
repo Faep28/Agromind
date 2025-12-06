@@ -4,6 +4,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import pe.edu.upc.backend.entities.Cliente;
 import pe.edu.upc.backend.entities.User;
+import pe.edu.upc.backend.exceptions.ResourceNotFoundException;
 import pe.edu.upc.backend.repositories.ClienteRepository;
 import pe.edu.upc.backend.repositories.UserRepository;
 import pe.edu.upc.backend.services.ClienteService;
@@ -22,35 +23,31 @@ public class ClienteServiceImpl implements ClienteService {
 
     @Override
     public Cliente add(Cliente cliente) {
-        // Intentar obtener el usuario con el ID del cliente
-        User user = userRepository.findById(cliente.getUser().getId()).orElse(null);
+        User user = userRepository.findById(cliente.getUser().getId())
+                .orElseThrow(() -> new ResourceNotFoundException("User id: " + cliente.getUser().getId() + " not found"));
 
-        if (user == null) {
-            throw new RuntimeException("User not found!");
-        }
-
-        // Verifica si el usuario fue encontrado correctamente
-        System.out.println("User found: " + user);  // Log de depuración
-
-        cliente.setUser(user);  // Asociar el usuario al cliente
-        return clienteRepository.save(cliente);  // Guardar el cliente
+        cliente.setUser(user);
+        return clienteRepository.save(cliente);
     }
+
     @Override
     public List<Cliente> findAll() {
         return clienteRepository.findAll();  // Obtener todos los clientes
     }
     @Override
     public Cliente edit(Cliente cliente) {
-        if (clienteRepository.existsById(cliente.getId())) {
-            return clienteRepository.save(cliente);  // Si existe, actualiza el cliente
+        if (!clienteRepository.existsById(cliente.getId())) {
+            throw new ResourceNotFoundException("Cliente id: " + cliente.getId() + " not found");
         }
-        return null;  // Si no existe, devuelve null
+        return clienteRepository.save(cliente);
     }
+
     @Override
     public void deleteById(Long id) {
-        if (clienteRepository.existsById(id)) {
-            clienteRepository.deleteById(id);  // Eliminar el cliente por ID
+        if (!clienteRepository.existsById(id)) {
+            throw new ResourceNotFoundException("Cliente id: " + id + " not found");
         }
+        clienteRepository.deleteById(id);
     }
     //----------------------------------CRUD----------------------------------------------------
     //----------------------------------------------------------------------------------------------------------------------

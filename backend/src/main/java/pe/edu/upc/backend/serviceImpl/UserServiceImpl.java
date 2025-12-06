@@ -6,6 +6,10 @@ import org.springframework.stereotype.Service;
 import pe.edu.upc.backend.dtos.UserDTO;
 import pe.edu.upc.backend.entities.Authority;
 import pe.edu.upc.backend.entities.User;
+import pe.edu.upc.backend.exceptions.InvalidDataException;
+import pe.edu.upc.backend.exceptions.KeyRepeatedDataException;
+import pe.edu.upc.backend.exceptions.RequiredDataException;
+import pe.edu.upc.backend.exceptions.ResourceNotFoundException;
 import pe.edu.upc.backend.repositories.UserRepository;
 import pe.edu.upc.backend.services.AuthorityService;
 import pe.edu.upc.backend.services.UserService;
@@ -53,28 +57,39 @@ public class UserServiceImpl implements UserService {
         if (userRepository.existsById(user.getId())) {
             return userRepository.save(user);  // Si existe, actualiza el usuario
         }
-        return null;  // Si no existe, devuelve null
+        throw new ResourceNotFoundException("User id: " + user.getId() + " not found");  // Si no existe, devuelve null
     }
 
     @Override
     public User findById(Long id) {
-        return userRepository.findById(id).orElse(null);
+        return userRepository.findById(id)
+                .orElseThrow(() -> new ResourceNotFoundException("User id: " + id + " not found"));
     }
 
     @Override
     public User findByUsername(String username) {
-        return userRepository.findByUsername(username);
+        User user = userRepository.findByUsername(username);
+        if (user == null) {
+            throw new ResourceNotFoundException("User with username: " + username + " not found");
+        }
+        return user;
     }
 
     @Override
     public UserDTO add(UserDTO userDTO) {
-
         User existingUser = userRepository.findByUsername(userDTO.getUsername());
         if (existingUser != null) {
-            return null;
+            throw new KeyRepeatedDataException("Username already exists: " + userDTO.getUsername());
         }
 
-        List<Authority> authorityList=authoritiesFromString(userDTO.getAuthorities());
+        if (userDTO.getPassword() == null || userDTO.getPassword().isEmpty()) {
+            throw new RequiredDataException("Password is required");
+        }
+
+        List<Authority> authorityList = authoritiesFromString(userDTO.getAuthorities());
+        if (authorityList.isEmpty()) {
+            throw new InvalidDataException("Authorities are invalid or empty");
+        }
 
         User newUser = new User(null, userDTO.getUsername(),
                 new BCryptPasswordEncoder().encode(userDTO.getPassword()),
@@ -88,7 +103,10 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public void deleteById(Long id) {
-        userRepository.deleteById(id);  // Eliminar un usuario por ID
+        if (!userRepository.existsById(id)) {
+            throw new ResourceNotFoundException("User id: " + id + " not found");
+        }
+        userRepository.deleteById(id); // Eliminar un usuario por ID
     }
 
     @Override

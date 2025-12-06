@@ -5,6 +5,7 @@ import org.springframework.stereotype.Service;
 import pe.edu.upc.backend.entities.Cultivo;
 import pe.edu.upc.backend.entities.Servicio;
 import pe.edu.upc.backend.entities.SolicitudServicio;
+import pe.edu.upc.backend.exceptions.ResourceNotFoundException;
 import pe.edu.upc.backend.repositories.CultivoRepository;
 import pe.edu.upc.backend.repositories.ServicioRepository;
 import pe.edu.upc.backend.repositories.SolicitudServicioRepository;
@@ -28,9 +29,12 @@ public class SolicitudServicioServiceImpl implements SolicitudServicioService {
     // Crear una nueva solicitud de servicio
     @Override
     public SolicitudServicio add(Long servicioId, Long cultivoId, SolicitudServicio solicitudServicio) {
+
         // Buscar el servicio y el cultivo asociados por ID
-        Servicio servicio = servicioRepository.findById(servicioId).orElseThrow(() -> new RuntimeException("Servicio no encontrado"));
-        Cultivo cultivo = cultivoRepository.findById(cultivoId).orElseThrow(() -> new RuntimeException("Cultivo no encontrado"));
+        Servicio servicio = servicioRepository.findById(servicioId)
+                .orElseThrow(() -> new ResourceNotFoundException("Servicio id: " + servicioId + " not found"));
+        Cultivo cultivo = cultivoRepository.findById(cultivoId)
+                .orElseThrow(() -> new ResourceNotFoundException("Cultivo id: " + cultivoId + " not found"));
 
         // Asociar la solicitud con el servicio y el cultivo
         solicitudServicio.setServicio(servicio);
@@ -49,24 +53,21 @@ public class SolicitudServicioServiceImpl implements SolicitudServicioService {
     // Editar una solicitud de servicio
     @Override
     public SolicitudServicio edit(Long id, SolicitudServicio solicitudServicio) {
-        // Verificar si la solicitud existe
         if (!solicitudServicioRepository.existsById(id)) {
-            throw new RuntimeException("Solicitud de servicio no encontrada");
+            throw new ResourceNotFoundException("Solicitud de servicio id: " + id + " not found");
         }
-        solicitudServicio.setId(id);  // Establecer el ID para actualizar
+        solicitudServicio.setId(id);
         return solicitudServicioRepository.save(solicitudServicio);
     }
 
     //eliminar
     @Override
     public void deleteById(Long id) {
-        if (solicitudServicioRepository.existsById(id)) {
-            solicitudServicioRepository.deleteById(id);  // Eliminar la solicitud de servicio si existe
-        } else {
-            System.out.println("Solicitud de Servicio con ID " + id + " no encontrada.");
+        if (!solicitudServicioRepository.existsById(id)) {
+            throw new ResourceNotFoundException("Solicitud de servicio id: " + id + " not found");
         }
+
+        // Eliminar la solicitud de servicio si existe
+        solicitudServicioRepository.deleteById(id);
     }
-
-
-
 }

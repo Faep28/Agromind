@@ -3,6 +3,7 @@ package pe.edu.upc.backend.serviceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import pe.edu.upc.backend.entities.Cultivo;
+import pe.edu.upc.backend.exceptions.ResourceNotFoundException;
 import pe.edu.upc.backend.repositories.CultivoRepository;
 import pe.edu.upc.backend.repositories.ParcelaRepository;
 import pe.edu.upc.backend.services.CultivoService;
@@ -32,11 +33,18 @@ public class CultivoServiceImpl implements CultivoService {
 
     @Override
     public Cultivo edit(Cultivo cultivo) {
+        if (!cultivoRepository.existsById(cultivo.getId())) {
+            throw new ResourceNotFoundException("Cultivo id: " + cultivo.getId() + " not found");
+        }
         return cultivoRepository.save(cultivo);
     }
 
+
     @Override
     public void deleteById(Long id) {
+        if (!cultivoRepository.existsById(id)) {
+            throw new ResourceNotFoundException("Cultivo id: " + id + " not found");
+        }
         cultivoRepository.deleteById(id);
     }
     //----------------------------------CRUD----------------------------------------------------
@@ -68,7 +76,8 @@ public class CultivoServiceImpl implements CultivoService {
 
     @Override
     public Cultivo findById(Long id) {
-        return cultivoRepository.findById(id).orElse(null);
+        return cultivoRepository.findById(id)
+                .orElseThrow(() -> new ResourceNotFoundException("Cultivo id: " + id + " not found"));
     }
 
 }

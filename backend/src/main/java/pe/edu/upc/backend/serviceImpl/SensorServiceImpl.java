@@ -3,6 +3,7 @@ package pe.edu.upc.backend.serviceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import pe.edu.upc.backend.entities.Sensor;
+import pe.edu.upc.backend.exceptions.ResourceNotFoundException;
 import pe.edu.upc.backend.repositories.SensorRepository;
 import pe.edu.upc.backend.services.SensorService;
 
@@ -26,7 +27,7 @@ public class SensorServiceImpl implements SensorService {
     @Override
     public Sensor edit(Long id, Sensor sensor) {
         if (!sensorRepository.existsById(id)) {
-            throw new RuntimeException("Sensor no encontrado");
+            throw new ResourceNotFoundException("Sensor id: " + id + " not found");
         }
         sensor.setId(id);
         return sensorRepository.save(sensor);
@@ -34,12 +35,12 @@ public class SensorServiceImpl implements SensorService {
 
     @Override
     public void deleteById(Long id) {
-        if (sensorRepository.existsById(id)) {
-            sensorRepository.deleteById(id);
-        } else {
-            System.out.println("Sensor no encontrado");
+        if (!sensorRepository.existsById(id)) {
+            throw new ResourceNotFoundException("Sensor id: " + id + " not found");
         }
+        sensorRepository.deleteById(id);
     }
+
     @Override
     public List<Object[]> countSensoresActivosPorTipo() {
         return sensorRepository.countSensoresActivosPorTipo();

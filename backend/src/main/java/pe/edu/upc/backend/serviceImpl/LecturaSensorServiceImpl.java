@@ -5,6 +5,7 @@ import org.springframework.stereotype.Service;
 import pe.edu.upc.backend.entities.LecturaSensor;
 import pe.edu.upc.backend.entities.Parcela;
 import pe.edu.upc.backend.entities.Sensor;
+import pe.edu.upc.backend.exceptions.ResourceNotFoundException;
 import pe.edu.upc.backend.repositories.LecturaSensorRepository;
 import pe.edu.upc.backend.repositories.ParcelaRepository;
 import pe.edu.upc.backend.repositories.SensorRepository;
@@ -27,8 +28,11 @@ public class LecturaSensorServiceImpl implements LecturaSensorService {
 
     @Override
     public LecturaSensor add(Long sensorId, Long parcelaId, LecturaSensor lecturaSensor) {
-        Sensor sensor = sensorRepository.findById(sensorId).orElseThrow(() -> new RuntimeException("Sensor no encontrado"));
-        Parcela parcela = parcelaRepository.findById(parcelaId).orElseThrow(() -> new RuntimeException("Parcela no encontrada"));
+        Sensor sensor = sensorRepository.findById(sensorId)
+                .orElseThrow(() -> new ResourceNotFoundException("Sensor id: " + sensorId + " not found"));
+
+        Parcela parcela = parcelaRepository.findById(parcelaId)
+                .orElseThrow(() -> new ResourceNotFoundException("Parcela id: " + parcelaId + " not found"));
 
         lecturaSensor.setSensor(sensor);
         lecturaSensor.setParcela(parcela);
@@ -42,8 +46,8 @@ public class LecturaSensorServiceImpl implements LecturaSensorService {
 
     @Override
     public LecturaSensor edit(Long id, LecturaSensor lecturaSensor) {
-        if (!lecturaSensorRepository.existsById(id)){
-            throw new RuntimeException("Lectura de sensor no encontrada");
+        if (!lecturaSensorRepository.existsById(id)) {
+            throw new ResourceNotFoundException("LecturaSensor id: " + id + " not found");
         }
         lecturaSensor.setId(id);
         return lecturaSensorRepository.save(lecturaSensor);
@@ -51,10 +55,9 @@ public class LecturaSensorServiceImpl implements LecturaSensorService {
 
     @Override
     public void deleteById(Long id) {
-        if (lecturaSensorRepository.existsById(id)){
-            lecturaSensorRepository.deleteById(id);
-        } else {
-            System.out.println("Lectura de sensor no encontrada");
+        if (!lecturaSensorRepository.existsById(id)) {
+            throw new ResourceNotFoundException("LecturaSensor id: " + id + " not found");
         }
+        lecturaSensorRepository.deleteById(id);
     }
 }

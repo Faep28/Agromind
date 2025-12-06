@@ -3,6 +3,7 @@ package pe.edu.upc.backend.serviceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import pe.edu.upc.backend.entities.Authority;
+import pe.edu.upc.backend.exceptions.ResourceNotFoundException;
 import pe.edu.upc.backend.repositories.AuthorityRepository;
 import pe.edu.upc.backend.services.AuthorityService;
 
@@ -26,19 +27,24 @@ public class AuthorityServiceImpl implements AuthorityService {
 
     @Override
     public Authority edit(Authority authority) {
-        if (authorityRepository.existsById(authority.getId())) {
-            return authorityRepository.save(authority);  // Si existe, actualiza el rol
+        if (!authorityRepository.existsById(authority.getId())) {
+            throw new ResourceNotFoundException("Authority id: " + authority.getId() + " not found");
         }
-        return null;  // Si no existe, devuelve null
+        return authorityRepository.save(authority);
     }
 
     @Override
     public Authority findById(Long id) {
-        return authorityRepository.findById(id).orElse(null);
+        return authorityRepository.findById(id)
+                .orElseThrow(() -> new ResourceNotFoundException("Authority id: " + id + " not found"));
     }
 
     @Override
     public Authority findByRoleName(String roleName) {
-        return authorityRepository.findByRoleName(roleName);
+        Authority authority = authorityRepository.findByRoleName(roleName);
+        if (authority == null) {
+            throw new ResourceNotFoundException("Authority roleName: " + roleName + " not found");
+        }
+        return authority;
     }
 }

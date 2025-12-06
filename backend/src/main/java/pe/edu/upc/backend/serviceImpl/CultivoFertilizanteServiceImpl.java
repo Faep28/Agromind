@@ -5,6 +5,8 @@ import org.springframework.stereotype.Service;
 import pe.edu.upc.backend.entities.Cultivo;
 import pe.edu.upc.backend.entities.CultivoFertilizante;
 import pe.edu.upc.backend.entities.Fertilizante;
+import pe.edu.upc.backend.exceptions.KeyRepeatedDataException;
+import pe.edu.upc.backend.exceptions.ResourceNotFoundException;
 import pe.edu.upc.backend.repositories.CultivoFertilizanteRepository;
 import pe.edu.upc.backend.repositories.CultivoRepository;
 import pe.edu.upc.backend.repositories.FertilizanteRepository;
@@ -27,20 +29,18 @@ public class CultivoFertilizanteServiceImpl implements CultivoFertilizanteServic
 
     @Override
     public CultivoFertilizante add(Long cultivoId, Long fertilizanteId, CultivoFertilizante cultivoFertilizante) {
-        // Validar duplicados ANTES de crear
         List<CultivoFertilizante> existentes = cultivoFertilizanteRepository
                 .findByCultivoIdAndFertilizanteId(cultivoId, fertilizanteId);
 
         if (!existentes.isEmpty()) {
-            throw new IllegalStateException("Este fertilizante ya está asignado a este cultivo");
+            throw new KeyRepeatedDataException("Fertilizante id: " + fertilizanteId + " ya está asignado al cultivo id: " + cultivoId);
         }
 
-        // Tu código actual continúa aquí (buscar cultivo, fertilizante, setear, guardar)
         Cultivo cultivo = cultivoRepository.findById(cultivoId)
-                .orElseThrow(() -> new RuntimeException("Cultivo no encontrado"));
+                .orElseThrow(() -> new ResourceNotFoundException("Cultivo id: " + cultivoId + " not found"));
 
         Fertilizante fertilizante = fertilizanteRepository.findById(fertilizanteId)
-                .orElseThrow(() -> new RuntimeException("Fertilizante no encontrado"));
+                .orElseThrow(() -> new ResourceNotFoundException("Fertilizante id: " + fertilizanteId + " not found"));
 
         cultivoFertilizante.setCultivo(cultivo);
         cultivoFertilizante.setFertilizante(fertilizante);
@@ -56,7 +56,7 @@ public class CultivoFertilizanteServiceImpl implements CultivoFertilizanteServic
     @Override
     public CultivoFertilizante edit(Long id, CultivoFertilizante cultivoFertilizante) {
         if (!cultivoFertilizanteRepository.existsById(id)) {
-            throw new RuntimeException("Relación Cultivo-Fertilizante no encontrada");
+            throw new ResourceNotFoundException("Relación Cultivo-Fertilizante id: " + id + " not found");
         }
         cultivoFertilizante.setId(id);
         return cultivoFertilizanteRepository.save(cultivoFertilizante);
@@ -64,11 +64,10 @@ public class CultivoFertilizanteServiceImpl implements CultivoFertilizanteServic
 
     @Override
     public void deleteById(Long id) {
-        if (cultivoFertilizanteRepository.existsById(id)) {
-            cultivoFertilizanteRepository.deleteById(id);
-        } else {
-            System.out.println("Relación Cultivo-Fertilizante no encontrada");
+        if (!cultivoFertilizanteRepository.existsById(id)) {
+            throw new ResourceNotFoundException("Relación Cultivo-Fertilizante id: " + id + " not found");
         }
+        cultivoFertilizanteRepository.deleteById(id);
     }
 
     @Override

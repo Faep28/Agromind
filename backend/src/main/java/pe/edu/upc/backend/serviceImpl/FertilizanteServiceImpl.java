@@ -3,6 +3,7 @@ package pe.edu.upc.backend.serviceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import pe.edu.upc.backend.entities.Fertilizante;
+import pe.edu.upc.backend.exceptions.ResourceNotFoundException;
 import pe.edu.upc.backend.repositories.FertilizanteRepository;
 import pe.edu.upc.backend.services.FertilizanteService;
 
@@ -27,7 +28,7 @@ public class FertilizanteServiceImpl implements FertilizanteService {
     @Override
     public Fertilizante edit(Long id, Fertilizante fertilizante) {
         if (!fertilizanteRepository.existsById(id)) {
-            throw new RuntimeException("Fertilizante no encontrado");
+            throw new ResourceNotFoundException("Fertilizante id: " + id + " not found");
         }
         fertilizante.setId(id);
         return fertilizanteRepository.save(fertilizante);
@@ -35,10 +36,9 @@ public class FertilizanteServiceImpl implements FertilizanteService {
 
     @Override
     public void deleteById(Long id) {
-        if (fertilizanteRepository.existsById(id)) {
-            fertilizanteRepository.deleteById(id);
-        } else {
-            System.out.println("Fertilizante no encontrado");
+        if (!fertilizanteRepository.existsById(id)) {
+            throw new ResourceNotFoundException("Fertilizante id: " + id + " not found");
         }
+        fertilizanteRepository.deleteById(id);
     }
 }
