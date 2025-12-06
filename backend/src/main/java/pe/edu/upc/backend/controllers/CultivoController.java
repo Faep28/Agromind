@@ -106,6 +106,13 @@ public class CultivoController {
     }
 
 
+    // GET /api/cultivos/cliente/{clienteId}
+    @GetMapping("/cliente/{clienteId}")
+    public ResponseEntity<List<Cultivo>> getCultivosByCliente(@PathVariable Long clienteId) {
+        List<Cultivo> cultivos = cultivoService.getCultivosByCliente(clienteId);
+        return ResponseEntity.ok(cultivos);
+    }
+
     //Buscar cultivos por temporada
     @GetMapping("/temporada/{temporada}")   //http://localhost:8080/api/cultivos/temporada/Verano
     public ResponseEntity<List<Cultivo>> buscarPorTemporada(@PathVariable String temporada) {

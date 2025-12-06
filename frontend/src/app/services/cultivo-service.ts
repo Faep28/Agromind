@@ -17,6 +17,11 @@ export class CultivoService {
     return this.http.get<Cultivo[]>(`${this.apiUrl}/list`);
   }
 
+  // Obtener cultivos por cliente (usuario logueado)
+  getCultivosByCliente(clienteId: number): Observable<Cultivo[]> {
+    return this.http.get<Cultivo[]>(`${this.apiUrl}/cliente/${clienteId}`);
+  }
+
   // Obtener cultivos por parcela (nuevo endpoint en backend)
   getByParcela(parcelaId: number): Observable<Cultivo[]> {
     return this.http.get<Cultivo[]>(`${this.apiUrl}/parcela/${parcelaId}`);

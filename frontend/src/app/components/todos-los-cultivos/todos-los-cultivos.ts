@@ -66,16 +66,27 @@ export class TodosLosCultivosComponent implements OnInit, AfterViewInit {
   }
 
   loadCultivos(): void {
-    this.cultivoService.listAll().subscribe({
+    // Obtener el ID del usuario logueado
+    const clienteId = Number(localStorage.getItem('user_id'));
+    
+    if (!clienteId) {
+      console.error('No se encontró user_id en localStorage');
+      this.snackBar.open('Error: Usuario no autenticado', 'Cerrar', { duration: 3000 });
+      return;
+    }
+
+    // Obtener solo los cultivos del usuario logueado
+    this.cultivoService.getCultivosByCliente(clienteId).subscribe({
       next: (data) => {
-        console.log('Datos recibidos:', data);
+        console.log('Cultivos del usuario:', data);
         this.dsCultivos.data = data || [];
         setTimeout(() => {
           this.dsCultivos.paginator = this.paginator;
         });
       },
       error: (err) => {
-        console.error('Error al obtener todos los cultivos:', err);
+        console.error('Error al obtener cultivos del usuario:', err);
+        this.snackBar.open('Error al cargar cultivos', 'Cerrar', { duration: 3000 });
         this.dsCultivos.data = [];
       }
     });

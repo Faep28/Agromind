@@ -3,11 +3,13 @@ package pe.edu.upc.backend.serviceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import pe.edu.upc.backend.entities.Cultivo;
+import pe.edu.upc.backend.entities.Parcela;
 import pe.edu.upc.backend.exceptions.ResourceNotFoundException;
 import pe.edu.upc.backend.repositories.CultivoRepository;
 import pe.edu.upc.backend.repositories.ParcelaRepository;
 import pe.edu.upc.backend.services.CultivoService;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Service
@@ -78,6 +80,19 @@ public class CultivoServiceImpl implements CultivoService {
     public Cultivo findById(Long id) {
         return cultivoRepository.findById(id)
                 .orElseThrow(() -> new ResourceNotFoundException("Cultivo id: " + id + " not found"));
+    }
+
+    public List<Cultivo> getCultivosByCliente(Long clienteId) {
+        // Obtener todas las parcelas del cliente
+        List<Parcela> parcelas = parcelaRepository.findParcelasByClienteId(clienteId);
+
+        // Obtener todos los cultivos de esas parcelas
+        List<Cultivo> cultivos = new ArrayList<>();
+        for (Parcela parcela : parcelas) {
+            cultivos.addAll(cultivoRepository.findByParcelaId(parcela.getId()));
+        }
+
+        return cultivos;
     }
 
 }

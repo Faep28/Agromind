@@ -21,4 +21,5 @@ public interface CultivoService {
     List<Cultivo> findByParcelaId(Long parcelaId);
     Long countByEstadoIgnoreCase(String estado);
     Cultivo findById(Long id);
+    List<Cultivo> getCultivosByCliente(Long clienteId);
 }
