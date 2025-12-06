@@ -16,6 +16,11 @@ export interface AsignarFertilizanteData {
   cultivoNombre: string;
   fertilizanteId: number;
   fertilizanteNombre: string;
+  // Datos opcionales para modo edición
+  relacionId?: number;
+  fechaAplicacion?: string;
+  cantidad?: number;
+  isEditMode?: boolean;
 }
 
 @Component({
@@ -39,6 +44,7 @@ export class AsignarFertilizanteDialogComponent implements OnInit {
 
   asignarForm: FormGroup;
   isLoading: boolean = false;
+  isEditMode: boolean = false;
 
   constructor(
     private fb: FormBuilder,
@@ -54,7 +60,15 @@ export class AsignarFertilizanteDialogComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    // Inicialización si es necesaria
+    this.isEditMode = this.data.isEditMode || false;
+    
+    // Si está en modo edición, pre-llenar el formulario
+    if (this.isEditMode && this.data.fechaAplicacion && this.data.cantidad) {
+      this.asignarForm.patchValue({
+        fechaAplicacion: new Date(this.data.fechaAplicacion),
+        cantidad: this.data.cantidad
+      });
+    }
   }
 
   guardar(): void {
@@ -71,32 +85,69 @@ export class AsignarFertilizanteDialogComponent implements OnInit {
     const fechaAplicacion = this.formatDate(this.asignarForm.get('fechaAplicacion')?.value);
     const cantidad = this.asignarForm.get('cantidad')?.value;
 
-    const requestData = {
-      fechaAplicacion,
-      cantidad
-    };
-
-    this.fertilizanteService.asignarFertilizanteACultivo(
-      this.data.cultivoId,
-      this.data.fertilizanteId,
-      requestData
-    ).subscribe({
-      next: (relacion) => {
-        this.isLoading = false;
-        this.snackBar.open('Fertilizante asignado exitosamente al cultivo', 'Cerrar', {
-          duration: 2000
-        });
-        this.dialogRef.close(true); // Retorna true para indicar éxito
-      },
-      error: (err) => {
-        console.error('Error al asignar fertilizante:', err);
-        this.isLoading = false;
-        const mensaje = err.error?.message || 'Error al asignar el fertilizante al cultivo';
-        this.snackBar.open(mensaje, 'Cerrar', {
-          duration: 4000
-        });
-      }
-    });
+    if (this.isEditMode && this.data.relacionId) {
+      // Modo edición: actualizar relación existente
+      const requestData = {
+        id: this.data.relacionId,
+        fechaAplicacion,
+        cantidad,
+        cultivo: {
+          id: this.data.cultivoId
+        },
+        fertilizante: {
+          id: this.data.fertilizanteId
+        }
+      };
+      
+      this.fertilizanteService.updateRelacion(
+        this.data.relacionId,
+        requestData as any
+      ).subscribe({
+        next: (relacion) => {
+          this.isLoading = false;
+          this.snackBar.open('Relación actualizada exitosamente', 'Cerrar', {
+            duration: 2000
+          });
+          this.dialogRef.close(true);
+        },
+        error: (err) => {
+          console.error('Error al actualizar relación:', err);
+          this.isLoading = false;
+          const mensaje = err.error?.message || 'Error al actualizar la relación';
+          this.snackBar.open(mensaje, 'Cerrar', {
+            duration: 4000
+          });
+        }
+      });
+    } else {
+      // Modo creación: asignar nuevo fertilizante
+      const requestData = {
+        fechaAplicacion,
+        cantidad
+      };
+      
+      this.fertilizanteService.asignarFertilizanteACultivo(
+        this.data.cultivoId,
+        this.data.fertilizanteId,
+        requestData
+      ).subscribe({
+        next: (relacion) => {
+          this.isLoading = false;
+          this.snackBar.open('Fertilizante asignado exitosamente al cultivo', 'Cerrar', {
+            duration: 2000
+          });
+          this.dialogRef.close(true);
+        },
+        error: (err) => {
+          console.error('Error al asignar fertilizante:', err);
+          this.isLoading = false;
+          const mensaje = err.error?.message || 'Error al asignar el fertilizante al cultivo';
+          this.snackBar.open(mensaje, 'Cerrar', {
+            duration: 4000
+          });
+        }
+      });
+    }
   }
 
   cancelar(): void {

@@ -31,6 +31,8 @@ export class RegistroFertilizanteComponent {
 
   fertilizanteForm: FormGroup;
   isLoading: boolean = false;
+  isEditMode: boolean = false;
+  fertilizanteId: number | null = null;
 
   tiposFertilizante: string[] = [
     'Orgánico',
@@ -54,6 +56,17 @@ export class RegistroFertilizanteComponent {
       tipo: ['', [Validators.required]],
       dosisRecomendada: [null, [Validators.required, Validators.min(0)]]
     });
+
+    // Si se pasan datos, está en modo edición
+    if (data && data.fertilizante) {
+      this.isEditMode = true;
+      this.fertilizanteId = data.fertilizante.id;
+      this.fertilizanteForm.patchValue({
+        nombre: data.fertilizante.nombre,
+        tipo: data.fertilizante.tipo,
+        dosisRecomendada: data.fertilizante.dosisRecomendada
+      });
+    }
   }
 
   guardar(): void {
@@ -67,23 +80,44 @@ export class RegistroFertilizanteComponent {
     this.isLoading = true;
     const fertilizanteData: Partial<Fertilizante> = this.fertilizanteForm.value;
 
-    this.fertilizanteService.create(fertilizanteData).subscribe({
-      next: (fertilizanteCreado) => {
-        this.isLoading = false;
-        this.snackBar.open('Fertilizante creado exitosamente', 'Cerrar', {
-          duration: 2000
-        });
-        // Cerrar el diálogo y pasar el fertilizante creado
-        this.dialogRef.close(fertilizanteCreado);
-      },
-      error: (err) => {
-        console.error('Error al crear fertilizante:', err);
-        this.isLoading = false;
-        this.snackBar.open('Error al crear el fertilizante', 'Cerrar', {
-          duration: 3000
-        });
-      }
-    });
+    if (this.isEditMode && this.fertilizanteId) {
+      // Modo edición: actualizar fertilizante existente
+      this.fertilizanteService.update(this.fertilizanteId, fertilizanteData).subscribe({
+        next: (fertilizanteActualizado) => {
+          this.isLoading = false;
+          this.snackBar.open('Fertilizante actualizado exitosamente', 'Cerrar', {
+            duration: 2000
+          });
+          this.dialogRef.close(true); // Retorna true para recargar la lista
+        },
+        error: (err) => {
+          console.error('Error al actualizar fertilizante:', err);
+          this.isLoading = false;
+          this.snackBar.open('Error al actualizar el fertilizante', 'Cerrar', {
+            duration: 3000
+          });
+        }
+      });
+    } else {
+      // Modo creación: crear nuevo fertilizante
+      this.fertilizanteService.create(fertilizanteData).subscribe({
+        next: (fertilizanteCreado) => {
+          this.isLoading = false;
+          this.snackBar.open('Fertilizante creado exitosamente', 'Cerrar', {
+            duration: 2000
+          });
+          // Cerrar el diálogo y pasar el fertilizante creado
+          this.dialogRef.close(fertilizanteCreado);
+        },
+        error: (err) => {
+          console.error('Error al crear fertilizante:', err);
+          this.isLoading = false;
+          this.snackBar.open('Error al crear el fertilizante', 'Cerrar', {
+            duration: 3000
+          });
+        }
+      });
+    }
   }
 
   cancelar(): void {

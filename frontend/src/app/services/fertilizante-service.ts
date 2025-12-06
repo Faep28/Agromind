@@ -43,7 +43,7 @@ export class FertilizanteService {
   }
 
   // Actualizar relación cultivo-fertilizante
-  updateRelacion(id: number, data: { fechaAplicacion: string, cantidad: number }): Observable<CultivoFertilizante> {
+  updateRelacion(id: number, data: any): Observable<CultivoFertilizante> {
     return this.http.put<CultivoFertilizante>(`${this.base}/cultivo-fertilizante/update/${id}`, data);
   }
 
