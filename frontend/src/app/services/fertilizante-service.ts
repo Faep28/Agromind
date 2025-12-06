@@ -9,47 +9,47 @@ import { environment } from '../../environments/environment';
   providedIn: 'root'
 })
 export class FertilizanteService {
-  private apiUrl = `${environment.apiUrl}/notificaciones`;
+  private base = 'http://localhost:8080/api';
 
   constructor(private http: HttpClient) {}
 
   // Obtener todas las relaciones cultivo-fertilizante de un cultivo específico
   getFertilizantesByCultivo(cultivoId: number): Observable<CultivoFertilizante[]> {
-    return this.http.get<CultivoFertilizante[]>(`${this.apiUrl}/cultivo-fertilizante/cultivo/${cultivoId}`);
+    return this.http.get<CultivoFertilizante[]>(`${this.base}/cultivo-fertilizante/cultivo/${cultivoId}`);
   }
 
   // Listar todos los fertilizantes disponibles
   listAll(): Observable<Fertilizante[]> {
-    return this.http.get<Fertilizante[]>(`${this.apiUrl}/fertilizantes/list`);
+    return this.http.get<Fertilizante[]>(`${this.base}/fertilizantes/list`);
   }
 
   // Crear un nuevo fertilizante
   create(fertilizante: Partial<Fertilizante>): Observable<Fertilizante> {
-    return this.http.post<Fertilizante>(`${this.apiUrl}/fertilizantes/insert`, fertilizante);
+    return this.http.post<Fertilizante>(`${this.base}/fertilizantes/insert`, fertilizante);
   }
 
   // Actualizar un fertilizante
   update(id: number, fertilizante: Partial<Fertilizante>): Observable<Fertilizante> {
-    return this.http.put<Fertilizante>(`${this.apiUrl}/fertilizantes/update/${id}`, fertilizante);
+    return this.http.put<Fertilizante>(`${this.base}/fertilizantes/update/${id}`, fertilizante);
   }
 
   // Eliminar un fertilizante
   delete(id: number): Observable<void> {
-    return this.http.delete<void>(`${this.apiUrl}/fertilizantes/delete/${id}`);
+    return this.http.delete<void>(`${this.base}/fertilizantes/delete/${id}`);
   }
 
   // Asignar fertilizante a un cultivo (crear relación cultivo-fertilizante)
   asignarFertilizanteACultivo(cultivoId: number, fertilizanteId: number, data: { fechaAplicacion: string, cantidad: number }): Observable<CultivoFertilizante> {
-    return this.http.post<CultivoFertilizante>(`${this.apiUrl}/cultivo-fertilizante/insert/${cultivoId}/${fertilizanteId}`, data);
+    return this.http.post<CultivoFertilizante>(`${this.base}/cultivo-fertilizante/insert/${cultivoId}/${fertilizanteId}`, data);
   }
 
   // Actualizar relación cultivo-fertilizante
   updateRelacion(id: number, data: any): Observable<CultivoFertilizante> {
-    return this.http.put<CultivoFertilizante>(`${this.apiUrl}/cultivo-fertilizante/update/${id}`, data);
+    return this.http.put<CultivoFertilizante>(`${this.base}/cultivo-fertilizante/update/${id}`, data);
   }
 
   // Eliminar relación cultivo-fertilizante
   deleteRelacion(id: number): Observable<void> {
-    return this.http.delete<void>(`${this.apiUrl}/cultivo-fertilizante/delete/${id}`);
+    return this.http.delete<void>(`${this.base}/cultivo-fertilizante/delete/${id}`);
   }
 }

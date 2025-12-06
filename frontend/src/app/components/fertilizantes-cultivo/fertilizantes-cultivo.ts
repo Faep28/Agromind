@@ -175,19 +175,20 @@ export class FertilizantesCultivoComponent implements OnInit {
     });
   }
 
-  eliminarRelacion(relacion: CultivoFertilizante): void {
-    if (!confirm(`¿Está seguro de eliminar la relación con el fertilizante "${relacion.fertilizante.nombre}"?`)) {
+  eliminarFertilizante(relacion: CultivoFertilizante): void {
+    if (!confirm(`⚠️ ADVERTENCIA: ¿Está seguro de eliminar el fertilizante "${relacion.fertilizante.nombre}" PERMANENTEMENTE?\n\nEsto eliminará el fertilizante del catálogo y TODAS sus relaciones con cultivos.`)) {
       return;
     }
 
-    this.fertilizanteService.deleteRelacion(relacion.id).subscribe({
+    this.fertilizanteService.delete(relacion.fertilizante.id).subscribe({
       next: () => {
-        this.showMessage('Relación eliminada correctamente');
+        this.showMessage('Fertilizante eliminado correctamente del catálogo');
         this.loadFertilizantes();
       },
       error: (err) => {
-        console.error('Error al eliminar relación:', err);
-        this.showMessage('Error al eliminar la relación');
+        console.error('Error al eliminar fertilizante:', err);
+        const mensaje = err.error?.message || 'Error al eliminar el fertilizante';
+        this.showMessage(mensaje);
       }
     });
   }
