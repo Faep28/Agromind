@@ -1,82 +1,179 @@
 <div class="home-container">
-  <!-- seccion bienvenida -->
-  <section class="welcome-section">
-    <h1>Bienvenido, {{ username }}!</h1>
-    <p>Optimiza el rendimiento de tus cultivos con AgroMinds.</p>
-    <button mat-raised-button color="primary" routerLink="/recomendaciones">Ver recomendaciones</button>
+  <!-- Hero Section con imagen de fondo decorativa -->
+  <section class="hero-section">
+    <div class="hero-overlay">
+      <div class="hero-content">
+        <h1 class="hero-title">Bienvenido, {{ username }}!</h1>
+        <p class="hero-subtitle">Optimiza el rendimiento de tus cultivos con tecnología inteligente</p>
+        <div class="hero-actions">
+          <button mat-raised-button color="primary" class="hero-btn" routerLink="/recomendaciones">
+            <mat-icon>psychology</mat-icon>
+            Ver recomendaciones
+          </button>
+          <button mat-stroked-button class="hero-btn-secondary" routerLink="/registro-cultivo">
+            <mat-icon>add_circle</mat-icon>
+            Registrar cultivo
+          </button>
+        </div>
+      </div>
+    </div>
   </section>
 
-  <section class="activity-alerts-section">
-  <!-- Registrar servicios (modificado para imagen a la izquierda y contenido a la derecha) -->
-  <div class="activity-summary">
-    <h2>Registrar Servicios</h2>
-    <div class="summary-cards services-list">
-      <mat-card *ngFor="let s of serviciosHome; let i = index" class="service-card">
-        <div class="service-card-container">
-          <!-- Imagen a la izquierda -->
-          <div class="service-image-container">
-            <img [src]="getImagenServicio(i)" alt="{{s.nombre}}" class="service-image"/>
-          </div>
+  <!-- Sección de estadísticas rápidas -->
+  <section class="stats-section">
+    <div class="stat-card">
+      <mat-icon class="stat-icon">local_florist</mat-icon>
+      <div class="stat-content">
+        <h3 class="stat-number">{{ serviciosHome.length }}</h3>
+        <p class="stat-label">Servicios disponibles</p>
+      </div>
+    </div>
+    <div class="stat-card">
+      <mat-icon class="stat-icon">notifications_active</mat-icon>
+      <div class="stat-content">
+        <h3 class="stat-number">{{ notificacionesMostradas.length }}</h3>
+        <p class="stat-label">Alertas activas</p>
+      </div>
+    </div>
+    <div class="stat-card">
+      <mat-icon class="stat-icon">eco</mat-icon>
+      <div class="stat-content">
+        <h3 class="stat-number">100%</h3>
+        <p class="stat-label">Productividad</p>
+      </div>
+    </div>
+  </section>
 
-          <!-- Contenido a la derecha -->
-          <div class="service-content">
-            <mat-card-title>{{ s.nombre }}</mat-card-title>
-            <mat-card-content>
-              <p class="desc">{{ s.descripcion }}</p>
-              <p class="price">S/ {{ s.precio }}</p>
-            </mat-card-content>
-            <div class="service-actions">
-              <button mat-stroked-button color="primary" [routerLink]="['/solicitud-servicio']">Ver servicios</button>
+  <!-- Sección principal con servicios y alertas -->
+  <section class="main-content-section">
+    <!-- Servicios destacados -->
+    <div class="services-section">
+      <div class="section-header">
+        <mat-icon class="section-icon">business_center</mat-icon>
+        <h2>Servicios Disponibles</h2>
+      </div>
+      
+      <div class="services-grid">
+        <mat-card *ngFor="let s of serviciosHome; let i = index" class="modern-service-card">
+          <div class="service-image-wrapper">
+            <img [src]="getImagenServicio(i)" alt="{{s.nombre}}" class="service-img"/>
+            <div class="service-badge">
+              <mat-icon>verified</mat-icon>
             </div>
           </div>
-        </div>
-      </mat-card>
-    </div>
-  </div>
-
-  <!-- Alertas (sin cambios) -->
-  <div class="alerts-section">
-    <h2>Alertas</h2>
-    <div class="alert-cards">
-      <mat-card *ngFor="let n of notificacionesMostradas" class="alert-card">
-        <mat-card-title>
-          {{ n.titulo }}
-          <span *ngIf="n.esLeido" style="font-size:0.8em;color:gray;margin-left:8px;">(Leída)</span>
-        </mat-card-title>
-        <mat-card-content>{{ n.mensaje }}</mat-card-content>
-        <button mat-button color="warn" *ngIf="!n.esLeido" (click)="markAsRead(n)">Marcar como leída</button>
-        <button mat-button disabled *ngIf="n.esLeido">Leída</button>
-      </mat-card>
-    </div>
-    <div style="display:flex;justify-content:center;margin-top:12px;">
-      <button mat-stroked-button color="primary" routerLink="/notificaciones">Ver todas</button>
-    </div>
-  </div>
-</section>
-
-
-  
-
-  <!-- Botron flotante -->
-<button class="notification-bell" (click)="showNotifications = !showNotifications">
-  <mat-icon>notifications</mat-icon>
-</button>
-
-<!-- Panel de notificaciones-->
-  <div *ngIf="showNotifications" class="notification-panel">
-    <div class="notification-header">
-      <h3>Notificaciones</h3>
-    </div>
-
-    <div class="notification-list">
-      <div *ngFor="let n of notificacionesMostradas" class="notification-item">
-        <p><strong>{{n.titulo}}</strong></p>
-        <p>{{n.mensaje}}</p>
+          <mat-card-content class="service-info">
+            <h3 class="service-title">{{ s.nombre }}</h3>
+            <p class="service-description">{{ s.descripcion }}</p>
+            <div class="service-footer">
+              <span class="service-price">
+                <mat-icon>payments</mat-icon>
+                S/ {{ s.precio }}
+              </span>
+              <button mat-flat-button color="primary" [routerLink]="['/solicitud-servicio']">
+                Solicitar
+                <mat-icon>arrow_forward</mat-icon>
+              </button>
+            </div>
+          </mat-card-content>
+        </mat-card>
       </div>
     </div>
 
-    <div style="display: flex;justify-content: center;">
-      <button mat-raised-button color="primary" routerLink="/notificaciones" class="view-all-button">Ver todas</button>
+    <!-- Alertas y notificaciones -->
+    <div class="alerts-sidebar">
+      <div class="section-header">
+        <mat-icon class="section-icon warning">notifications_active</mat-icon>
+        <h2>Alertas Recientes</h2>
+      </div>
+      
+      <div class="alerts-list">
+        <mat-card *ngFor="let n of notificacionesMostradas" 
+                  class="modern-alert-card"
+                  [class.unread]="!n.esLeido">
+          <div class="alert-icon-wrapper">
+            <mat-icon [class.unread-icon]="!n.esLeido">
+              {{ n.esLeido ? 'check_circle' : 'error' }}
+            </mat-icon>
+          </div>
+          <div class="alert-content">
+            <h4>{{ n.titulo }}</h4>
+            <p>{{ n.mensaje }}</p>
+            <div class="alert-actions">
+              <button mat-button color="primary" *ngIf="!n.esLeido" (click)="markAsRead(n)">
+                <mat-icon>done</mat-icon>
+                Marcar leída
+              </button>
+              <span *ngIf="n.esLeido" class="read-badge">
+                <mat-icon>check</mat-icon>
+                Leída
+              </span>
+            </div>
+          </div>
+        </mat-card>
+      </div>
+      
+      <button mat-stroked-button class="view-all-btn" routerLink="/notificaciones">
+        Ver todas las notificaciones
+        <mat-icon>arrow_forward</mat-icon>
+      </button>
+    </div>
+  </section>
+
+  <!-- Sección decorativa con imagen y call-to-action -->
+  <section class="cta-section">
+    <div class="cta-content">
+      <div class="cta-text">
+        <h2>¿Necesitas ayuda con tu cultivo?</h2>
+        <p>Accede a nuestras guías personalizadas y servicios especializados para maximizar tu producción</p>
+        <button mat-raised-button color="accent" routerLink="/nuestros-servicios">
+          <mat-icon>explore</mat-icon>
+          Explorar servicios
+        </button>
+      </div>
+      <div class="cta-image">
+        <!-- Imagen decorativa: assets/img/home-cta-image.jpg -->
+        <img src="assets/img/home-cta-image.jpg" alt="Agricultura inteligente" />
+      </div>
+    </div>
+  </section>
+  <!-- Botón flotante de notificaciones -->
+  <button mat-fab class="notification-fab" 
+          [class.has-notifications]="notificacionesMostradas.length > 0"
+          (click)="showNotifications = !showNotifications">
+    <mat-icon>notifications</mat-icon>
+    <span *ngIf="notificacionesMostradas.length > 0" class="notification-badge">
+      {{ notificacionesMostradas.length }}
+    </span>
+  </button>
+
+  <!-- Panel flotante de notificaciones -->
+  <div *ngIf="showNotifications" class="floating-notification-panel">
+    <div class="panel-header">
+      <h3>
+        <mat-icon>notifications</mat-icon>
+        Notificaciones
+      </h3>
+      <button mat-icon-button (click)="showNotifications = false">
+        <mat-icon>close</mat-icon>
+      </button>
+    </div>
+
+    <div class="panel-content">
+      <div *ngFor="let n of notificacionesMostradas" class="mini-notification-item">
+        <mat-icon class="mini-icon" [class.unread]="!n.esLeido">
+          {{ n.esLeido ? 'check_circle' : 'circle' }}
+        </mat-icon>
+        <div class="mini-content">
+          <strong>{{n.titulo}}</strong>
+          <p>{{n.mensaje}}</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="panel-footer">
+      <button mat-raised-button color="primary" routerLink="/notificaciones" class="panel-btn">
+        Ver todas
+      </button>
     </div>
   </div>
 </div>
