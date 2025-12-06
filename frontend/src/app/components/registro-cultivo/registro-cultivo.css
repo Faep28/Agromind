@@ -1,47 +1,135 @@
-.container {
-  max-width: 800px;
+.page-container {
+  max-width: 1000px;
   margin: 0 auto;
-  padding: 20px;
+  padding: 24px;
+  background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+  min-height: 100vh;
+}
+
+.header-card {
+  margin-bottom: 24px;
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  color: white;
+  border-radius: 16px;
+  overflow: visible;
+}
+
+.header-card mat-card-header {
+  padding: 32px;
+  display: flex;
+  align-items: center;
+  gap: 16px;
+}
+
+.back-btn {
+  color: white !important;
+  background: rgba(255, 255, 255, 0.2);
+}
+
+.header-content {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.header-icon {
+  font-size: 48px;
+  width: 48px;
+  height: 48px;
+  margin-bottom: 8px;
+}
+
+.header-card mat-card-title {
+  font-size: 2rem;
+  font-weight: 600;
+  color: white;
+  margin: 0;
+}
+
+.header-card mat-card-subtitle {
+  color: rgba(255, 255, 255, 0.9);
+  font-size: 1.1rem;
+  margin: 0;
+}
+
+.form-card {
+  border-radius: 16px;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.12);
+}
+
+.cultivo-form {
+  padding: 16px;
+}
+
+.form-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 20px;
+  margin-bottom: 32px;
+}
+
+.full-width {
+  grid-column: span 2;
+}
+
+.span-2 {
+  grid-column: span 2;
 }
 
 mat-form-field {
   width: 100%;
-  margin-bottom: 20px;
 }
 
-mat-form-field textarea {
-  min-height: 100px;
-  resize: vertical;
+.form-actions {
+  display: flex;
+  justify-content: flex-end;
+  gap: 16px;
+  padding-top: 24px;
+  border-top: 1px solid #e0e0e0;
 }
 
-.registrar-btn {
-  display: block;
-  margin-left: auto;
-  margin-right: auto;
-  width: 100%;
-  padding: 10px 20px;
-  border-radius: 5px;
-  background-color: #4CAF50;
-  color: white;
-  font-weight: bold;
-  text-transform: uppercase;
-  cursor: pointer;
-  transition: background-color 0.3s ease;
+.cancel-btn {
+  display: flex;
+  align-items: center;
+  gap: 8px;
 }
 
-.registrar-btn:hover:not(:disabled) {
-  background-color: #45a049;
+.submit-btn {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 0 32px;
+  font-size: 16px;
 }
 
-.registrar-btn:disabled {
-  background-color: #ccc;
-  cursor: not-allowed;
-}
+@media (max-width: 768px) {
+  .form-grid {
+    grid-template-columns: 1fr;
+  }
 
-mat-error {
-  color: red;
-}
+  .full-width,
+  .span-2 {
+    grid-column: span 1;
+  }
 
-h2 {
-  font-weight: bold;
+  .form-actions {
+    flex-direction: column-reverse;
+  }
+
+  .form-actions button {
+    width: 100%;
+  }
+
+  .page-container {
+    padding: 16px;
+  }
+
+  .header-card mat-card-header {
+    padding: 20px;
+  }
+
+  .header-card mat-card-title {
+    font-size: 1.5rem;
+  }
 }

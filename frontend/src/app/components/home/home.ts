@@ -77,11 +77,12 @@ export class Home {
 
   // helper para imagen (puedes colocar la imagen manualmente en template si prefieres)
   getImagenServicio(index: number) {
-    // Usar imágenes específicas en `assets/img/` (guia1.jpg, guia2.jpeg, guia3.png)
+    // Usar imágenes ejemplo disponibles en assets/img/
     const imgs = [
-      'assets/img/guia1.jpg',
-      'assets/img/guia2.jpeg',
-      'assets/img/guia3.png'
+      'assets/img/ejemplo6.jpg',
+      'assets/img/ejemplo1.jpg',
+      'assets/img/ejemplo3.jpg',
+      'assets/img/ejemplo5.jpg'
     ];
     return imgs[index % imgs.length];
   }

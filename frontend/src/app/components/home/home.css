@@ -7,8 +7,10 @@
 .hero-section {
   position: relative;
   height: 450px;
-  background: url('assets/img/hero-background.jpg') center/cover no-repeat;
+  background-image: linear-gradient(135deg, rgba(16, 94, 44, 0.7) 0%, rgba(76, 175, 80, 0.6) 100%);
   background-color: #1a5928;
+  background-size: cover;
+  background-position: center;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -547,13 +549,8 @@
 .panel-btn {
   width: 100%;
 }
-  cursor: pointer;
-  z-index: 1000;
-  border: none;
-}
 
-
-
+/* Responsive Design */
 @media (max-width: 768px) {
   .activity-alerts-section {
     flex-direction: column;
