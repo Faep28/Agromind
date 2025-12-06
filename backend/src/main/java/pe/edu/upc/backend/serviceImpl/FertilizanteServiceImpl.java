@@ -27,18 +27,29 @@ public class FertilizanteServiceImpl implements FertilizanteService {
 
     @Override
     public Fertilizante edit(Long id, Fertilizante fertilizante) {
-        if (!fertilizanteRepository.existsById(id)) {
-            throw new ResourceNotFoundException("Fertilizante id: " + id + " not found");
-        }
-        fertilizante.setId(id);
-        return fertilizanteRepository.save(fertilizante);
+        Fertilizante existente = fertilizanteRepository.findById(id)
+                .orElseThrow(() -> new ResourceNotFoundException("Fertilizante id: " + id + " not found"));
+
+        // Solo actualizar los campos editables, NO las relaciones
+        existente.setNombre(fertilizante.getNombre());
+        existente.setTipo(fertilizante.getTipo());
+        existente.setDosisRecomendada(fertilizante.getDosisRecomendada());
+
+        return fertilizanteRepository.save(existente);
     }
 
     @Override
     public void deleteById(Long id) {
-        if (!fertilizanteRepository.existsById(id)) {
-            throw new ResourceNotFoundException("Fertilizante id: " + id + " not found");
+        Fertilizante fertilizante = fertilizanteRepository.findById(id)
+                .orElseThrow(() -> new RuntimeException("Fertilizante no encontrado con ID: " + id));
+
+        // Verificar si tiene relaciones (opcional - solo para logging)
+        if (fertilizante.getCultivoFertilizantes() != null && !fertilizante.getCultivoFertilizantes().isEmpty()) {
+            System.out.println("Eliminando fertilizante '" + fertilizante.getNombre() +
+                    "' con " + fertilizante.getCultivoFertilizantes().size() + " relaciones");
         }
+
+        // JPA eliminará automáticamente las relaciones gracias al cascade
         fertilizanteRepository.deleteById(id);
     }
 }

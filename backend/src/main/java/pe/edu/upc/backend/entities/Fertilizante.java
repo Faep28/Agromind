@@ -30,6 +30,6 @@ public class Fertilizante {
 
 
     @JsonIgnore
-    @OneToMany(mappedBy = "fertilizante", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+    @OneToMany(mappedBy = "fertilizante", cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.EAGER)
     private List<CultivoFertilizante> cultivoFertilizantes;
 }
